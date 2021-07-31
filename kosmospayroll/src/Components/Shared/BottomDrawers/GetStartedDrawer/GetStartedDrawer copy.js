@@ -7,21 +7,22 @@ const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
   useEffect(() => {
     if (isModalShown) {
       handlePresentModalPress();
+    } else {
+      bottomSheetModalRef.current?.close();
     }
   }, [isModalShown]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setisModalShown(true);
-    }, 1000);
-  }, []);
-
   const bottomSheetModalRef = useRef(BottomSheetModal);
 
-  const snapPoints = useMemo(() => ['0%', '45%'], []);
+  const snapPoints = useMemo(() => ['25%', '55%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current.present();
+  }, []);
+  const handleSheetChanges = useCallback(index => {
+    if (index === -1) {
+      setisModalShown(false);
+    }
   }, []);
 
   function customBackground({pointerEvents, style}) {
@@ -33,12 +34,13 @@ const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
         backgroundComponent={customBackground}
         ref={bottomSheetModalRef}
         index={1}
-        enableContentPanningGesture={false}
         snapPoints={snapPoints}
+        onChange={handleSheetChanges}
         handleComponent={() => null}>
         <View style={styles.contentContainer}>
-          <Text style={styles.bigwhitetext}>Stay connected! </Text>
-          <Text style={styles.blacktext}>Sign in with an account</Text>
+          <TouchableOpacity style={styles.contentelement}>
+            <Text>Report... </Text>
+          </TouchableOpacity>
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>

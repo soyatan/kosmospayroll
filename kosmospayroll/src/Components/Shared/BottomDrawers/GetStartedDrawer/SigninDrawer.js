@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import styles from './styles';
 
-const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
+const SigninDrawer = ({isModalShown, setisModalShown}) => {
   useEffect(() => {
     if (isModalShown) {
       handlePresentModalPress();
@@ -18,14 +18,14 @@ const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
 
   const bottomSheetModalRef = useRef(BottomSheetModal);
 
-  const snapPoints = useMemo(() => ['0%', '45%'], []);
+  const snapPoints = useMemo(() => ['0%', '65%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current.present();
   }, []);
 
   function customBackground({pointerEvents, style}) {
-    return <View style={[styles.container, style]} />;
+    return <View style={[styles.signincontainer, style]} />;
   }
   return (
     <BottomSheetModalProvider>
@@ -45,4 +45,4 @@ const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
   );
 };
 
-export default GetStartedDrawer;
+export default SigninDrawer;

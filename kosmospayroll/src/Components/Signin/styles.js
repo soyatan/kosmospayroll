@@ -1,15 +1,25 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import {Colors} from '../../constants/Colors';
 import {width as w, height as h} from '../../constants/Metrics';
 import Fonts from '../../constants/Fonts';
+import {Colors} from './../../constants/Colors';
 
 const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: Colors.mainGray,
+  },
+  bigwhitetext: {
+    fontFamily: Fonts.Families.bold,
+    fontSize: Fonts.Sizes.thirty,
+    color: Colors.mainWhite,
+    marginBottom: w * 0.03,
+  },
+  blacktext: {
+    fontFamily: Fonts.Families.medium,
+    fontSize: Fonts.Sizes.fourteen,
   },
 });

@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import GetStartedDrawer from '../Shared/BottomDrawers/GetStartedDrawer/GetStartedDrawer';
 import styles from './styles';
-import SigninDrawer from './../Shared/BottomDrawers/GetStartedDrawer/SigninDrawer';
-
-const SignInScreen = ({navigation}) => {
+const WelcomeScreen = ({navigation}) => {
   const [isModalShown, setisModalShown] = useState(false);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
         <Text>Touch me</Text>
       </TouchableOpacity>
-      <Text style={styles.bigwhitetext}>Welcome! </Text>
       {/*'Logo and text'*/}
-      <SigninDrawer
+      <GetStartedDrawer
         isModalShown={isModalShown}
         setisModalShown={setisModalShown}
       />
@@ -20,4 +19,4 @@ const SignInScreen = ({navigation}) => {
   );
 };
 
-export default SignInScreen;
+export default WelcomeScreen;
