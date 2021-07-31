@@ -1,12 +1,14 @@
 export const Colors = {
-  mainColor: '#650A33', //reddish
   mainWhite: '#FFFFFF',
-  mainGray: '#c7c7cb',
-  mainPink: '#F1CDF1',
+  mainLightGray: '#E9E9E9',
+  mainGray: '#71717F',
+  mainPink: '#F890AB',
   mainBlack: '#000000',
-  statusbarColor: '#4d5d53',
-  mainBlue: '#293fb3',
+  mainGoogleBlue: '#293fb3',
   mainPurple: '#6e29b3',
+  green: '#1FBE25',
+  red: '#F10000',
+  orange: '#DB9E11',
 };
 
 export const Grads = {

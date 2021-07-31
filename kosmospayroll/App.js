@@ -4,7 +4,7 @@ import {storeCombined} from './src/redux/store';
 import {Provider, useDispatch} from 'react-redux';
 
 import {PersistGate} from 'redux-persist/integration/react';
-import {MainNavigation} from './src/Components/Main/MainNavigation';
+import {MainNavigation} from './src/Navigation/Main/MainNavigation';
 
 const {store, persistor} = storeCombined();
 

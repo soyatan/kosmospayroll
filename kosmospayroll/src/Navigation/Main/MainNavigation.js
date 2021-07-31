@@ -4,12 +4,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
-import AuthNavigation from './../Auth/AuthContainer';
+import AuthNavigation from '../Auth/AuthNavigation';
 
 const Main = createStackNavigator();
 
 export const MainNavigation = () => {
   const user = useSelector(userSelector);
+  console.log('1.show user cred.', user);
   return (
     <NavigationContainer>
       <Main.Navigator>
