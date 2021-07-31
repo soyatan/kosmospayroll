@@ -7,13 +7,11 @@ const WelcomeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
-        <Text>Touch me</Text>
-      </TouchableOpacity>
       {/*'Logo and text'*/}
       <GetStartedDrawer
         isModalShown={isModalShown}
         setisModalShown={setisModalShown}
+        onPress={() => navigation.navigate('Signin')}
       />
     </View>
   );

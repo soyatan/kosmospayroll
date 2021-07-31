@@ -7,10 +7,10 @@ const SignInScreen = ({navigation}) => {
   const [isModalShown, setisModalShown] = useState(false);
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
-        <Text>Touch me</Text>
-      </TouchableOpacity>
-      <Text style={styles.bigwhitetext}>Welcome! </Text>
+      <View style={styles.welcometextcontainer}>
+        <Text style={styles.bigwhitetext}>Welcome! </Text>
+      </View>
+
       {/*'Logo and text'*/}
       <SigninDrawer
         isModalShown={isModalShown}

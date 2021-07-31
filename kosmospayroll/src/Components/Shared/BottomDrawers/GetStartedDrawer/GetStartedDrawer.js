@@ -2,8 +2,9 @@ import React, {useCallback, useEffect, useMemo, useState, useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import styles from './styles';
+import RoundedButton from './../../Button/RoundedButton';
 
-const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
+const GetStartedDrawer = ({isModalShown, setisModalShown, onPress}) => {
   useEffect(() => {
     if (isModalShown) {
       handlePresentModalPress();
@@ -39,6 +40,13 @@ const GetStartedDrawer = ({isModalShown, setisModalShown}) => {
         <View style={styles.contentContainer}>
           <Text style={styles.bigwhitetext}>Stay connected! </Text>
           <Text style={styles.blacktext}>Sign in with an account</Text>
+          <RoundedButton
+            label={'Get Started  >'}
+            width_scale={1.2}
+            bg_color={'mainPink'}
+            text_color={'mainBlack'}
+            onPress={onPress}
+          />
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>

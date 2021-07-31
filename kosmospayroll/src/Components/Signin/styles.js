@@ -22,4 +22,8 @@ export default styles = StyleSheet.create({
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
   },
+  welcometextcontainer: {
+    alignItems: 'center',
+    marginTop: w * 0.15,
+  },
 });

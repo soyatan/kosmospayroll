@@ -20,13 +20,16 @@ export default styles = StyleSheet.create({
     borderTopLeftRadius: w * 0.15,
     borderTopRightRadius: w * 0.15,
   },
+  signinbuttonscontainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   contentContainer: {
     flex: 1,
-    marginHorizontal: 20,
-    marginVertical: 20,
-    borderTopLeftRadius: w * 0.5,
-    borderTopRightRadius: w * 0.5,
-    padding: w * 0.04,
+    marginHorizontal: w * 0.05,
+    marginTop: w * 0.1,
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
   },
   contentelement: {alignItems: 'flex-start', paddingVertical: w * 0.02},
 
@@ -36,8 +39,22 @@ export default styles = StyleSheet.create({
     color: Colors.mainWhite,
     marginBottom: w * 0.03,
   },
+  bigblacktext: {
+    fontFamily: Fonts.Families.bold,
+    fontSize: Fonts.Sizes.thirty,
+    color: Colors.mainBlack,
+    marginBottom: w * 0.03,
+  },
   blacktext: {
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainBlack,
+    marginBottom: w * 0.025,
+  },
+  redtext: {
+    fontFamily: Fonts.Families.medium,
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.red,
+    marginBottom: w * 0.025,
   },
 });

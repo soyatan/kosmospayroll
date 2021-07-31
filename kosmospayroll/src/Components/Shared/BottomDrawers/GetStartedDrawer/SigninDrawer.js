@@ -1,7 +1,16 @@
 import React, {useCallback, useEffect, useMemo, useState, useRef} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import styles from './styles';
+import InputComponent from './../../Input/InputComponent';
+import RoundedButton from './../../Button/RoundedButton';
 
 const SigninDrawer = ({isModalShown, setisModalShown}) => {
   useEffect(() => {
@@ -37,8 +46,36 @@ const SigninDrawer = ({isModalShown, setisModalShown}) => {
         snapPoints={snapPoints}
         handleComponent={() => null}>
         <View style={styles.contentContainer}>
-          <Text style={styles.bigwhitetext}>Stay connected! </Text>
-          <Text style={styles.blacktext}>Sign in with an account</Text>
+          <Text style={styles.blacktext}>Email Address</Text>
+          <InputComponent iconname={'envelope'} label={'Your Email'} />
+          <Text style={styles.blacktext}>Password</Text>
+          <InputComponent
+            iconname={'padlock'}
+            label={'Your Password'}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity>
+            <Text style={styles.redtext}>Forgot password?</Text>
+          </TouchableOpacity>
+          <KeyboardAvoidingView
+            enabled={true}
+            style={styles.signinbuttonscontainer}>
+            <RoundedButton
+              label={'Sign In'}
+              bg_color={'mainPink'}
+              text_color={'mainBlack'}
+            />
+            <RoundedButton
+              label={'Google Login'}
+              bg_color={'blue'}
+              text_color={'mainWhite'}
+            />
+            <RoundedButton
+              label={'Sign Up'}
+              bg_color={'mainLightGray'}
+              text_color={'mainPink'}
+            />
+          </KeyboardAvoidingView>
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>
