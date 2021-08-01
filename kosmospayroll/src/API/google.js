@@ -18,8 +18,6 @@ export async function signIn(dispatch) {
     account.email = userInfo.user.email;
     account.uid = userInfo.user.id;
     account.username = userInfo.user.givenName;
-    account.popCoin = 100;
-    account.ownedBoards = [1, 3, 10, 14];
     database()
       .ref('users/' + userInfo.user.id)
       .once('value', snapshot => {
@@ -30,10 +28,9 @@ export async function signIn(dispatch) {
             setUserAndError(
               newAccount.username,
               newAccount.uid,
+              newAccount.email,
               null,
               'google',
-              newAccount.popCoin,
-              newAccount.ownedBoards,
             ),
           );
         } else {
@@ -50,10 +47,9 @@ export async function signIn(dispatch) {
                     setUserAndError(
                       newAccount.username,
                       newAccount.uid,
+                      newAccount.email,
                       null,
                       'google',
-                      100,
-                      [1, 3, 10, 14],
                     ),
                   );
                 });
@@ -62,19 +58,11 @@ export async function signIn(dispatch) {
       });
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      // when user cancels sign in process,
-      //Alert.alert('Process Cancelled');
-      //dispatch(setError(error));
     } else if (error.code === statusCodes.IN_PROGRESS) {
-      // when in progress already
       dispatch(setError(error.message));
     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      // when play services not available
-      //Alert.alert('Play services are not available');
       dispatch(setError(error.message));
     } else {
-      // some other error
-      //Alert.alert('Something else went wrong... ', error.toString());
       dispatch(setError(error.message));
     }
   }
@@ -87,17 +75,14 @@ export async function getCurrentUserInfo(dispatch) {
       setUserAndError(
         userInfo.user.givenName,
         userInfo.user.id,
+        userInfo.user.email, //check this
         null,
         'google',
       ),
     );
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_REQUIRED) {
-      // when user hasn't signed in yet
-      //Alert.alert('Please Sign in');
-      //      await dispatch(setUser(null, null));
     } else {
-      //Alert.alert('Something else went wrong... ', error.toString());
       await dispatch(setError(error));
     }
   }

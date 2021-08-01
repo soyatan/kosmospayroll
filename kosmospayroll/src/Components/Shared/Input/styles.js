@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
     height: h * 0.06,
     borderWidth: 0.7,
     opacity: 0.5,
-    marginBottom: w * 0.04,
+    marginBottom: w * 0.02,
     //paddingLeft: 10,
     width: '100%',
 

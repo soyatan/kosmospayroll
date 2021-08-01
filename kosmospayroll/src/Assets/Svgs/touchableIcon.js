@@ -11,7 +11,7 @@ export const TouchableIcon = ({name, scale, onPress}) => {
     <TouchableOpacity
       style={{
         width: size * 2,
-        height: '100%',
+        height: size * 2,
 
         alignItems: 'center',
       }}

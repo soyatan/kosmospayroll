@@ -3,14 +3,14 @@ import {StyleSheet} from 'react-native';
 
 import {width as w, height as h} from '../../constants/Metrics';
 import Fonts from '../../constants/Fonts';
-import {Colors} from './../../constants/Colors';
+import {Colors} from '../../constants/Colors';
 
 const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.mainGray,
+    backgroundColor: Colors.mainWhite,
   },
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,

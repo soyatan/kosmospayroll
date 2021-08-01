@@ -1,16 +1,17 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {width as w, height as h} from '../../../constants/Metrics';
 import styles from './styles';
 import {Colors} from './../../../constants/Colors';
+import {Icon} from './../../../Assets/Svgs/icon';
 
 export default RoundedButton = ({
   label,
   onPress,
   pressable,
-  width_scale,
   bg_color,
   text_color,
+  iconname,
 }) => {
   return (
     <TouchableOpacity
@@ -30,7 +31,6 @@ export default RoundedButton = ({
               {
                 width: '100%',
                 alignSelf: 'center',
-                justifyContent: 'center',
                 marginVertical: w * 0.025,
 
                 backgroundColor: Colors[bg_color],
@@ -38,6 +38,12 @@ export default RoundedButton = ({
             ]
       }
       onPress={onPress}>
+      {iconname ? (
+        <>
+          <Icon name={'google'} scale={1.5} />
+          <View style={{marginHorizontal: 5}}></View>
+        </>
+      ) : null}
       <Text
         style={
           pressable

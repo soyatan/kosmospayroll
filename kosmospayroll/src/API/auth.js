@@ -2,16 +2,15 @@ import auth, {firebase} from '@react-native-firebase/auth';
 
 import {setError, setUserAndError, signOutAction} from '../redux/userReducer';
 import database from '@react-native-firebase/database';
-export const createUser = (dispatch, name, email, password) => {
+
+export const createUser = (dispatch, username, email, password) => {
   auth()
     .createUserWithEmailAndPassword(email, password)
     .then(authData => {
       let account = {};
       account.email = email.toLowerCase();
       account.uid = authData.user.uid;
-      account.username = name;
-      account.popCoin = 100;
-      account.ownedBoards = [1, 3, 10, 14];
+      account.username = username;
 
       database()
         .ref('users/' + authData.user.uid)
@@ -26,10 +25,9 @@ export const createUser = (dispatch, name, email, password) => {
                 setUserAndError(
                   newAccount.username,
                   newAccount.uid,
+                  newAccount.email,
                   null,
                   'firebase',
-                  newAccount.popCoin,
-                  newAccount.ownedBoards,
                 ),
               );
             })
@@ -56,10 +54,11 @@ export const signOutUser = dispatch => {
   auth()
     .signOut()
     .then(() => dispatch(signOutAction()))
-    .then(console.log('loggingout by firebase'));
+    .then(console.log('logging out by firebase'));
 };
 
 export const signInUser = (dispatch, email, password) => {
+  console.log('step1');
   auth()
     .signInWithEmailAndPassword(email, password)
     .then(authData => {
@@ -72,10 +71,9 @@ export const signInUser = (dispatch, email, password) => {
             setUserAndError(
               newAccount.username,
               newAccount.uid,
+              newAccount.email,
               null,
               'firebase',
-              newAccount.popCoin,
-              newAccount.ownedBoards,
             ),
           );
         })

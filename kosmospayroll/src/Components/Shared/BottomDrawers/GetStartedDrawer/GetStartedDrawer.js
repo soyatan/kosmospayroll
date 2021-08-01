@@ -19,7 +19,7 @@ const GetStartedDrawer = ({isModalShown, setisModalShown, onPress}) => {
 
   const bottomSheetModalRef = useRef(BottomSheetModal);
 
-  const snapPoints = useMemo(() => ['0%', '45%'], []);
+  const snapPoints = useMemo(() => ['0%', '35%'], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current.present();
@@ -40,13 +40,14 @@ const GetStartedDrawer = ({isModalShown, setisModalShown, onPress}) => {
         <View style={styles.contentContainer}>
           <Text style={styles.bigwhitetext}>Stay connected! </Text>
           <Text style={styles.blacktext}>Sign in with an account</Text>
-          <RoundedButton
-            label={'Get Started  >'}
-            width_scale={1.2}
-            bg_color={'mainPink'}
-            text_color={'mainBlack'}
-            onPress={onPress}
-          />
+          <View style={styles.getstartedbuttoncontainer}>
+            <RoundedButton
+              label={'Get Started  >'}
+              bg_color={'mainPink'}
+              text_color={'mainBlack'}
+              onPress={onPress}
+            />
+          </View>
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>

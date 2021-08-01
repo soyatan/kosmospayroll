@@ -15,6 +15,9 @@ import salary from './salary.svg';
 import down from './sort-down.svg';
 import switcher from './switch.svg';
 import hide from './hide.svg';
+import user from './user.svg';
+import validate from './validate.svg';
+import cross from './cross.svg';
 
 export const SVGS = {
   add_user,
@@ -33,5 +36,8 @@ export const SVGS = {
   salary,
   down,
   switcher,
+  validate,
   hide,
+  user,
+  cross,
 };

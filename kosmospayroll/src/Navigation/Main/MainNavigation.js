@@ -5,20 +5,34 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import AuthNavigation from '../Auth/AuthNavigation';
+import PayrollNavigation from '../Payroll/PayrollNavigation';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import {Footer} from '../../Components/Footer/Footer';
+import {Header} from './../../Components/Header/Header';
+import styles from '../../Components/Header/styles';
 
 const Main = createStackNavigator();
 
 export const MainNavigation = () => {
   const user = useSelector(userSelector);
-  console.log('1.show user cred.', user);
   return (
     <NavigationContainer>
       <Main.Navigator>
-        <Main.Screen
-          name="Auth"
-          component={AuthNavigation}
-          options={{headerShown: false}}
-        />
+        {!user.isLoggedIn ? (
+          <Main.Screen
+            name="Auth"
+            component={AuthNavigation}
+            options={{headerShown: false}}
+          />
+        ) : (
+          <Main.Screen
+            name="Payroll"
+            component={PayrollNavigation}
+            options={({route}) => ({
+              header: () => <Header route={route} />,
+            })}
+          />
+        )}
       </Main.Navigator>
     </NavigationContainer>
   );

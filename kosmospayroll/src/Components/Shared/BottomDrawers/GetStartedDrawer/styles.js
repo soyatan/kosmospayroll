@@ -21,15 +21,20 @@ export default styles = StyleSheet.create({
     borderTopRightRadius: w * 0.15,
   },
   signinbuttonscontainer: {
-    flex: 1,
     justifyContent: 'center',
+    height: h * 0.3,
+  },
+  getstartedbuttoncontainer: {
+    width: w * 0.45,
+    alignSelf: 'flex-end',
+    marginTop: w * 0.1,
   },
   contentContainer: {
     flex: 1,
-    marginHorizontal: w * 0.05,
-    marginTop: w * 0.1,
+    marginHorizontal: w * 0.1,
+    marginTop: w * 0.05,
     alignItems: 'stretch',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   contentelement: {alignItems: 'flex-start', paddingVertical: w * 0.02},
 
@@ -53,7 +58,7 @@ export default styles = StyleSheet.create({
   },
   redtext: {
     fontFamily: Fonts.Families.medium,
-    fontSize: Fonts.Sizes.fourteen,
+    fontSize: Fonts.Sizes.twelve,
     color: Colors.red,
     marginBottom: w * 0.025,
   },

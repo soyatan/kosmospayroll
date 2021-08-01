@@ -4,17 +4,25 @@ import styles from './styles';
 import SigninDrawer from './../Shared/BottomDrawers/GetStartedDrawer/SigninDrawer';
 
 const SignInScreen = ({navigation}) => {
+  const [isSignup, setisSignup] = useState(false);
   const [isModalShown, setisModalShown] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={styles.welcometextcontainer}>
-        <Text style={styles.bigwhitetext}>Welcome! </Text>
+        {isSignup ? (
+          <Text style={styles.bigwhitetext}>Register Now! </Text>
+        ) : (
+          <Text style={styles.bigwhitetext}>Welcome! </Text>
+        )}
       </View>
 
       {/*'Logo and text'*/}
       <SigninDrawer
         isModalShown={isModalShown}
         setisModalShown={setisModalShown}
+        isSignup={isSignup}
+        setisSignup={setisSignup}
       />
     </View>
   );
