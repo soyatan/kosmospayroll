@@ -23,10 +23,11 @@ export const Header = ({route}) => {
     // This can happen during if there hasn't been any navigation inside the screen
     // In our case, it's "Feed" as that's the first screen inside the navigator
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Payroll';
+    console.log(routeName);
 
     switch (routeName) {
-      case 'Feed':
-        return 'News feed';
+      case 'Payroll':
+        return 'Dashboard';
       case 'Dashboard':
         return 'Dashboard';
       case 'Loading':
@@ -39,7 +40,7 @@ export const Header = ({route}) => {
   return (
     <View style={styles.headercontainer}>
       <View style={styles.headertitlebox}>
-        <Text> </Text>
+        <Text style={styles.bigwhitetext}>{title}</Text>
       </View>
     </View>
   );

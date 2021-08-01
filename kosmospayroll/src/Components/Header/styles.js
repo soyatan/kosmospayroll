@@ -11,14 +11,13 @@ export default styles = StyleSheet.create({
   headercontainer: {
     width: '100%',
     height: w * 0.13,
-    backgroundColor: 'red',
+    backgroundColor: Colors.mainGray,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   headertitlebox: {
     alignItems: 'center',
-    backgroundColor: 'yellow',
   },
   smalltext: {
     fontSize: Fonts.Sizes.twelve,
@@ -27,5 +26,11 @@ export default styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: 'red',
     height: h * 0.08,
+  },
+  bigwhitetext: {
+    fontFamily: Fonts.Families.bold,
+    fontSize: Fonts.Sizes.twentysix,
+    color: Colors.mainWhite,
+    marginBottom: w * 0.03,
   },
 });
