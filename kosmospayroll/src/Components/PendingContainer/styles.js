@@ -3,24 +3,39 @@ import {StyleSheet} from 'react-native';
 
 import {width as w, height as h} from '../../constants/Metrics';
 import Fonts from '../../constants/Fonts';
-import {Colors} from './../../constants/Colors';
+import {Colors} from '../../constants/Colors';
 
 const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   container: {
-    width: w * 0.85,
+    width: w * 0.9,
     backgroundColor: Colors.mainLightGray,
     alignSelf: 'center',
-    height: h * 0.07,
-    borderRadius: w * 0.1,
+    height: h * 0.1,
+    borderRadius: w * 0.05,
     paddingHorizontal: w * 0.03,
     justifyContent: 'space-between',
     alignItems: 'center',
-
+    borderWidth: 0.3,
     flexDirection: 'row',
     position: 'absolute',
     alignContent: 'stretch',
+  },
+  pendingleftcontainer: {
+    flex: 2,
+    height: '50%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    paddingHorizontal: w * 0.05,
+    borderRightWidth: 1,
+  },
+  pendingrightcontainer: {
+    flex: 2,
+    paddingLeft: w * 0.05,
+    height: '80%',
+    paddingVertical: h * 0.01,
+    justifyContent: 'center',
   },
   headeradditioncontainer: {
     backgroundColor: Colors.mainGray,

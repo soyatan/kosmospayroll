@@ -8,6 +8,7 @@ import dollar from './dollar-currency-symbol.svg';
 import envelope from './envelope.svg';
 import google from './google-plus.svg';
 import left from './left-chevron.svg';
+import right from './right-chevron.svg';
 import management from './management.svg';
 import overtime from './overtime.svg';
 import padlock from './padlock.svg';
@@ -29,6 +30,7 @@ export const SVGS = {
   dollar,
   envelope,
   google,
+  right,
   left,
   management,
   overtime,

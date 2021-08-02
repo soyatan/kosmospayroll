@@ -27,6 +27,17 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  bigbutton: {
+    flexDirection: 'row',
+    backgroundColor: Colors.mainPink,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: w * 0.01,
+    borderRadius: w * 0.2,
+    paddingHorizontal: w * 0.03,
+    width: w * 0.3,
+  },
   whitetext: {
     color: Colors.mainWhite,
     fontSize: Fonts.Sizes.fourteen,
@@ -36,5 +47,12 @@ export default styles = StyleSheet.create({
     color: Colors.mainBlack,
     fontSize: Fonts.Sizes.fourteen,
     fontFamily: Fonts.Families.bold,
+  },
+  smallwhitetext: {
+    color: Colors.mainWhite,
+    fontSize: Fonts.Sizes.twelve,
+    fontFamily: Fonts.Families.bold,
+    marginRight: w * 0.02,
+    textAlign: 'center',
   },
 });

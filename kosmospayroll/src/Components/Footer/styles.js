@@ -30,5 +30,4 @@ export default styles = StyleSheet.create({
     fontSize: Fonts.Sizes.twelve,
     color: 'black',
   },
-  smallwhitetext: {fontSize: Fonts.Sizes.twelve, color: 'white'},
 });

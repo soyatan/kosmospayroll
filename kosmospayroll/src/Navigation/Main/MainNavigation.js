@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import AuthNavigation from '../Auth/AuthNavigation';
 import PayrollNavigation from '../Payroll/PayrollNavigation';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+
 import {Footer} from '../../Components/Footer/Footer';
 import {Header} from './../../Components/Header/Header';
 import styles from '../../Components/Header/styles';

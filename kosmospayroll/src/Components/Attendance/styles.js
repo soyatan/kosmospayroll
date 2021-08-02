@@ -12,6 +12,10 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.mainWhite,
   },
+  attendancecontainer: {
+    flex: 1,
+    marginTop: h * 0.08,
+  },
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,
     fontSize: Fonts.Sizes.thirty,

@@ -10,12 +10,13 @@ export const TouchableIcon = ({name, scale, onPress, color}) => {
   return (
     <TouchableOpacity
       style={{
-        width: size,
-        height: size,
         alignItems: 'center',
+        flex: 1,
+        height: '100%',
+        justifyContent: 'center',
       }}
       onPress={onPress}>
-      <VecGr width="100%" height="100%" fill={color ?? 'black'} />
+      <VecGr width={size} height={size} fill={color ?? 'black'} />
     </TouchableOpacity>
   );
 };
