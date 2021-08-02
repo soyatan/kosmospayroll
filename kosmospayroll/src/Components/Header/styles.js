@@ -10,7 +10,7 @@ const {Families, Sizes} = Fonts;
 export default styles = StyleSheet.create({
   headercontainer: {
     width: '100%',
-    height: w * 0.13,
+    height: h * 0.1,
     backgroundColor: Colors.mainGray,
     flexDirection: 'row',
     justifyContent: 'center',

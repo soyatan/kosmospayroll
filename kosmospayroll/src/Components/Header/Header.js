@@ -19,19 +19,21 @@ export const Header = ({route}) => {
     settitle(titlefromroute);
   }, [route]);
   function getHeaderTitle(route) {
-    // If the focused route is not found, we need to assume it's the initial screen
-    // This can happen during if there hasn't been any navigation inside the screen
-    // In our case, it's "Feed" as that's the first screen inside the navigator
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Payroll';
-    console.log(routeName);
 
     switch (routeName) {
       case 'Payroll':
         return 'Dashboard';
       case 'Dashboard':
         return 'Dashboard';
-      case 'Loading':
-        return 'Loading';
+      case 'Settings':
+        return 'Settings';
+      case 'Payslips':
+        return 'Payslips';
+      case 'Attendance':
+        return 'Attendance';
+      case 'Roster':
+        return 'Roster';
     }
   }
   const user = useSelector(userSelector);

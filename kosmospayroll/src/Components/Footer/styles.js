@@ -15,19 +15,20 @@ export default styles = StyleSheet.create({
     height: w * 0.19,
     backgroundColor: Colors.mainGray,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   footeritem: {
     flexDirection: 'column',
-    padding: w * 0.01,
-
-    justifyContent: 'flex-start',
-    borderWidth: 1,
+    justifyContent: 'space-around',
     alignItems: 'center',
+    flex: 1,
+    height: '100%',
+    paddingTop: h * 0.01,
   },
   smalltext: {
     fontSize: Fonts.Sizes.twelve,
     color: 'black',
   },
+  smallwhitetext: {fontSize: Fonts.Sizes.twelve, color: 'white'},
 });

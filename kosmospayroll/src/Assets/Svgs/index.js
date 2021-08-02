@@ -18,7 +18,7 @@ import hide from './hide.svg';
 import user from './user.svg';
 import validate from './validate.svg';
 import cross from './cross.svg';
-
+import settings from './settings.svg';
 export const SVGS = {
   add_user,
   attendance,
@@ -39,5 +39,6 @@ export const SVGS = {
   validate,
   hide,
   user,
+  settings,
   cross,
 };

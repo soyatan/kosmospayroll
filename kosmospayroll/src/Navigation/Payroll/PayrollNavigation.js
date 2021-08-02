@@ -9,6 +9,10 @@ import DashboardScreen from './../../Components/Dashboard/DashboardScreen';
 import {Footer} from '../../Components/Footer/Footer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoadingScreen from '../../Components/Loading/LoadingScreen';
+import RosterScreen from './../../Components/Roster/RosterScreen';
+import AttendanceScreen from './../../Components/Attendance/AttendanceScreen';
+import PayslipsScreen from './../../Components/Payslips/PayslipsScreen';
+import SettingsScreen from './../../Components/Settings/SettingsScreen';
 
 const Payroll = createBottomTabNavigator();
 const PayrollNavigation = () => {
@@ -17,7 +21,10 @@ const PayrollNavigation = () => {
       <StatusBar barStyle={'light-content'} backgroundColor={Colors.mainGray} />
       <Payroll.Navigator tabBar={() => <Footer />}>
         <Payroll.Screen name="Dashboard" component={DashboardScreen} />
-        <Payroll.Screen name="Loading" component={LoadingScreen} />
+        <Payroll.Screen name="Roster" component={RosterScreen} />
+        <Payroll.Screen name="Attendance" component={AttendanceScreen} />
+        <Payroll.Screen name="Payslips" component={PayslipsScreen} />
+        <Payroll.Screen name="Settings" component={SettingsScreen} />
       </Payroll.Navigator>
     </>
   );
