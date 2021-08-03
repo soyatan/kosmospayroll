@@ -8,7 +8,7 @@ import EmployeeSummaryContainer from './../EmployeeSummaryContainer/EmployeeSumm
 const RosterScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <PendingContainer />
+      <PendingContainer onPress={() => navigation.navigate('Add')} />
       <View style={styles.rostercontainer}>
         <WorkTypeFilterContainer />
         <EmployeeSummaryContainer />

@@ -20,6 +20,16 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  borderlessinput: {
+    height: h * 0.06,
+    opacity: 0.5,
+    margin: w * 0.02,
+    //paddingLeft: 10,
+    width: '100%',
+    borderBottomWidth: 0.3,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   textinput: {
     marginLeft: w * 0.02,
     marginRight: w * 0.03,

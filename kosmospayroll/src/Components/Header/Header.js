@@ -34,6 +34,8 @@ export const Header = ({route}) => {
         return 'Attendance';
       case 'Roster':
         return 'Roster';
+      case 'Add':
+        return 'Add Employee';
     }
   }
   const user = useSelector(userSelector);

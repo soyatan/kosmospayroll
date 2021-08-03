@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
-const PendingContainer = () => {
+const PendingContainer = ({onPress}) => {
   return (
     <>
       <View style={styles.headeradditioncontainer}></View>
@@ -17,7 +17,7 @@ const PendingContainer = () => {
             name={'add_user'}
             scale={1}
             label={'NEW EMPLOYEE'}
-            onPress={() => console.log('çenin onpresin mi yok?')}
+            onPress={onPress}
           />
         </View>
       </View>

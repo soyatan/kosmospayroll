@@ -13,6 +13,7 @@ import RosterScreen from './../../Components/Roster/RosterScreen';
 import AttendanceScreen from './../../Components/Attendance/AttendanceScreen';
 import PayslipsScreen from './../../Components/Payslips/PayslipsScreen';
 import SettingsScreen from './../../Components/Settings/SettingsScreen';
+import AddEmployeeScreen from '../../Components/AddEmplyee/AddEmployeeScreen';
 
 const Payroll = createBottomTabNavigator();
 const PayrollNavigation = () => {
@@ -25,6 +26,7 @@ const PayrollNavigation = () => {
         <Payroll.Screen name="Attendance" component={AttendanceScreen} />
         <Payroll.Screen name="Payslips" component={PayslipsScreen} />
         <Payroll.Screen name="Settings" component={SettingsScreen} />
+        <Payroll.Screen name="Add" component={AddEmployeeScreen} />
       </Payroll.Navigator>
     </>
   );
