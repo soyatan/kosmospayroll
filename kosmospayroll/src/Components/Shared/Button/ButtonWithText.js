@@ -17,7 +17,7 @@ export default ButtonWithText = ({
     <TouchableOpacity style={[styles.bigbutton]} onPress={onPress}>
       <>
         <Text style={styles.smallwhitetext}>{label}</Text>
-        <Icon name={name} scale={scale} />
+        <Icon name={name} scale={scale} color={'white'} />
       </>
     </TouchableOpacity>
   );

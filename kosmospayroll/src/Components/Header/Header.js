@@ -29,7 +29,7 @@ export const Header = ({route}) => {
       case 'Settings':
         return 'Settings';
       case 'Payslips':
-        return 'Payslips';
+        return 'Pay Slip Summary';
       case 'Attendance':
         return 'Attendance';
       case 'Roster':

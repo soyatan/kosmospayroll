@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
 
 const PayslipsScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.welcometextcontainer}></View>
-
-      <Text>HELLO FROM THE PS</Text>
+      <DateContainer />
     </View>
   );
 };
