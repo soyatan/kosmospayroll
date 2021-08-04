@@ -11,7 +11,7 @@ import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/Work
 import DateTimePicker from '@react-native-community/datetimepicker';
 const AddEmployeeScreen = ({navigation}) => {
   const [name, setname] = useState('');
-  const [birthdate, setbirthdate] = useState('');
+  const [birthdate, setbirthdate] = useState(new Date());
   const [email, setemail] = useState('');
   const [mobilenumber, setmobilenumber] = useState('');
   const [designation, setdesignation] = useState('');
@@ -20,8 +20,9 @@ const AddEmployeeScreen = ({navigation}) => {
   const [isActive, setisActive] = useState(true);
   const [rate, setrate] = useState('');
   const [otrate, setotrate] = useState('');
-  const [show, setShow] = useState(false);
-  const [mode, setMode] = useState('date');
+  const [showJoin, setShowJoin] = useState(false);
+  const [showBirth, setShowBirth] = useState(false);
+
   const switchActive = () => {
     if (isActive) {
       setisActive(false);
@@ -29,14 +30,18 @@ const AddEmployeeScreen = ({navigation}) => {
       setisActive(true);
     }
   };
-  const onChange = (event, selectedDate) => {
+  const onChangeJD = (event, selectedDate) => {
+    console.log('showin jd');
     const currentDate = selectedDate || joindate;
-    setShow(Platform.OS === 'ios');
+    setShowJoin(Platform.OS === 'ios');
     setjoindate(currentDate);
   };
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
+
+  const onChangeBD = (event, selectedDate) => {
+    console.log('showin bd');
+    const currentDate = selectedDate || birthdate;
+    setShowBirth(Platform.OS === 'ios');
+    setbirthdate(currentDate);
   };
   console.log(joindate);
   return (
@@ -58,11 +63,21 @@ const AddEmployeeScreen = ({navigation}) => {
           <View style={styles.inforow}>
             <Text style={styles.inputtitle}>Date of Birth:</Text>
             <View style={styles.inputcontainer}>
-              <InputComponentAdd
-                state={birthdate}
-                onChangeText={setbirthdate}
-                label={'Date of Birth'}
-              />
+              <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
+                <Text onPress={() => setShowBirth(true)}>
+                  {birthdate.toLocaleDateString('en-gb')}
+                </Text>
+              </View>
+              {showBirth && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={birthdate}
+                  mode={'date'}
+                  is24Hour={true}
+                  display={'spinner'}
+                  onChange={onChangeBD}
+                />
+              )}
             </View>
           </View>
 
@@ -102,13 +117,12 @@ const AddEmployeeScreen = ({navigation}) => {
           <View style={styles.inforow}>
             <Text style={styles.inputtitle}>Joining Date:</Text>
             <View style={styles.inputcontainer}>
-              <View>
-                <Button
-                  onPress={() => showMode('date')}
-                  title="Show date picker!"
-                />
+              <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
+                <Text onPress={() => setShowJoin(true)}>
+                  {joindate.toLocaleDateString('en-gb')}
+                </Text>
               </View>
-              {show && (
+              {showJoin && (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={joindate}
@@ -116,7 +130,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   is24Hour={true}
                   display={'spinner'}
                   display="default"
-                  onChange={onChange}
+                  onChange={onChangeJD}
                 />
               )}
             </View>
