@@ -27,6 +27,9 @@ export default styles = StyleSheet.create({
     height: h * 0.03,
     alignItems: 'center',
   },
+  savebutton: {
+    width: w * 0.4,
+  },
   inforow: {
     flexDirection: 'row',
     width: '100%',

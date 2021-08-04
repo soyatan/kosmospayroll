@@ -15,28 +15,14 @@ export default RoundedButton = ({
 }) => {
   return (
     <TouchableOpacity
-      style={
-        pressable
-          ? [
-              styles.buttonpr,
-              {
-                width: '100%',
-                alignSelf: 'center',
-                justifyContent: 'center',
-                marginVertical: w * 0.025,
-              },
-            ]
-          : [
-              styles.button,
-              {
-                width: '100%',
-                alignSelf: 'center',
-                marginVertical: w * 0.025,
+      style={[
+        styles.button,
+        {
+          marginVertical: w * 0.025,
 
-                backgroundColor: Colors[bg_color],
-              },
-            ]
-      }
+          backgroundColor: Colors[bg_color],
+        },
+      ]}
       onPress={onPress}>
       {iconname ? (
         <>
@@ -44,12 +30,7 @@ export default RoundedButton = ({
           <View style={{marginHorizontal: 5}}></View>
         </>
       ) : null}
-      <Text
-        style={
-          pressable
-            ? styles.whitetext
-            : [styles.blacktext, {color: Colors[text_color]}]
-        }>
+      <Text style={[styles.blacktext, {color: Colors[text_color]}]}>
         {label}
       </Text>
     </TouchableOpacity>

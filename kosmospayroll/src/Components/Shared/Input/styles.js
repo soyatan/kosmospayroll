@@ -13,9 +13,8 @@ export default styles = StyleSheet.create({
     borderWidth: 0.7,
     opacity: 0.5,
     marginBottom: w * 0.02,
-    //paddingLeft: 10,
+    paddingHorizontal: w * 0.02,
     width: '100%',
-
     borderRadius: w * 0.03,
     alignItems: 'center',
     flexDirection: 'row',
@@ -32,7 +31,7 @@ export default styles = StyleSheet.create({
   },
   textinput: {
     marginLeft: w * 0.02,
-    marginRight: w * 0.03,
+    marginRight: w * 0.01,
     flex: 1,
   },
 });

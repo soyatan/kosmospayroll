@@ -9,13 +9,13 @@ const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.mainWhite,
     borderRadius: w * 0.1,
     margin: w * 0.01,
     height: h * 0.06,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   buttonpr: {
     backgroundColor: Colors.darkBlue,

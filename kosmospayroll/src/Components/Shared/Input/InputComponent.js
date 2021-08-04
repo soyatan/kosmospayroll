@@ -38,7 +38,9 @@ export default InputComponent = ({
           onEndEditing={onEndEditing}
         />
         {secureTextEntry ? (
-          <TouchableIcon name={'hide'} scale={1} onPress={iconOnPress} />
+          <View>
+            <TouchableIcon name={'hide'} scale={1} onPress={iconOnPress} />
+          </View>
         ) : null}
       </View>
     </>

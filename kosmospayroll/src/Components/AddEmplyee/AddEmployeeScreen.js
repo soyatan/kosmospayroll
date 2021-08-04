@@ -9,6 +9,8 @@ import CheckBox from '@react-native-community/checkbox';
 import WorkTypeFilterContainer from './../WorkTypeFilterContainer/WorkTypeFilterContainer';
 import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/WorkTypeFilterContainerSmall';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import RoundedButton from './../Shared/Button/RoundedButton';
+import {checkAge} from './../../API/Helper';
 const AddEmployeeScreen = ({navigation}) => {
   const [name, setname] = useState('');
   const [birthdate, setbirthdate] = useState(new Date());
@@ -22,6 +24,17 @@ const AddEmployeeScreen = ({navigation}) => {
   const [otrate, setotrate] = useState('');
   const [showJoin, setShowJoin] = useState(false);
   const [showBirth, setShowBirth] = useState(false);
+  const [isValid, setisValid] = useState({
+    name: false,
+    birthdate: false,
+    email: false,
+    mobilenumber: true,
+    designation: false,
+    joindate: true,
+    type: false,
+    rate: false,
+    otrate: true,
+  });
 
   const switchActive = () => {
     if (isActive) {
@@ -31,19 +44,15 @@ const AddEmployeeScreen = ({navigation}) => {
     }
   };
   const onChangeJD = (event, selectedDate) => {
-    console.log('showin jd');
     const currentDate = selectedDate || joindate;
     setShowJoin(Platform.OS === 'ios');
     setjoindate(currentDate);
   };
-
   const onChangeBD = (event, selectedDate) => {
-    console.log('showin bd');
     const currentDate = selectedDate || birthdate;
     setShowBirth(Platform.OS === 'ios');
     setbirthdate(currentDate);
   };
-  console.log(joindate);
   return (
     <>
       <View style={styles.headeradditioncontainer}></View>
@@ -153,6 +162,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   state={rate}
                   onChangeText={setrate}
                   label={'Hourly Rate'}
+                  keyboardType={'numeric'}
                 />
               </View>
             </View>
@@ -165,6 +175,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   state={rate}
                   onChangeText={setrate}
                   label={'Daily Rate'}
+                  keyboardType={'numeric'}
                 />
               </View>
             </View>
@@ -178,6 +189,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   state={otrate}
                   onChangeText={setotrate}
                   label={'Overtime Rate'}
+                  keyboardType={'numeric'}
                 />
               </View>
             </View>
@@ -191,6 +203,7 @@ const AddEmployeeScreen = ({navigation}) => {
                     state={rate}
                     onChangeText={setrate}
                     label={'Monthly Salary'}
+                    keyboardType={'numeric'}
                   />
                 </View>
               </View>
@@ -213,6 +226,13 @@ const AddEmployeeScreen = ({navigation}) => {
               />
             </View>
           </View>
+        </View>
+        <View style={styles.savebutton}>
+          <RoundedButton
+            label={'SAVE'}
+            bg_color={'mainPink'}
+            text_color={'mainWhite'}
+          />
         </View>
       </ScrollView>
     </>
