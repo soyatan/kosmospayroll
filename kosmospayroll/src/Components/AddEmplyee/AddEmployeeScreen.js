@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Button, TouchableOpacity, ScrollView} from 'react-native';
 import AttendanceItem from '../AttendanceItem/AttendanceItem';
 import DateContainer from '../DateContainer/DateContainer';
@@ -11,7 +11,12 @@ import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/Work
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RoundedButton from './../Shared/Button/RoundedButton';
 import {checkAge} from './../../API/Helper';
+import {useSelector} from 'react-redux';
+import {userSelector} from '../../redux/userReducer';
+import {addEmployee} from '../../API/dbfunctions';
+
 const AddEmployeeScreen = ({navigation}) => {
+  const user = useSelector(userSelector);
   const [name, setname] = useState('');
   const [birthdate, setbirthdate] = useState(new Date());
   const [email, setemail] = useState('');
@@ -24,6 +29,7 @@ const AddEmployeeScreen = ({navigation}) => {
   const [otrate, setotrate] = useState('');
   const [showJoin, setShowJoin] = useState(false);
   const [showBirth, setShowBirth] = useState(false);
+  const [error, seterror] = useState('');
   const [isValid, setisValid] = useState({
     name: false,
     birthdate: false,
@@ -35,6 +41,164 @@ const AddEmployeeScreen = ({navigation}) => {
     rate: false,
     otrate: true,
   });
+  console.log(
+    'n',
+    name,
+    birthdate,
+    email,
+    mobilenumber,
+    designation,
+    'joindate',
+    joindate,
+    workType,
+    rate,
+    otrate,
+  );
+  useEffect(() => {
+    if (workType) {
+      const newValidList = {...isValid};
+      newValidList.type = true;
+      setisValid(newValidList);
+      seterror(null);
+    }
+  }, [workType]);
+
+  const validateName = () => {
+    if (name.length >= 3) {
+      const newValidList = {...isValid};
+      newValidList.name = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.name = false;
+      setisValid(newValidList);
+      seterror('Name must be minimum 3 characters');
+    }
+  };
+  const validateBirthDate = date => {
+    if (Math.ceil(checkAge(date)) >= 18) {
+      const newValidList = {...isValid};
+      newValidList.birthdate = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.birthdate = false;
+      setisValid(newValidList);
+      seterror('Employee must be older than 18 years');
+    }
+  };
+  const validateEmail = () => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase()) | !email) {
+      const newValidList = {...isValid};
+      newValidList.email = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.email = false;
+      setisValid(newValidList);
+      seterror('Please enter valid e-mail address');
+    }
+  };
+
+  const validateMobile = () => {
+    var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    if (re.test(mobilenumber) | !mobilenumber) {
+      const newValidList = {...isValid};
+      newValidList.mobilenumber = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.mobilenumber = false;
+      setisValid(newValidList);
+      seterror('Please enter valid mobile phone number');
+    }
+  };
+  const validateRate = () => {
+    const pattern = /^-?\d*(\.\d+)?$/;
+
+    if (rate.match(pattern)) {
+      const newValidList = {...isValid};
+      newValidList.rate = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.rate = false;
+      setisValid(newValidList);
+      seterror('Invalid entry for rate');
+    }
+  };
+  console.log(isValid);
+
+  const validateOtRate = () => {
+    const pattern = /^-?\d*(\.\d+)?$/;
+
+    if (otrate.match(pattern)) {
+      const newValidList = {...isValid};
+      newValidList.otrate = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.otrate = false;
+      setisValid(newValidList);
+      seterror('Invalid entry for overtime rate');
+    }
+  };
+  const validateDesignation = () => {
+    if (designation.length >= 3) {
+      const newValidList = {...isValid};
+      newValidList.designation = true;
+      setisValid(newValidList);
+      seterror(null);
+    } else {
+      const newValidList = {...isValid};
+      newValidList.designation = false;
+      setisValid(newValidList);
+      seterror('Designation must be minimum 3 characters');
+    }
+  };
+
+  const validateAll = () => {
+    if (!name || !designation || !workType || !rate) {
+      seterror('Please enter all required information');
+    } else if (Object.values(isValid).includes(false)) {
+      if (!isValid.name) {
+        validateName();
+      } else if (!isValid.rate) {
+        validateRate();
+      } else if (!isValid.mobilenumber) {
+        validateMobile();
+      } else if (!isValid.designation) {
+        validateDesignation();
+      } else if (!isValid.birthdate) {
+        validateBirthDate(birthdate);
+      } else if (!isValid.email) {
+        validateEmail();
+      }
+    } else {
+      addEmployee(
+        name,
+        birthdate,
+        email,
+        mobilenumber,
+        designation,
+        joindate,
+        workType,
+        isActive,
+        rate,
+        otrate,
+        user.userid,
+      );
+    }
+  };
 
   const switchActive = () => {
     if (isActive) {
@@ -52,25 +216,32 @@ const AddEmployeeScreen = ({navigation}) => {
     const currentDate = selectedDate || birthdate;
     setShowBirth(Platform.OS === 'ios');
     setbirthdate(currentDate);
+    validateBirthDate(currentDate);
   };
   return (
     <>
       <View style={styles.headeradditioncontainer}></View>
+      {error ? (
+        <View style={{marginVertical: 5}}>
+          <Text style={styles.errormessage}>* {error}</Text>
+        </View>
+      ) : null}
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <View style={styles.addinfocontainer}>
           <Text style={styles.texttitle}>Personal information</Text>
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Name:</Text>
+            <Text style={styles.inputtitle}>Name </Text>
             <View style={styles.inputcontainer}>
               <InputComponentAdd
                 state={name}
                 onChangeText={setname}
                 label={'Name'}
+                onEndEditing={validateName}
               />
             </View>
           </View>
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Date of Birth:</Text>
+            <Text style={styles.inputtitle}>Date of Birth</Text>
             <View style={styles.inputcontainer}>
               <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
                 <Text onPress={() => setShowBirth(true)}>
@@ -91,22 +262,29 @@ const AddEmployeeScreen = ({navigation}) => {
           </View>
 
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Email:</Text>
+            <Text style={styles.inputtitle}>
+              Email <Text style={styles.shadytext}>(opt..)</Text>
+            </Text>
             <View style={styles.inputcontainer}>
               <InputComponentAdd
                 state={email}
                 onChangeText={setemail}
                 label={'Email'}
+                keyboardType={'email-address'}
+                onEndEditing={validateEmail}
               />
             </View>
           </View>
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Mobile Number:</Text>
+            <Text style={styles.inputtitle}>
+              Mobile <Text style={styles.shadytext}> (opt..)</Text>
+            </Text>
             <View style={styles.inputcontainer}>
               <InputComponentAdd
                 state={mobilenumber}
                 onChangeText={setmobilenumber}
                 label={'Mobile Number'}
+                onEndEditing={validateMobile}
               />
             </View>
           </View>
@@ -114,17 +292,20 @@ const AddEmployeeScreen = ({navigation}) => {
         <View style={styles.addinfocontainer}>
           <Text style={styles.texttitle}>Work information</Text>
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Designation:</Text>
+            <Text style={styles.inputtitle}>Designation</Text>
             <View style={styles.inputcontainer}>
               <InputComponentAdd
                 state={designation}
                 onChangeText={setdesignation}
                 label={'Designation'}
+                onEndEditing={validateDesignation}
               />
             </View>
           </View>
           <View style={styles.inforow}>
-            <Text style={styles.inputtitle}>Joining Date:</Text>
+            <Text style={styles.inputtitle}>
+              Joining Date <Text style={styles.shadytext}> (opt..)</Text>
+            </Text>
             <View style={styles.inputcontainer}>
               <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
                 <Text onPress={() => setShowJoin(true)}>
@@ -163,6 +344,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   onChangeText={setrate}
                   label={'Hourly Rate'}
                   keyboardType={'numeric'}
+                  onEndEditing={validateRate}
                 />
               </View>
             </View>
@@ -176,6 +358,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   onChangeText={setrate}
                   label={'Daily Rate'}
                   keyboardType={'numeric'}
+                  onEndEditing={validateRate}
                 />
               </View>
             </View>
@@ -190,6 +373,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   onChangeText={setotrate}
                   label={'Overtime Rate'}
                   keyboardType={'numeric'}
+                  onEndEditing={validateOtRate}
                 />
               </View>
             </View>
@@ -204,6 +388,7 @@ const AddEmployeeScreen = ({navigation}) => {
                     onChangeText={setrate}
                     label={'Monthly Salary'}
                     keyboardType={'numeric'}
+                    onEndEditing={validateRate}
                   />
                 </View>
               </View>
@@ -227,11 +412,13 @@ const AddEmployeeScreen = ({navigation}) => {
             </View>
           </View>
         </View>
+
         <View style={styles.savebutton}>
           <RoundedButton
             label={'SAVE'}
             bg_color={'mainPink'}
             text_color={'mainWhite'}
+            onPress={() => validateAll()}
           />
         </View>
       </ScrollView>

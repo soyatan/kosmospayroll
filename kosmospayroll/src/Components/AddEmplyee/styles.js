@@ -51,7 +51,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   inputtitle: {
-    flex: 2.5,
+    flex: 3.2,
     fontSize: Fonts.Sizes.fourteen,
     fontWeight: 'bold',
     textAlignVertical: 'center',
@@ -62,5 +62,17 @@ export default styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlignVertical: 'center',
     color: Colors.mainPink,
+  },
+  errormessage: {
+    fontSize: Fonts.Sizes.twelve,
+    alignSelf: 'flex-start',
+    marginLeft: w * 0.07,
+    fontWeight: 'bold',
+    textAlignVertical: 'center',
+    color: Colors.red,
+  },
+  shadytext: {
+    fontSize: Fonts.Sizes.ten,
+    color: Colors.mainGray,
   },
 });
