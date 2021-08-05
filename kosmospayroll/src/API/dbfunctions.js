@@ -40,6 +40,34 @@ export const addEmployee = (
     });
 };
 
+export const addCurrency = (dispatch, currency, userid) => {
+  database()
+    .ref('users/' + userid)
+    .update({
+      currency: currency,
+    })
+    .then(() => {
+      database()
+        .ref('users/' + userid)
+        .once('value')
+        .then(function (snapshot) {
+          let newAccount = snapshot.val();
+          dispatch(
+            setUserAndError(
+              newAccount.username,
+              newAccount.uid,
+              newAccount.email,
+              newAccount.currency,
+              null,
+              'firebase',
+            ),
+          );
+        });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 export const fetchEmployees = async (dispatch, userid) => {
   const empList = await database()
     .ref('employees/' + userid)

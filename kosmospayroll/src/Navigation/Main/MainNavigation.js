@@ -10,6 +10,7 @@ import PayrollNavigation from '../Payroll/PayrollNavigation';
 import {Footer} from '../../Components/Footer/Footer';
 import {Header} from './../../Components/Header/Header';
 import styles from '../../Components/Header/styles';
+import SettingsNavigation from './../SettingsNavigation/SettingsNavigation';
 
 const Main = createStackNavigator();
 
@@ -24,10 +25,18 @@ export const MainNavigation = () => {
             component={AuthNavigation}
             options={{headerShown: false}}
           />
-        ) : (
+        ) : user.currency ? (
           <Main.Screen
             name="Payroll"
             component={PayrollNavigation}
+            options={({route}) => ({
+              header: () => <Header route={route} />,
+            })}
+          />
+        ) : (
+          <Main.Screen
+            name="Settings"
+            component={SettingsNavigation}
             options={({route}) => ({
               header: () => <Header route={route} />,
             })}

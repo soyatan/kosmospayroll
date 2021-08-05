@@ -1,3 +1,5 @@
+import {FormatMoney} from 'format-money-js';
+
 export const checkAge = birthdate => {
   const brd = new Date(birthdate.toLocaleDateString());
   const now = Date.now();
@@ -30,3 +32,8 @@ export const generateFullDate = date => {
   const year = date.getUTCFullYear();
   return `${day}-${monthname}-${year}`;
 };
+
+export const fm = new FormatMoney({
+  decimals: 2,
+});
+console.log(fm.from(123125.23813, {symbol: '$'}));

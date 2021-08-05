@@ -11,7 +11,23 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.mainWhite,
+    paddingHorizontal: w * 0.02,
   },
+  modal: {
+    backgroundColor: Colors.mainLightGray,
+    marginTop: h * 0.3,
+    height: h * 0.5,
+    justifyContent: 'center',
+    borderWidth: 0.5,
+    alignItems: 'center',
+    margin: w * 0.03,
+    borderRadius: w * 0.05,
+  },
+  shadytext: {
+    fontSize: Fonts.Sizes.ten,
+    color: Colors.mainGray,
+  },
+
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,
     fontSize: Fonts.Sizes.thirty,
@@ -22,8 +38,50 @@ export default styles = StyleSheet.create({
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
   },
-  welcometextcontainer: {
+  settingrow: {
+    alignItems: 'flex-start',
+    marginVertical: h * 0.01,
+    height: h * 0.08,
+    flexDirection: 'row',
+    paddingHorizontal: w * 0.02,
+    backgroundColor: Colors.mainLightGray,
+    borderRadius: w * 0.02,
+  },
+  buttoncontainer: {
+    height: h * 0.08,
+    width: w * 0.9,
+    alignSelf: 'center',
+    alignItems: 'stretch',
+  },
+  modalbutton: {
+    height: h * 0.08,
+    width: w * 0.6,
+    alignSelf: 'center',
+    alignItems: 'stretch',
+  },
+  leftcontainer: {
+    flex: 2,
+    height: '100%',
+    justifyContent: 'center',
+    borderRightWidth: 0.3,
+  },
+  rightcontainer: {
+    flex: 2,
+    height: '100%',
+    paddingHorizontal: w * 0.02,
+    marginLeft: w * 0.02,
+    //alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  rightcontaineruser: {
+    flex: 2,
+    height: '100%',
+    paddingHorizontal: w * 0.02,
+    marginLeft: w * 0.02,
     alignItems: 'center',
-    marginTop: h * 0.05,
+    justifyContent: 'center',
+  },
+  pickeritem: {
+    fontSize: Fonts.Sizes.ten,
   },
 });

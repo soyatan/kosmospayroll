@@ -20,10 +20,9 @@ export const Header = ({route}) => {
   }, [route]);
   function getHeaderTitle(route) {
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Payroll';
-
     switch (routeName) {
       case 'Payroll':
-        return 'Dashboard';
+        return 'Payroll';
       case 'Dashboard':
         return 'Dashboard';
       case 'Settings':

@@ -9,7 +9,7 @@ const AttendanceScreen = ({navigation}) => {
   const employees = useSelector(employeesSelector);
   return (
     <View style={styles.container}>
-      <DateContainer />
+      <DateContainer date={1617809025443} />
       <View style={styles.attendancecontainer}>
         <FlatList
           data={employees}

@@ -11,6 +11,7 @@ export const createUser = (dispatch, username, email, password) => {
       account.email = email.toLowerCase();
       account.uid = authData.user.uid;
       account.username = username;
+      account.currency = null;
 
       database()
         .ref('users/' + authData.user.uid)
@@ -26,6 +27,7 @@ export const createUser = (dispatch, username, email, password) => {
                   newAccount.username,
                   newAccount.uid,
                   newAccount.email,
+                  newAccount.currency,
                   null,
                   'firebase',
                 ),
@@ -49,13 +51,13 @@ export const createUser = (dispatch, username, email, password) => {
       console.log(error);
     });
 };
-
+/*
 export const signOutUser = dispatch => {
   auth()
     .signOut()
     .then(() => dispatch(signOutAction()))
     .then(console.log('logging out by firebase'));
-};
+};*/
 
 export const signInUser = (dispatch, email, password) => {
   console.log('step1');
@@ -72,6 +74,7 @@ export const signInUser = (dispatch, email, password) => {
               newAccount.username,
               newAccount.uid,
               newAccount.email,
+              newAccount.currency,
               null,
               'firebase',
             ),

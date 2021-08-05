@@ -188,11 +188,11 @@ const AddEmployeeScreen = ({navigation}) => {
     } else {
       addEmployee(
         name,
-        birthdate,
+        Date.parse(birthdate),
         email,
         mobilenumber,
         designation,
-        joindate,
+        Date.parse(joindate),
         workType,
         isActive,
         rate,
