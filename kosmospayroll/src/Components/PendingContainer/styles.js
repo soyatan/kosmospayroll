@@ -40,7 +40,7 @@ export default styles = StyleSheet.create({
   headeradditioncontainer: {
     backgroundColor: Colors.mainGray,
     width: '100%',
-    height: h * 0.03,
+    height: h * 0.04,
     position: 'absolute',
   },
 });

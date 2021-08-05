@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Text, TouchableOpacity, ActivityIndicator, View} from 'react-native';
 import {width as w, height as h} from '../../../constants/Metrics';
 import styles from './styles';
 import {Colors} from './../../../constants/Colors';
@@ -12,6 +12,7 @@ export default RoundedButton = ({
   bg_color,
   text_color,
   iconname,
+  isloading,
 }) => {
   return (
     <TouchableOpacity
@@ -23,7 +24,7 @@ export default RoundedButton = ({
           backgroundColor: Colors[bg_color],
         },
       ]}
-      onPress={onPress}>
+      onPress={!isloading ? onPress : null}>
       {iconname ? (
         <>
           <Icon name={'google'} scale={1.5} />
@@ -33,6 +34,13 @@ export default RoundedButton = ({
       <Text style={[styles.blacktext, {color: Colors[text_color]}]}>
         {label}
       </Text>
+      {isloading ? (
+        <>
+          <View style={{position: 'absolute', right: 20}}>
+            <ActivityIndicator size="small" color="white" />
+          </View>
+        </>
+      ) : null}
     </TouchableOpacity>
   );
 };

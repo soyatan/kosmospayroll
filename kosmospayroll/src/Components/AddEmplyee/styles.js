@@ -24,7 +24,7 @@ export default styles = StyleSheet.create({
   },
   headeradditioncontainer: {
     backgroundColor: Colors.mainGray,
-    height: h * 0.03,
+    height: h * 0.04,
     alignItems: 'center',
   },
   savebutton: {

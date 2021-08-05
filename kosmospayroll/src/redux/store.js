@@ -5,9 +5,13 @@ import REDUX_PERSIST from './ReduxPersistConfig';
 import {persistStore, persistReducer} from 'redux-persist';
 
 import {userReducer} from './userReducer';
+import {employeesReducer} from './employeesReducer';
+import {loadingReducer} from './loadingReducer';
 
 const combinedReducer = combineReducers({
   userState: userReducer,
+  employeesState: employeesReducer,
+  loadingState: loadingReducer,
 });
 
 let persistedReducer = combinedReducer;

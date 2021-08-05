@@ -22,6 +22,11 @@ export default styles = StyleSheet.create({
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
   },
+  headeradditioncontainer: {
+    backgroundColor: Colors.mainGray,
+    height: h * 0.04,
+    alignItems: 'center',
+  },
   welcometextcontainer: {
     alignItems: 'center',
     marginTop: h * 0.05,

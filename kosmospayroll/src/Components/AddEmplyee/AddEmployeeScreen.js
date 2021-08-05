@@ -11,11 +11,14 @@ import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/Work
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RoundedButton from './../Shared/Button/RoundedButton';
 import {checkAge} from './../../API/Helper';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import {addEmployee} from '../../API/dbfunctions';
+import {loadingSelector} from '../../redux/loadingReducer';
 
 const AddEmployeeScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const isloading = useSelector(loadingSelector);
   const user = useSelector(userSelector);
   const [name, setname] = useState('');
   const [birthdate, setbirthdate] = useState(new Date());
@@ -135,7 +138,6 @@ const AddEmployeeScreen = ({navigation}) => {
       seterror('Invalid entry for rate');
     }
   };
-  console.log(isValid);
 
   const validateOtRate = () => {
     const pattern = /^-?\d*(\.\d+)?$/;
@@ -220,12 +222,14 @@ const AddEmployeeScreen = ({navigation}) => {
   };
   return (
     <>
-      <View style={styles.headeradditioncontainer}></View>
-      {error ? (
-        <View style={{marginVertical: 5}}>
-          <Text style={styles.errormessage}>* {error}</Text>
-        </View>
-      ) : null}
+      <View style={styles.headeradditioncontainer}>
+        {error ? (
+          <View style={{marginVertical: 5}}>
+            <Text style={styles.errormessage}>* {error}</Text>
+          </View>
+        ) : null}
+      </View>
+
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <View style={styles.addinfocontainer}>
           <Text style={styles.texttitle}>Personal information</Text>
@@ -419,6 +423,7 @@ const AddEmployeeScreen = ({navigation}) => {
             bg_color={'mainPink'}
             text_color={'mainWhite'}
             onPress={() => validateAll()}
+            isloading={isloading}
           />
         </View>
       </ScrollView>
