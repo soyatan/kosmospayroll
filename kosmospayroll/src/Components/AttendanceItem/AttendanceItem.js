@@ -5,14 +5,19 @@ import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 import AttendanceOption from './AttendanceOption';
 import {Icon} from '../../Assets/Svgs/icon';
-const AttendanceItem = () => {
+import {markAttendance} from './../../API/dbfunctions';
+const AttendanceItem = ({employee}) => {
   return (
     <>
       <View style={styles.container}>
         <View style={styles.leftcontainer}>
-          <Text style={styles.whitetext}>Abdi Umayung</Text>
+          <Text style={styles.whitetext}>{employee.name}</Text>
           <View style={{flexDirection: 'row'}}>
-            <AttendanceOption title={'Absent'} color={'red'} />
+            <AttendanceOption
+              title={'Absent'}
+              color={'red'}
+              onPress={() => markAttendance(employee.userid)}
+            />
             <AttendanceOption title={'Absent'} color={'red'} />
             <AttendanceOption title={'Absent'} color={'red'} />
           </View>

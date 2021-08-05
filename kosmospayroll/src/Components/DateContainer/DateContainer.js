@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {generateFullDate} from '../../API/Helper';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import styles from './styles';
 const DateContainer = () => {
+  useEffect(() => {
+    const today = new Date();
+    const dateToShow = generateFullDate(today);
+    console.log(dateToShow);
+  }, []);
   return (
     <View style={styles.headeradditioncontainer}>
       <View style={styles.container}>

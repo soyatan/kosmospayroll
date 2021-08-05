@@ -24,12 +24,13 @@ export const addEmployee = (
   employee.birthdate = birthdate;
   employee.mobilenumber = mobilenumber;
   employee.designation = designation;
-  employee.joindate = joindate;
+  employee.joindate = joindate ?? new Date();
   employee.isactive = isactive;
   employee.worktype = worktype;
   employee.rate = rate;
   employee.otrate = otrate;
   employee.userid = userid;
+  employee.attendance = {165748: 8};
 
   database()
     .ref('employees/' + userid)
@@ -53,4 +54,16 @@ export const fetchEmployees = async (dispatch, userid) => {
     });
   dispatch(setEmployees(empList));
   dispatch(setLoading(false));
+};
+
+export const markAttendance = (userid, employeeid, date, status) => {
+  database()
+    .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/attendance`)
+    .update({166856: 911});
+};
+
+export const addPayment = (userid, employeeid, date, status) => {
+  database()
+    .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/payments`)
+    .update({166856: 911});
 };

@@ -1,11 +1,4 @@
-const INITIAL_STATE = {
-  errorMessage: null,
-  isLoggedIn: false,
-  userid: null,
-  loginType: null,
-  username: null,
-  email: null,
-};
+const INITIAL_STATE = [];
 
 //selector
 export const employeesSelector = state => state.employeesState;

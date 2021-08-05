@@ -12,6 +12,7 @@ const DashboardScreen = ({navigation}) => {
   const user = useSelector(userSelector);
   const isloading = useSelector(loadingSelector);
   const employees = useSelector(employeesSelector);
+  console.log(employees);
   useEffect(() => {
     dispatch(setLoading(true));
     fetchEmployees(dispatch, user.userid);
@@ -27,10 +28,10 @@ const DashboardScreen = ({navigation}) => {
           </>
         ) : null}
       </View>
-      {!isloading ? (
+      {employees ? (
         <View style={styles.welcometextcontainer}>
-          <Text>{employees[0].name}</Text>
-          <Text>{employees[1].name}</Text>
+          <Text>aa</Text>
+          <Text></Text>
         </View>
       ) : null}
     </View>
