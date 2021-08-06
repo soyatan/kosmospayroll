@@ -40,11 +40,12 @@ export const addEmployee = (
     });
 };
 
-export const addCurrency = (dispatch, currency, userid) => {
+export const addCurrency = (dispatch, currency, company, userid) => {
   database()
     .ref('users/' + userid)
     .update({
       currency: currency,
+      company: company,
     })
     .then(() => {
       database()
@@ -58,6 +59,7 @@ export const addCurrency = (dispatch, currency, userid) => {
               newAccount.uid,
               newAccount.email,
               newAccount.currency,
+              newAccount.company,
               null,
               'firebase',
             ),

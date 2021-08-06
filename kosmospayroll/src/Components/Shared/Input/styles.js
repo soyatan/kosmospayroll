@@ -19,6 +19,13 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  simpleinputcontainer: {
+    height: h * 0.06,
+    opacity: 0.5,
+    paddingHorizontal: w * 0.02,
+    width: '100%',
+    borderRadius: w * 0.03,
+  },
   borderlessinput: {
     height: h * 0.06,
     opacity: 0.5,

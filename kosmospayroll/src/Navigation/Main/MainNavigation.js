@@ -25,7 +25,7 @@ export const MainNavigation = () => {
             component={AuthNavigation}
             options={{headerShown: false}}
           />
-        ) : user.currency ? (
+        ) : user.currency && user.company ? (
           <Main.Screen
             name="Payroll"
             component={PayrollNavigation}

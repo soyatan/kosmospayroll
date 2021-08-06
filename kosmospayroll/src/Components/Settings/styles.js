@@ -38,6 +38,12 @@ export default styles = StyleSheet.create({
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
   },
+  bigpinktext: {
+    fontFamily: Fonts.Families.medium,
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainPink,
+    fontWeight: 'bold',
+  },
   settingrow: {
     alignItems: 'flex-start',
     marginVertical: h * 0.01,
@@ -68,20 +74,17 @@ export default styles = StyleSheet.create({
   rightcontainer: {
     flex: 2,
     height: '100%',
-    paddingHorizontal: w * 0.02,
-    marginLeft: w * 0.02,
     //alignItems: 'flex-end',
     justifyContent: 'center',
   },
   rightcontaineruser: {
     flex: 2,
     height: '100%',
-    paddingHorizontal: w * 0.02,
-    marginLeft: w * 0.02,
-    alignItems: 'center',
+
     justifyContent: 'center',
   },
   pickeritem: {
     fontSize: Fonts.Sizes.ten,
+    paddingLeft: w * 0.05,
   },
 });

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   username: null,
   email: null,
   currency: null,
+  company: null,
 };
 
 //selector
@@ -31,6 +32,7 @@ export const setUserAndError = (
   userid,
   email,
   currency,
+  company,
   errorMessage,
   loginType,
 ) => {
@@ -41,6 +43,7 @@ export const setUserAndError = (
       userid,
       email,
       currency,
+      company,
       errorMessage,
       loginType,
     },
@@ -88,6 +91,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         username: null,
         email: null,
         currency: null,
+        company: null,
       };
 
     default:
