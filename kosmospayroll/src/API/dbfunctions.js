@@ -17,6 +17,8 @@ export const addEmployee = (
   rate,
   otrate,
   userid,
+  currency,
+  navigation,
 ) => {
   let employee = {};
   employee.name = name;
@@ -31,10 +33,12 @@ export const addEmployee = (
   employee.otrate = otrate;
   employee.userid = userid;
   employee.attendance = {165748: 8};
+  employee.currency = currency;
 
   database()
     .ref('employees/' + userid)
     .push(employee)
+    .then(() => navigation.navigate('Roster'))
     .catch(error => {
       console.log(error);
     });

@@ -6,8 +6,9 @@ import styles from './styles';
 import {TouchableIcon} from '../../../Assets/Svgs/touchableIcon';
 import {Colors} from '../../../constants/Colors';
 import {Icon} from '../../../Assets/Svgs/icon';
+import MaskInput, {Masks} from 'react-native-mask-input';
 
-export default InputComponentAdd = ({
+export default InputComponentMasked = ({
   label,
   secureTextEntry,
   keyboardType,
@@ -15,23 +16,31 @@ export default InputComponentAdd = ({
   state,
   onChangeText,
   iconOnPress,
+  mask,
 }) => {
   return (
     <>
       <View style={styles.borderlessinput}>
-        <TextInput
+        <MaskInput
           style={styles.textinput}
           label={label}
-          placeholder={label}
           autoCorrect={false}
           autoCapitalize="none"
           placeholderTextColor={Colors.mainGray}
           selectionColor="blue"
-          onChangeText={onChangeText}
+          onChangeText={(masked, unmasked, obfuscated) => {
+            onChangeText(unmasked); // you can use the unmasked value as well
+
+            // assuming you typed "9" all the way:
+            console.log(masked); // (99) 99999-9999
+            console.log(unmasked); // 99999999999
+            console.log(obfuscated); // (99) 99999-9999 (there's no obfuscation on this mask example)
+          }}
           value={state.toString()}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
           onEndEditing={onEndEditing}
+          mask={mask}
         />
         {secureTextEntry ? (
           <TouchableIcon name={'hide'} scale={1} onPress={iconOnPress} />

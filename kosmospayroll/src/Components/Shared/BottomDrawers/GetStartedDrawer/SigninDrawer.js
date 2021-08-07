@@ -291,10 +291,10 @@ const SigninDrawer = ({
           </View>
           <View enabled={true} style={styles.signinbuttonscontainer}>
             <RoundedButton
-              label={'Sign In'}
+              label={isSignup ? 'Sign Up' : 'Sign In'}
               bg_color={'mainPink'}
               text_color={'mainBlack'}
-              onPress={() => loginUser()}
+              onPress={isSignup ? () => registerUser() : () => loginUser()}
             />
             <RoundedButton
               label={'Google Login'}
@@ -302,18 +302,25 @@ const SigninDrawer = ({
               text_color={'mainWhite'}
               iconname={'google'}
             />
-            <RoundedButton
-              label={'Sign Up'}
-              bg_color={'mainLightGray'}
-              text_color={'mainPink'}
+            <TouchableOpacity
+              style={styles.siginoption}
               onPress={() => {
                 if (!isSignup) {
                   setisSignup(true);
                 } else {
-                  registerUser();
+                  setisSignup(false);
                 }
-              }}
-            />
+              }}>
+              {isSignup ? (
+                <Text style={styles.boldtext}>
+                  Already have an account? Sign in.
+                </Text>
+              ) : (
+                <Text style={styles.boldtext}>
+                  Don't have an account? Sign up.
+                </Text>
+              )}
+            </TouchableOpacity>
           </View>
         </View>
       </BottomSheetModal>

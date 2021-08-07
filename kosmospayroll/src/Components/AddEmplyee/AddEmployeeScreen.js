@@ -10,12 +10,20 @@ import WorkTypeFilterContainer from './../WorkTypeFilterContainer/WorkTypeFilter
 import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/WorkTypeFilterContainerSmall';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RoundedButton from './../Shared/Button/RoundedButton';
-import {checkAge} from './../../API/Helper';
+import {
+  checkAge,
+  findCurrencySymbol,
+  fm,
+  formatCurrency,
+  PhoneMask,
+} from './../../API/Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import {addEmployee} from '../../API/dbfunctions';
 import {loadingSelector} from '../../redux/loadingReducer';
-
+import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input';
+import InputComponentMasked from '../Shared/Input/InputComponentMasked';
+import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
 const AddEmployeeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const isloading = useSelector(loadingSelector);
@@ -28,8 +36,8 @@ const AddEmployeeScreen = ({navigation}) => {
   const [joindate, setjoindate] = useState(new Date());
   const [workType, setworkType] = useState('');
   const [isActive, setisActive] = useState(true);
-  const [rate, setrate] = useState('');
-  const [otrate, setotrate] = useState('');
+  const [rate, setrate] = useState(0);
+  const [otrate, setotrate] = useState(0);
   const [showJoin, setShowJoin] = useState(false);
   const [showBirth, setShowBirth] = useState(false);
   const [error, seterror] = useState('');
@@ -57,6 +65,9 @@ const AddEmployeeScreen = ({navigation}) => {
     rate,
     otrate,
   );
+
+  const symbol = findCurrencySymbol(user.currency);
+
   useEffect(() => {
     if (workType) {
       const newValidList = {...isValid};
@@ -65,7 +76,11 @@ const AddEmployeeScreen = ({navigation}) => {
       seterror(null);
     }
   }, [workType]);
-
+  useEffect(() => {
+    if (workType === 'monthly') {
+      setotrate(0);
+    }
+  }, [workType]);
   const validateName = () => {
     if (name.length >= 3) {
       const newValidList = {...isValid};
@@ -124,9 +139,9 @@ const AddEmployeeScreen = ({navigation}) => {
     }
   };
   const validateRate = () => {
-    const pattern = /^-?\d*(\.\d+)?$/;
+    const pattern = /^[+-]?((\.\d+)|(\d+(\.\d+)?))$/;
 
-    if (rate.match(pattern)) {
+    if (pattern.test(rate)) {
       const newValidList = {...isValid};
       newValidList.rate = true;
       setisValid(newValidList);
@@ -140,9 +155,9 @@ const AddEmployeeScreen = ({navigation}) => {
   };
 
   const validateOtRate = () => {
-    const pattern = /^-?\d*(\.\d+)?$/;
+    const pattern = /^[+-]?((\.\d+)|(\d+(\.\d+)?))$/;
 
-    if (otrate.match(pattern)) {
+    if (pattern.test(otrate)) {
       const newValidList = {...isValid};
       newValidList.otrate = true;
       setisValid(newValidList);
@@ -198,6 +213,8 @@ const AddEmployeeScreen = ({navigation}) => {
         rate,
         otrate,
         user.userid,
+        user.currency,
+        navigation,
       );
     }
   };
@@ -246,9 +263,23 @@ const AddEmployeeScreen = ({navigation}) => {
           </View>
           <View style={styles.inforow}>
             <Text style={styles.inputtitle}>Date of Birth</Text>
-            <View style={styles.inputcontainer}>
-              <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
-                <Text onPress={() => setShowBirth(true)}>
+            <View style={[styles.inputcontainer, {width: '100%'}]}>
+              <View
+                style={{
+                  alignSelf: 'flex-start',
+                  justifyContent: 'center',
+                  alignItems: 'stretch',
+                  marginLeft: 15,
+                  alignContent: 'stretch',
+                  width: '100%',
+                  height: '100%',
+                }}>
+                <Text
+                  style={{
+                    flex: 1,
+                    textAlignVertical: 'center',
+                  }}
+                  onPress={() => setShowBirth(true)}>
                   {birthdate.toLocaleDateString('en-gb')}
                 </Text>
               </View>
@@ -284,11 +315,12 @@ const AddEmployeeScreen = ({navigation}) => {
               Mobile <Text style={styles.shadytext}> (opt..)</Text>
             </Text>
             <View style={styles.inputcontainer}>
-              <InputComponentAdd
+              <InputComponentMasked
                 state={mobilenumber}
                 onChangeText={setmobilenumber}
                 label={'Mobile Number'}
                 onEndEditing={validateMobile}
+                mask={PhoneMask}
               />
             </View>
           </View>
@@ -343,12 +375,13 @@ const AddEmployeeScreen = ({navigation}) => {
             <View style={styles.inforow}>
               <Text style={styles.inputtitle}>Hourly Rate:</Text>
               <View style={styles.inputcontainer}>
-                <InputComponentAdd
+                <InputComponentCurrency
                   state={rate}
                   onChangeText={setrate}
                   label={'Hourly Rate'}
                   keyboardType={'numeric'}
                   onEndEditing={validateRate}
+                  prefix={`${symbol} `}
                 />
               </View>
             </View>
@@ -357,12 +390,13 @@ const AddEmployeeScreen = ({navigation}) => {
             <View style={styles.inforow}>
               <Text style={styles.inputtitle}>Daily Rate:</Text>
               <View style={styles.inputcontainer}>
-                <InputComponentAdd
+                <InputComponentCurrency
                   state={rate}
                   onChangeText={setrate}
                   label={'Daily Rate'}
                   keyboardType={'numeric'}
                   onEndEditing={validateRate}
+                  prefix={`${symbol} `}
                 />
               </View>
             </View>
@@ -372,12 +406,13 @@ const AddEmployeeScreen = ({navigation}) => {
             <View style={styles.inforow}>
               <Text style={styles.inputtitle}>Overtime Rate:</Text>
               <View style={styles.inputcontainer}>
-                <InputComponentAdd
+                <InputComponentCurrency
                   state={otrate}
                   onChangeText={setotrate}
                   label={'Overtime Rate'}
                   keyboardType={'numeric'}
                   onEndEditing={validateOtRate}
+                  prefix={`${symbol} `}
                 />
               </View>
             </View>
@@ -387,12 +422,13 @@ const AddEmployeeScreen = ({navigation}) => {
               <View style={styles.inforow}>
                 <Text style={styles.inputtitle}>Monthly Salary:</Text>
                 <View style={styles.inputcontainer}>
-                  <InputComponentAdd
+                  <InputComponentCurrency
                     state={rate}
                     onChangeText={setrate}
                     label={'Monthly Salary'}
                     keyboardType={'numeric'}
                     onEndEditing={validateRate}
+                    prefix={`${symbol} `}
                   />
                 </View>
               </View>

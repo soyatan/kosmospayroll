@@ -29,6 +29,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginTop: w * 0.1,
   },
+  siginoption: {marginVertical: w * 0.03, alignItems: 'flex-start'},
   contentContainer: {
     flex: 1,
     marginHorizontal: w * 0.1,
@@ -49,6 +50,12 @@ export default styles = StyleSheet.create({
     fontSize: Fonts.Sizes.thirty,
     color: Colors.mainBlack,
     marginBottom: w * 0.03,
+  },
+  boldtext: {
+    fontFamily: Fonts.Families.bold,
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainBlack,
+    fontWeight: 'bold',
   },
   blacktext: {
     fontFamily: Fonts.Families.medium,

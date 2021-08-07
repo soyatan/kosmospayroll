@@ -1,4 +1,6 @@
 import {FormatMoney} from 'format-money-js';
+import {createNumberMask} from 'react-native-mask-input';
+import {currencies} from './currencies';
 
 export const checkAge = birthdate => {
   const brd = new Date(birthdate.toLocaleDateString());
@@ -36,4 +38,43 @@ export const generateFullDate = date => {
 export const fm = new FormatMoney({
   decimals: 2,
 });
-console.log(fm.from(123125.23813, {symbol: '$'}));
+
+export const findCurrencySymbol = code => {
+  const currency = Object.values(currencies).find(item => item.code === code);
+  return currency.symbol;
+};
+
+export const formatCurrency = (number, currencyCode) => {
+  return fm.from(number, {symbol: findCurrencySymbol(currencyCode)});
+};
+
+//console.log(formatCurrency(123125.123123, 'USD'));
+
+export const CurrencyMask = symbol => {
+  return createNumberMask({
+    prefix: [symbol, ' '],
+    delimiter: ',',
+    separator: '.',
+    precision: 2,
+  });
+};
+export const PhoneMask = [
+  '(',
+  /\d/, // that's because I want it to be a digit (0-9)
+  /\d/,
+  ')',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+];

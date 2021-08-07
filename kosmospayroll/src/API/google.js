@@ -19,6 +19,7 @@ export async function signIn(dispatch) {
     account.uid = userInfo.user.id;
     account.username = userInfo.user.givenName;
     account.currency = null;
+    account.company = null;
     database()
       .ref('users/' + userInfo.user.id)
       .once('value', snapshot => {
@@ -31,6 +32,7 @@ export async function signIn(dispatch) {
               newAccount.uid,
               newAccount.email,
               newAccount.currency,
+              newAccount.company,
               null,
               'google',
             ),
@@ -51,6 +53,7 @@ export async function signIn(dispatch) {
                       newAccount.uid,
                       newAccount.email,
                       newAccount.currency,
+                      newAccount.company,
                       null,
                       'google',
                     ),
@@ -80,6 +83,7 @@ export async function getCurrentUserInfo(dispatch) {
         userInfo.user.id,
         userInfo.user.email,
         userInfo.user.currency,
+        userInfo.user.company,
         null,
         'google',
       ),
