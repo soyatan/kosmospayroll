@@ -19,7 +19,7 @@ import {
 } from './../../API/Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
-import {addEmployee} from '../../API/dbfunctions';
+import {addEmployee, convertDateYMD} from '../../API/dbfunctions';
 import {loadingSelector} from '../../redux/loadingReducer';
 import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input';
 import InputComponentMasked from '../Shared/Input/InputComponentMasked';
@@ -44,7 +44,7 @@ const AddEmployeeScreen = ({navigation}) => {
   const [isValid, setisValid] = useState({
     name: false,
     birthdate: false,
-    email: false,
+    email: true,
     mobilenumber: true,
     designation: false,
     joindate: true,
@@ -182,7 +182,7 @@ const AddEmployeeScreen = ({navigation}) => {
       seterror('Designation must be minimum 3 characters');
     }
   };
-
+  console.log(isValid);
   const validateAll = () => {
     if (!name || !designation || !workType || !rate) {
       seterror('Please enter all required information');
@@ -203,11 +203,11 @@ const AddEmployeeScreen = ({navigation}) => {
     } else {
       addEmployee(
         name,
-        Date.parse(birthdate),
+        convertDateYMD(birthdate),
         email,
         mobilenumber,
         designation,
-        Date.parse(joindate),
+        convertDateYMD(joindate),
         workType,
         isActive,
         rate,
@@ -237,6 +237,7 @@ const AddEmployeeScreen = ({navigation}) => {
     setbirthdate(currentDate);
     validateBirthDate(currentDate);
   };
+
   return (
     <>
       <View style={styles.headeradditioncontainer}>

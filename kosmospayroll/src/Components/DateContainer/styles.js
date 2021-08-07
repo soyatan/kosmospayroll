@@ -22,6 +22,9 @@ export default styles = StyleSheet.create({
     position: 'absolute',
     alignContent: 'stretch',
   },
+  iconcontainer: {
+    width: w * 0.15,
+  },
   headeradditioncontainer: {
     backgroundColor: Colors.mainGray,
     width: '100%',

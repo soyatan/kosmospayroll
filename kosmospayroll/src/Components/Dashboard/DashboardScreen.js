@@ -8,6 +8,13 @@ import {loadingSelector, setLoading} from '../../redux/loadingReducer';
 import {employeesSelector} from '../../redux/employeesReducer';
 
 const DashboardScreen = ({navigation}) => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      //fetchEmployees(dispatch, user.userid);
+      console.log('WHOS THERE');
+    });
+    return unsubscribe;
+  }, [navigation]);
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
   const isloading = useSelector(loadingSelector);

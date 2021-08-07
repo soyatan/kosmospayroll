@@ -20,6 +20,8 @@ import user from './user.svg';
 import validate from './validate.svg';
 import cross from './cross.svg';
 import settings from './settings.svg';
+import hourglass from './hourglass.svg';
+import clock from './clock.svg';
 export const SVGS = {
   add_user,
   attendance,
@@ -35,11 +37,13 @@ export const SVGS = {
   management,
   overtime,
   padlock,
+  clock,
   salary,
   down,
   switcher,
   validate,
   hide,
+  hourglass,
   user,
   settings,
   cross,

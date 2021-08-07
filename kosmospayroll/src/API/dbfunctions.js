@@ -2,9 +2,9 @@ import auth, {firebase} from '@react-native-firebase/auth';
 
 import {setError, setUserAndError, signOutAction} from '../redux/userReducer';
 import database from '@react-native-firebase/database';
-import {setEmployees} from '../redux/employeesReducer';
+import {changeAbsence, setEmployees} from '../redux/employeesReducer';
 import {setLoading} from '../redux/loadingReducer';
-
+import moment from 'moment';
 export const addEmployee = (
   name,
   birthdate,
@@ -32,7 +32,7 @@ export const addEmployee = (
   employee.rate = rate;
   employee.otrate = otrate;
   employee.userid = userid;
-  employee.attendance = {165748: 8};
+  employee.attendance = {};
   employee.currency = currency;
 
   database()
@@ -90,14 +90,23 @@ export const fetchEmployees = async (dispatch, userid) => {
   dispatch(setLoading(false));
 };
 
-export const markAttendance = (userid, employeeid, date, status) => {
+export const markAttendance = (userid, employeeid, date, status, dispatch) => {
   database()
-    .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/attendance`)
-    .update({166856: 911});
+    .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
+    .update({status})
+    .then(() => dispatch(changeAbsence(employeeid, date, status)));
 };
 
 export const addPayment = (userid, employeeid, date, status) => {
   database()
     .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/payments`)
     .update({166856: 911});
+};
+
+export const convertDateYMD = utcdate => {
+  return moment(utcdate).format('YYYY-MM-DD');
+};
+
+export const converDateUTC = date => {
+  return moment(date).format('MM-YYYY-DD');
 };

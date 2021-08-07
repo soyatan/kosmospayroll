@@ -16,8 +16,21 @@ export default styles = StyleSheet.create({
     paddingHorizontal: w * 0.01,
     marginTop: h * 0.02,
     paddingVertical: h * 0.005,
-
+    borderRadius: w * 0.01,
     flexDirection: 'row',
+    backgroundColor: Colors.mainLightGray,
+  },
+  pickeritem: {
+    fontSize: Fonts.Sizes.ten,
+    paddingLeft: w * 0.05,
+  },
+  clockcontainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
+    width: '100%',
   },
   leftcontainer: {
     flex: 5,
@@ -31,7 +44,7 @@ export default styles = StyleSheet.create({
     flex: 1.4,
     paddingHorizontal: w * 0.01,
     justifyContent: 'space-around',
-    paddingVertical: h * 0.01,
+    //paddingVertical: h * 0.01,
     alignItems: 'flex-end',
   },
   dropdowncontainer: {
@@ -47,11 +60,20 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
   },
+  whitetext: {fontSize: Fonts.Sizes.twelve, color: Colors.mainGray},
+  blacktext: {
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainBlack,
+    fontWeight: 'bold',
+  },
+  smalltext: {
+    fontSize: Fonts.Sizes.ten,
+  },
   attoption: {
     height: h * 0.035,
     paddingHorizontal: w * 0.02,
     marginHorizontal: w * 0.01,
-    backgroundColor: 'red',
+    borderWidth: 0.2,
     borderRadius: w * 0.01,
     width: w * 0.22,
     alignItems: 'center',

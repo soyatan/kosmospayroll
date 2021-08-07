@@ -1,7 +1,7 @@
 import {FormatMoney} from 'format-money-js';
 import {createNumberMask} from 'react-native-mask-input';
 import {currencies} from './currencies';
-
+import moment from 'moment';
 export const checkAge = birthdate => {
   const brd = new Date(birthdate.toLocaleDateString());
   const now = Date.now();

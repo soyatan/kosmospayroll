@@ -1,26 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {generateFullDate} from '../../API/Helper';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import styles from './styles';
 import moment from 'moment';
-const DateContainer = ({date}) => {
-  const [curDate, setcurDate] = useState('');
-  //console.log(Date.parse(date));
+const DateContainer = ({curDate, setcurDate}) => {
   useEffect(() => {
-    if (date) {
-      setcurDate(moment(date).format('DD-MMMM-YYYY'));
-      const dayafter = Date.parse(moment(date).add(1, 'd'));
+    if (curDate) {
+      //setcurDate(moment(curDate, 'YYYY-MM-DD').format('DD-MMMM-YYYY'));
+      //const dayafter = moment(curDate).add(3, 'd');
+      //console.log(dayafter);
     }
-  }, [date]);
+  }, [curDate]);
 
   return (
     <View style={styles.headeradditioncontainer}>
       <View style={styles.container}>
-        <TouchableIcon name={'calendar'} scale={1.4} />
-        <Text>{curDate}</Text>
-        <TouchableIcon name={'left'} scale={1.4} />
-        <TouchableIcon name={'right'} scale={1.4} />
+        <View style={styles.iconcontainer}>
+          <TouchableIcon name={'calendar'} scale={1.4} />
+        </View>
+        <Text>{moment(curDate).format('DD-MMMM-YYYY')}</Text>
+        <View style={styles.iconcontainer}>
+          <TouchableIcon
+            name={'left'}
+            scale={1}
+            onPress={() => console.log('bum')}
+            onPress={() => setcurDate(moment(curDate).subtract(1, 'd'))}
+          />
+        </View>
+        <View style={styles.iconcontainer}>
+          <TouchableIcon
+            name={'right'}
+            scale={1}
+            onPress={() => {
+              setcurDate(moment(curDate).add(1, 'd'));
+            }}
+          />
+        </View>
       </View>
     </View>
   );

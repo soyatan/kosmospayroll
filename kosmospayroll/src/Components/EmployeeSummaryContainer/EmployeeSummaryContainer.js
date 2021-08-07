@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {converDateUTC} from '../../API/dbfunctions';
 import {formatCurrency} from '../../API/Helper';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee}) => {
-  console.log(employee);
+  console.log(converDateUTC(employee.birthdate));
   return (
     <>
       <View style={styles.container}>
