@@ -17,7 +17,6 @@ const SettingsScreen = ({navigation}) => {
   const [company, setcompany] = useState('');
   const [modalVisible, setmodalVisible] = useState(false);
   const dispatch = useDispatch();
-  console.log(user);
   return (
     <View style={styles.container}>
       <Modal

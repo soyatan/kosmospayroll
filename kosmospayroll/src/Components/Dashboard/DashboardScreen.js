@@ -19,7 +19,6 @@ const DashboardScreen = ({navigation}) => {
   const user = useSelector(userSelector);
   const isloading = useSelector(loadingSelector);
   const employees = useSelector(employeesSelector);
-  console.log(employees);
   useEffect(() => {
     dispatch(setLoading(true));
     fetchEmployees(dispatch, user.userid);

@@ -8,7 +8,6 @@ const DateContainer = ({curDate, setcurDate}) => {
     if (curDate) {
       //setcurDate(moment(curDate, 'YYYY-MM-DD').format('DD-MMMM-YYYY'));
       //const dayafter = moment(curDate).add(3, 'd');
-      //console.log(dayafter);
     }
   }, [curDate]);
 

@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  SectionList,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import AttendanceItem from '../AttendanceItem/AttendanceItem';
 import DateContainer from '../DateContainer/DateContainer';
@@ -14,13 +20,17 @@ const AttendanceScreen = ({navigation}) => {
     <View style={styles.container}>
       <DateContainer curDate={curDate} setcurDate={setcurDate} />
       <View style={styles.attendancecontainer}>
-        <FlatList
-          data={employees}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => {
-            return <AttendanceItem employee={item} curDate={curDate} />;
-          }}
-        />
+        {employees.length > 1 ? (
+          <SectionList
+            //data={employees}
+            sections={employees}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => {
+              return <AttendanceItem employee={item} curDate={curDate} />;
+            }}
+            renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
+          />
+        ) : null}
       </View>
     </View>
   );

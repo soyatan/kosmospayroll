@@ -6,7 +6,6 @@ import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee}) => {
-  console.log(converDateUTC(employee.birthdate));
   return (
     <>
       <View style={styles.container}>

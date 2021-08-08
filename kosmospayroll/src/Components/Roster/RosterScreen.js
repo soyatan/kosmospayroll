@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  SectionList,
+} from 'react-native';
 import PendingContainer from '../PendingContainer/PendingContainer';
 import styles from './styles';
 import WorkTypeFilterContainer from './../WorkTypeFilterContainer/WorkTypeFilterContainer';
@@ -21,12 +27,13 @@ const RosterScreen = ({navigation}) => {
       <View style={styles.rostercontainer}>
         <WorkTypeFilterContainer />
         {employees ? (
-          <FlatList
-            data={employees}
+          <SectionList
+            sections={employees}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => {
               return <EmployeeSummaryContainer employee={item} />;
             }}
+            renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
           />
         ) : null}
       </View>

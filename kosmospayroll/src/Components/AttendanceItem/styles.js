@@ -66,6 +66,11 @@ export default styles = StyleSheet.create({
     color: Colors.mainBlack,
     fontWeight: 'bold',
   },
+  smallblacktext: {
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainBlack,
+    fontWeight: 'bold',
+  },
   smalltext: {
     fontSize: Fonts.Sizes.ten,
   },

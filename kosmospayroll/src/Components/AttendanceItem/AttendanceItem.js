@@ -18,7 +18,6 @@ const AttendanceItem = ({employee, curDate}) => {
   const [absence, setabsence] = useState(null);
   const [otHours, setotHours] = useState(0);
   const [workHours, setworkHours] = useState(0);
-  console.log(otHours);
   useEffect(() => {
     if (employee.attendance) {
       const curDateFormatted = moment(curDate).format('YYYY-MM-DD');
@@ -31,6 +30,7 @@ const AttendanceItem = ({employee, curDate}) => {
     markAttendance(
       employee.userid,
       employee.key,
+      employee.worktype,
       moment(curDate).format('YYYY-MM-DD'),
       status,
       dispatch,
@@ -128,20 +128,20 @@ const AttendanceItem = ({employee, curDate}) => {
           <View style={styles.rightcontainer}>
             <View style={[styles.clockcontainer, {borderBottomWidth: 0.3}]}>
               <Icon name={'clock'} scale={1} />
-              <Text style={styles.blacktext}>Daily</Text>
+              <Text style={styles.blacktext}>Half</Text>
             </View>
 
             <TouchableOpacity
               style={styles.clockcontainer}
               onPress={() => pickerRef.current.focus()}>
               <Icon name={'hourglass'} scale={1} />
-              <Text style={styles.blacktext}>{otHours.toFixed(2)}</Text>
+              <Text style={styles.smallblacktext}>{otHours.toFixed(2)}</Text>
             </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.rightcontainer}>
             <View style={[styles.clockcontainer]}>
-              <Icon name={'clock'} scale={1} />
+              <Icon name={'calendar'} scale={1} />
               <Text style={styles.blacktext}>Monthly</Text>
             </View>
           </View>

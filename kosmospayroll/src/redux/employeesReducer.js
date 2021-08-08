@@ -15,7 +15,7 @@ export const setEmployees = employees => {
   };
 };
 
-export const changeAbsence = (employeeid, date, status) => {
+export const changeAbsence = (employeeid, date, status, worktype) => {
   console.log(employeeid, date, status);
   return {
     type: CHANGE_ABSENCE,
@@ -23,6 +23,7 @@ export const changeAbsence = (employeeid, date, status) => {
       employeeid,
       date,
       status,
+      worktype,
     },
   };
 };
@@ -43,27 +44,33 @@ export const employeesReducer = (state = INITIAL_STATE, action) => {
     case DELETE_EMPLOYEE:
       return state.filter(emp => emp.id !== action.payload.employee);
     case CHANGE_ABSENCE:
-      const newState = state.map(item => {
-        if (item.key === action.payload.employeeid) {
-          if (item.attendance) {
-            console.log('we got some log');
-            const newItem = {...item};
-            newItem.attendance[action.payload.date] = {
-              status: action.payload.status,
-            };
-            return newItem;
-          } else {
-            console.log('we got nop log');
-            const newItem = {
-              ...item,
-              attendance: {},
-            };
-            newItem.attendance[action.payload.date] = {
-              status: action.payload.status,
-            };
-            return newItem;
-          }
-        } else return item;
+      const newState = state.map(bigitem => {
+        if (bigitem.title.toLowerCase() === action.payload.worktype) {
+          const newbigitemdata = bigitem.data.map(item => {
+            if (item.key === action.payload.employeeid) {
+              if (item.attendance) {
+                console.log('we got some log');
+                const newItem = {...item};
+                newItem.attendance[action.payload.date] = {
+                  status: action.payload.status,
+                };
+                return newItem;
+              } else {
+                console.log('we got nop log');
+                const newItem = {
+                  ...item,
+                  attendance: {},
+                };
+                newItem.attendance[action.payload.date] = {
+                  status: action.payload.status,
+                };
+                return newItem;
+              }
+            } else return item;
+          });
+          bigitem.data = newbigitemdata;
+          return bigitem;
+        } else return bigitem;
       });
 
       return newState;

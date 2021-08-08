@@ -79,10 +79,35 @@ export const fetchEmployees = async (dispatch, userid) => {
     .ref('employees/' + userid)
     .once('value')
     .then(function (snapshot) {
-      let employeeeList = [];
+      let employeeeList = [
+        {title: 'Monthly', data: []},
+        {title: 'Daily', data: []},
+        {title: 'Hourly', data: []},
+      ];
       let employees = snapshot.val();
       for (const key in employees) {
-        employeeeList.push({key: key, ...employees[key]});
+        let data = [];
+        data.push();
+        if (employees[key].worktype === 'monthly') {
+          employeeeList.map(item => {
+            if (item.title === 'Monthly') {
+              item.data.push({key: key, ...employees[key]});
+            }
+          });
+        } else if (employees[key].worktype === 'daily') {
+          employeeeList.map(item => {
+            if (item.title === 'Daily') {
+              item.data.push({key: key, ...employees[key]});
+            }
+          });
+        }
+        if (employees[key].worktype === 'hourly') {
+          employeeeList.map(item => {
+            if (item.title === 'Hourly') {
+              item.data.push({key: key, ...employees[key]});
+            }
+          });
+        }
       }
       return employeeeList;
     });
@@ -90,11 +115,18 @@ export const fetchEmployees = async (dispatch, userid) => {
   dispatch(setLoading(false));
 };
 
-export const markAttendance = (userid, employeeid, date, status, dispatch) => {
+export const markAttendance = (
+  userid,
+  employeeid,
+  worktype,
+  date,
+  status,
+  dispatch,
+) => {
   database()
     .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
     .update({status})
-    .then(() => dispatch(changeAbsence(employeeid, date, status)));
+    .then(() => dispatch(changeAbsence(employeeid, date, status, worktype)));
 };
 
 export const addPayment = (userid, employeeid, date, status) => {

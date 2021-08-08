@@ -48,8 +48,6 @@ export const formatCurrency = (number, currencyCode) => {
   return fm.from(number, {symbol: findCurrencySymbol(currencyCode)});
 };
 
-//console.log(formatCurrency(123125.123123, 'USD'));
-
 export const CurrencyMask = symbol => {
   return createNumberMask({
     prefix: [symbol, ' '],
