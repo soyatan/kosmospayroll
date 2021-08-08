@@ -5,117 +5,92 @@ import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 import AttendanceOption from './AttendanceOption';
 import {Icon} from '../../Assets/Svgs/icon';
-import {
-  changeAttendance,
-  markAttendance,
-  saveOtHours,
-} from './../../API/dbfunctions';
+import {markAttendance, saveOtHours} from './../../API/dbfunctions';
 import moment from 'moment';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Picker} from '@react-native-picker/picker';
 import {currencies} from '../../API/currencies';
 import {hours} from './../../API/hours';
-import {userSelector} from '../../redux/userReducer';
 
 const AttendanceItem = ({employee, curDate}) => {
-  const user = useSelector(userSelector);
-
   const dispatch = useDispatch();
-  const [curDateFormatted, setCurDateFormatted] = useState(
-    moment(new Date()).format('YYYY-MM-DD'),
-  );
 
-  const [attendance, setattendance] = useState({
-    status: null,
-    workhours: 0,
-    othours: 0,
-    workday: 'None',
-  });
+  const [absence, setabsence] = useState(null);
+  const [otHours, setotHours] = useState(0);
+  const [workHours, setworkHours] = useState(0);
+  const [workday, setworkday] = useState('None');
 
-  const _changeAttendance = att => {
+  useEffect(() => {
     if (employee.attendance) {
+      const curDateFormatted = moment(curDate).format('YYYY-MM-DD');
       if (employee.attendance[curDateFormatted]) {
-        const mergedAttendance = {
-          ...employee.attendance[curDateFormatted],
-          ...att,
-        };
-        changeAttendance(
-          employee.userid,
-          employee.key,
-          employee.worktype,
-          moment(curDate).format('YYYY-MM-DD'),
-          mergedAttendance,
-          dispatch,
-        );
+        setabsence(employee.attendance[curDateFormatted].status);
+        if (employee.attendance[curDateFormatted].workhours) {
+          setworkHours(employee.attendance[curDateFormatted].workhours);
+        }
+        if (employee.attendance[curDateFormatted].workday) {
+          setworkday(employee.attendance[curDateFormatted].workday);
+        }
+        if (employee.attendance[curDateFormatted].othours) {
+          setotHours(employee.attendance[curDateFormatted].othours);
+        }
+      } else setabsence(null);
+    } else setabsence(null);
+  }, [curDate, employee]);
+
+  useEffect(() => {
+    if (employee.attendance) {
+      const curDateFormatted = moment(curDate).format('YYYY-MM-DD');
+      if (employee.attendance[curDateFormatted]) {
+        setabsence(employee.attendance[curDateFormatted].status);
+        if (employee.attendance[curDateFormatted].workhours) {
+          setworkHours(employee.attendance[curDateFormatted].workhours);
+        }
+        if (employee.attendance[curDateFormatted].workday) {
+          setworkday(employee.attendance[curDateFormatted].workday);
+        }
+        if (employee.attendance[curDateFormatted].othours) {
+          setotHours(employee.attendance[curDateFormatted].othours);
+        }
+      } else {
+        setabsence(null);
+        setotHours(0);
+        setworkday('None');
+        setworkHours(0);
       }
-    } else {
-      changeAttendance(
-        employee.userid,
-        employee.key,
-        employee.worktype,
-        moment(curDate).format('YYYY-MM-DD'),
-        att,
-        dispatch,
-      );
+    } else setabsence(null);
+  }, [curDate, employee]);
+
+  const _onPress = status => {
+    if (employee.worktype === 'daily') {
+      if (status === 2) {
+        setworkday('Full');
+      } else if (status === 1) {
+        setworkday('Half');
+      } else {
+        setworkday('None');
+      }
     }
-  };
-
-  //const [absence, setabsence] = useState(null);
-
-  /*useEffect(() => {
-    changeAttendance(
+    markAttendance(
       employee.userid,
       employee.key,
       employee.worktype,
       moment(curDate).format('YYYY-MM-DD'),
-      attendance,
+      status,
       dispatch,
     );
-  }, [attendance]);*/
-  console.log(employee);
-  useEffect(() => {
-    setCurDateFormatted(moment(curDate).format('YYYY-MM-DD'));
-    if (employee.attendance) {
-      if (employee.attendance[curDateFormatted]) {
-        setattendance(employee.attendance[curDateFormatted]);
-      } else {
-        setattendance({
-          status: null,
-          workhours: 0,
-          othours: 0,
-          workday: 'None',
-        });
-      }
-    } else
-      setattendance({
-        status: null,
-        workhours: 0,
-        othours: 0,
-        workday: 'None',
-      });
-  }, [curDate, employee]);
+  };
 
-  const _onPress = status => {
-    if (status === 2) {
-      _changeAttendance({
-        status: 2,
-        workday: 'Full',
-        workhours: user.workhours,
-      });
-    } else if (status === 1) {
-      _changeAttendance({
-        status: 1,
-        workday: 'Half',
-        workhours: 0.5 * user.workhours,
-      });
-    } else {
-      _changeAttendance({
-        status: 0,
-        workday: 'None',
-        workhours: 0,
-        othours: 0,
-      });
-    }
+  const _saveOtHours = hours => {
+    setotHours(hours);
+    saveOtHours(
+      employee.userid,
+      employee.key,
+      employee.worktype,
+      moment(curDate).format('YYYY-MM-DD'),
+      hours,
+      dispatch,
+    );
   };
 
   const pickerRef = useRef();
@@ -128,26 +103,26 @@ const AttendanceItem = ({employee, curDate}) => {
           <View style={{flexDirection: 'row'}}>
             <AttendanceOption
               title={'Present'}
-              color={attendance.status == 2 ? 'green' : 'white'}
-              textcolor={attendance.status == 2 ? 'white' : 'gray'}
+              color={absence == 2 ? 'green' : 'white'}
+              textcolor={absence == 2 ? 'white' : 'gray'}
               onPress={() => _onPress(2)}
             />
             <AttendanceOption
               title={'Half Day'}
-              color={attendance.status == 1 ? 'yellow' : 'white'}
-              textcolor={attendance.status == 1 ? 'black' : 'gray'}
+              color={absence == 1 ? 'yellow' : 'white'}
+              textcolor={absence == 1 ? 'black' : 'gray'}
               onPress={() => _onPress(1)}
             />
             <AttendanceOption
               title={'Absent'}
-              color={attendance.status == 0 ? 'red' : 'white'}
-              textcolor={attendance.status == 0 ? 'white' : 'gray'}
+              color={absence == 0 ? 'red' : 'white'}
+              textcolor={absence == 0 ? 'white' : 'gray'}
               onPress={() => _onPress(0)}
             />
           </View>
         </View>
         <Picker
-          value={attendance.othours}
+          value={otHours}
           style={{
             width: 0,
             height: 0,
@@ -155,15 +130,8 @@ const AttendanceItem = ({employee, curDate}) => {
             position: 'absolute',
           }}
           ref={pickerRef}
-          selectedValue={attendance.othours}
-          onValueChange={(itemValue, itemIndex) =>
-            _changeAttendance({
-              status: 2,
-              workday: 'Full',
-              workhours: user.workhours,
-              othours: itemValue,
-            })
-          }>
+          selectedValue={otHours}
+          onValueChange={(itemValue, itemIndex) => _saveOtHours(itemValue)}>
           {hours.map((item, index) => {
             return (
               <Picker.Item
@@ -176,7 +144,7 @@ const AttendanceItem = ({employee, curDate}) => {
           })}
         </Picker>
         <Picker
-          value={attendance.workhours}
+          value={workHours}
           style={{
             width: 0,
             height: 0,
@@ -184,13 +152,8 @@ const AttendanceItem = ({employee, curDate}) => {
             position: 'absolute',
           }}
           ref={pickerRefWork}
-          selectedValue={attendance.workhours}
-          onValueChange={(itemValue, itemIndex) =>
-            _changeAttendance({
-              status: 2,
-              workhours: itemValue,
-            })
-          }>
+          selectedValue={workHours}
+          onValueChange={(itemValue, itemIndex) => setworkHours(itemValue)}>
           {hours.map((item, index) => {
             return (
               <Picker.Item
@@ -208,28 +171,28 @@ const AttendanceItem = ({employee, curDate}) => {
               style={[styles.clockcontainer, {borderBottomWidth: 0.3}]}
               onPress={() => pickerRefWork.current.focus()}>
               <Icon name={'clock'} scale={1} />
-              <Text style={styles.blacktext}>{attendance.workhours}</Text>
+              <Text style={styles.blacktext}>{workHours.toFixed(2)}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.clockcontainer}
               onPress={() => pickerRef.current.focus()}>
               <Icon name={'hourglass'} scale={1} />
-              <Text style={styles.blacktext}>{attendance.othours}</Text>
+              <Text style={styles.blacktext}>{otHours.toFixed(2)}</Text>
             </TouchableOpacity>
           </View>
         ) : employee.worktype === 'daily' ? (
           <View style={styles.rightcontainer}>
             <View style={[styles.clockcontainer, {borderBottomWidth: 0.3}]}>
               <Icon name={'clock'} scale={1} />
-              <Text style={styles.blacktext}>{attendance.workday}</Text>
+              <Text style={styles.blacktext}>{workday}</Text>
             </View>
 
             <TouchableOpacity
               style={styles.clockcontainer}
               onPress={() => pickerRef.current.focus()}>
               <Icon name={'hourglass'} scale={1} />
-              <Text style={styles.smallblacktext}>{attendance.othours}</Text>
+              <Text style={styles.smallblacktext}>{otHours.toFixed(2)}</Text>
             </TouchableOpacity>
           </View>
         ) : (

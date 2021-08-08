@@ -12,6 +12,16 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.mainWhite,
   },
+  seperator: {
+    backgroundColor: Colors.mainGray,
+    height: h * 0.035,
+    alignItems: 'flex-start',
+    paddingHorizontal: w * 0.03,
+    marginHorizontal: w * 0.02,
+    marginTop: w * 0.02,
+    justifyContent: 'center',
+    borderRadius: w * 0.02,
+  },
   rostercontainer: {
     flex: 1,
     marginTop: h * 0.11,
@@ -29,5 +39,10 @@ export default styles = StyleSheet.create({
   welcometextcontainer: {
     alignItems: 'center',
     marginTop: h * 0.05,
+  },
+  seperatortext: {
+    fontFamily: Fonts.Families.monoton,
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.mainWhite,
   },
 });

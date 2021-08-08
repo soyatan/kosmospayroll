@@ -10,15 +10,42 @@ import {addCurrency} from '../../API/dbfunctions';
 import InputComponent from './../Shared/Input/InputComponent';
 import InputComponentAdd from './../Shared/Input/InputComponentAdd';
 import SimpleInput from '../Shared/Input/SimpleInput';
+import {hours, shifthours} from '../../API/hours';
+import {Icon} from './../../Assets/Svgs/icon';
 
 const SettingsScreen = ({navigation}) => {
   const user = useSelector(userSelector);
   const [currency, setcurrency] = useState('USD');
   const [company, setcompany] = useState('');
+  const [workHours, setworkHours] = useState(10);
   const [modalVisible, setmodalVisible] = useState(false);
   const dispatch = useDispatch();
+  const pickerRef = useRef();
+
   return (
     <View style={styles.container}>
+      <Picker
+        value={workHours}
+        style={{
+          width: 0,
+          height: 0,
+          backgroundColor: 'white',
+          position: 'absolute',
+        }}
+        ref={pickerRef}
+        selectedValue={workHours}
+        onValueChange={(itemValue, itemIndex) => setworkHours(itemValue)}>
+        {shifthours.map((item, index) => {
+          return (
+            <Picker.Item
+              label={item.toString()}
+              value={item}
+              key={index.toString()}
+              style={styles.pickeritem}
+            />
+          );
+        })}
+      </Picker>
       <Modal
         animationType="slide"
         transparent={true}
@@ -28,7 +55,9 @@ const SettingsScreen = ({navigation}) => {
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.modal}>
-          {company ? (
+          {(company || user.company) &&
+          (currency || user.currency) &&
+          (workHours || user.workhours) ? (
             <>
               <Text style={styles.blacktext}>
                 {`Currency selected - `}
@@ -36,24 +65,44 @@ const SettingsScreen = ({navigation}) => {
               </Text>
               <View style={{marginVertical: 10}}></View>
               <Text style={styles.blacktext}>
-                Company name - <Text style={styles.bigpinktext}>{company}</Text>
+                {`Company name - `}
+                <Text style={styles.bigpinktext}>
+                  {company || user.company}
+                </Text>
+              </Text>
+              <View style={{marginVertical: 10}}></View>
+              <Text style={styles.blacktext}>
+                Daily Work Shift -
+                <Text style={styles.bigpinktext}>
+                  {workHours || user.workhours} hrs
+                </Text>
               </Text>
               <View style={{marginVertical: 10}}></View>
             </>
           ) : (
             <>
-              <Text style={styles.blacktext}>Please enter company name</Text>
+              <Text style={styles.blacktext}>
+                Please enter all required information
+              </Text>
               <View style={{marginVertical: 10}}></View>
             </>
           )}
-          {company && currency ? (
+          {(company || user.company) &&
+          (currency || user.currency) &&
+          (workHours || user.workhours) ? (
             <View style={styles.modalbutton}>
               <RoundedButton
                 label={'Confirm'}
                 text_color={'mainBlack'}
                 bg_color={'mainPink'}
                 onPress={() =>
-                  addCurrency(dispatch, currency, company, user.userid)
+                  addCurrency(
+                    dispatch,
+                    currency,
+                    company,
+                    workHours,
+                    user.userid,
+                  )
                 }
               />
             </View>
@@ -65,7 +114,7 @@ const SettingsScreen = ({navigation}) => {
               bg_color={'mainGray'}
               onPress={() => setmodalVisible(false)}
             />
-            {company && currency ? (
+            {company && currency && workHours ? (
               <Text style={styles.shadytext}>*Can not be changed later</Text>
             ) : null}
           </View>
@@ -124,7 +173,23 @@ const SettingsScreen = ({navigation}) => {
           )}
         </View>
       </View>
-      {!user.currency || !user.company ? (
+      <View style={styles.settingrow}>
+        <View style={styles.leftcontainer}>
+          <Text style={styles.blacktext}>Daily Work Shift (hours)</Text>
+        </View>
+        <View style={styles.rightcontainer}>
+          {!user.workhours ? (
+            <TouchableOpacity
+              style={styles.workhourscontainer}
+              onPress={() => pickerRef.current.focus()}>
+              <Text style={styles.blacktext}>{workHours.toFixed(2)}</Text>
+            </TouchableOpacity>
+          ) : (
+            <Text style={styles.pickeritem}>{user.workhours.toFixed(2)}</Text>
+          )}
+        </View>
+      </View>
+      {!user.currency || !user.company || !user.workhours ? (
         <View style={styles.buttoncontainer}>
           <RoundedButton
             label={'Continue'}

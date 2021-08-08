@@ -2,9 +2,14 @@ import auth, {firebase} from '@react-native-firebase/auth';
 
 import {setError, setUserAndError, signOutAction} from '../redux/userReducer';
 import database from '@react-native-firebase/database';
-import {changeAbsence, setEmployees} from '../redux/employeesReducer';
+import {
+  changeAbsence,
+  changeAttendanceAction,
+  setEmployees,
+} from '../redux/employeesReducer';
 import {setLoading} from '../redux/loadingReducer';
 import moment from 'moment';
+import {changeOtHours} from './../redux/employeesReducer';
 export const addEmployee = (
   name,
   birthdate,
@@ -44,12 +49,13 @@ export const addEmployee = (
     });
 };
 
-export const addCurrency = (dispatch, currency, company, userid) => {
+export const addCurrency = (dispatch, currency, company, workhours, userid) => {
   database()
     .ref('users/' + userid)
     .update({
       currency: currency,
       company: company,
+      workhours: workhours,
     })
     .then(() => {
       database()
@@ -64,6 +70,7 @@ export const addCurrency = (dispatch, currency, company, userid) => {
               newAccount.email,
               newAccount.currency,
               newAccount.company,
+              newAccount.workhours,
               null,
               'firebase',
             ),
@@ -129,6 +136,21 @@ export const markAttendance = (
     .then(() => dispatch(changeAbsence(employeeid, date, status, worktype)));
 };
 
+export const changeAttendance = (
+  userid,
+  employeeid,
+  worktype,
+  date,
+  attendance,
+  dispatch,
+) => {
+  database()
+    .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
+    .update(attendance)
+    .then(() =>
+      dispatch(changeAttendanceAction(employeeid, date, worktype, attendance)),
+    );
+};
 export const addPayment = (userid, employeeid, date, status) => {
   database()
     .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/payments`)

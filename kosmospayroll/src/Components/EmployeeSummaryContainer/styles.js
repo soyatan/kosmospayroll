@@ -10,12 +10,12 @@ const {Families, Sizes} = Fonts;
 export default styles = StyleSheet.create({
   container: {
     width: w * 0.95,
-    borderWidth: 0.3,
+    borderWidth: 1,
     alignSelf: 'center',
     height: h * 0.1,
     borderRadius: w * 0.05,
     paddingHorizontal: w * 0.03,
-    marginTop: h * 0.02,
+    marginTop: h * 0.01,
     paddingVertical: h * 0.005,
     flexDirection: 'row',
   },

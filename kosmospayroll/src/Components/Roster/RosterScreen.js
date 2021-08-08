@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {employeesSelector} from './../../redux/employeesReducer';
 import {fetchEmployees} from '../../API/dbfunctions';
 import {userSelector} from '../../redux/userReducer';
+import {Title} from './Title';
 
 const RosterScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ const RosterScreen = ({navigation}) => {
     <View style={styles.container}>
       <PendingContainer onPress={() => navigation.navigate('Add')} />
       <View style={styles.rostercontainer}>
-        <WorkTypeFilterContainer />
         {employees ? (
           <SectionList
             sections={employees}
@@ -33,7 +33,9 @@ const RosterScreen = ({navigation}) => {
             renderItem={({item}) => {
               return <EmployeeSummaryContainer employee={item} />;
             }}
-            renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
+            renderSectionHeader={({section: {title}}) => (
+              <Title title={title} />
+            )}
           />
         ) : null}
       </View>

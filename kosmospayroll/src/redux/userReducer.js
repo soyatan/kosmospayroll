@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   email: null,
   currency: null,
   company: null,
+  workhours: null,
 };
 
 //selector
@@ -33,6 +34,7 @@ export const setUserAndError = (
   email,
   currency,
   company,
+  workhours,
   errorMessage,
   loginType,
 ) => {
@@ -44,6 +46,7 @@ export const setUserAndError = (
       email,
       currency,
       company,
+      workhours,
       errorMessage,
       loginType,
     },
@@ -55,27 +58,7 @@ export const signOutAction = () => {
     type: SIGNOUT,
   };
 };
-export const purchaseBoardRequest = id => {
-  return {
-    type: PURCHASE_REQUEST,
-    payload: {
-      id,
-    },
-  };
-};
-export const updateUserRequest = () => {
-  return {
-    type: UPDATE_USER_REQUEST,
-  };
-};
-export const setBoards = boards => {
-  return {
-    type: SET_BOARDS,
-    payload: {
-      boards,
-    },
-  };
-};
+
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_ERROR:
@@ -92,6 +75,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         email: null,
         currency: null,
         company: null,
+        workhours: null,
       };
 
     default:

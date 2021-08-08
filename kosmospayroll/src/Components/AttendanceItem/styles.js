@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     height: h * 0.1,
     paddingHorizontal: w * 0.01,
-    marginTop: h * 0.02,
+    marginTop: h * 0.01,
     paddingVertical: h * 0.005,
     borderRadius: w * 0.01,
     flexDirection: 'row',

@@ -5,7 +5,8 @@ export const employeesSelector = state => state.employeesState;
 export const SET_EMPLOYEES = 'employees/set';
 export const DELETE_EMPLOYEE = 'employee/delete';
 export const CHANGE_ABSENCE = 'absence/change';
-
+export const CHANGE_OTHOURS = 'othours/change';
+export const CHANGE_ATTENDANCE = 'attendance/change';
 export const setEmployees = employees => {
   return {
     type: SET_EMPLOYEES,
@@ -14,7 +15,22 @@ export const setEmployees = employees => {
     },
   };
 };
-
+export const changeAttendanceAction = (
+  employeeid,
+  date,
+  worktype,
+  attendance,
+) => {
+  return {
+    type: CHANGE_ATTENDANCE,
+    payload: {
+      employeeid,
+      date,
+      worktype,
+      attendance,
+    },
+  };
+};
 export const changeAbsence = (employeeid, date, status, worktype) => {
   console.log(employeeid, date, status);
   return {
@@ -27,7 +43,17 @@ export const changeAbsence = (employeeid, date, status, worktype) => {
     },
   };
 };
-
+export const changeOtHours = (employeeid, date, worktype, othours) => {
+  return {
+    type: CHANGE_OTHOURS,
+    payload: {
+      employeeid,
+      date,
+      worktype,
+      othours,
+    },
+  };
+};
 export const deleteEmployee = employee => {
   return {
     type: DELETE_EMPLOYEE,
@@ -49,14 +75,14 @@ export const employeesReducer = (state = INITIAL_STATE, action) => {
           const newbigitemdata = bigitem.data.map(item => {
             if (item.key === action.payload.employeeid) {
               if (item.attendance) {
-                console.log('we got some log');
+                //console.log('we got some log');
                 const newItem = {...item};
                 newItem.attendance[action.payload.date] = {
                   status: action.payload.status,
                 };
                 return newItem;
               } else {
-                console.log('we got nop log');
+                //console.log('we got nop log');
                 const newItem = {
                   ...item,
                   attendance: {},
@@ -74,6 +100,35 @@ export const employeesReducer = (state = INITIAL_STATE, action) => {
       });
 
       return newState;
+
+    case CHANGE_ATTENDANCE:
+      const newOTState = state.map(bigitem => {
+        if (bigitem.title.toLowerCase() === action.payload.worktype) {
+          const newbigitemdata = bigitem.data.map(item => {
+            if (item.key === action.payload.employeeid) {
+              if (item.attendance) {
+                const newItem = {...item};
+                newItem.attendance[action.payload.date] =
+                  action.payload.attendance;
+
+                return newItem;
+              } else {
+                const newItem = {
+                  ...item,
+                  attendance: {},
+                };
+                newItem.attendance[action.payload.date] =
+                  action.payload.attendance;
+                return newItem;
+              }
+            } else return item;
+          });
+          bigitem.data = newbigitemdata;
+          return bigitem;
+        } else return bigitem;
+      });
+
+      return newOTState;
 
     default:
       return state;

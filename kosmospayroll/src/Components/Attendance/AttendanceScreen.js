@@ -12,6 +12,7 @@ import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
 import {employeesSelector} from './../../redux/employeesReducer';
 import {convertDateYMD} from '../../API/dbfunctions';
+import {Title} from '../Roster/Title';
 const AttendanceScreen = ({navigation}) => {
   const [curDate, setcurDate] = useState(new Date());
   const employees = useSelector(employeesSelector);
@@ -28,7 +29,9 @@ const AttendanceScreen = ({navigation}) => {
             renderItem={({item}) => {
               return <AttendanceItem employee={item} curDate={curDate} />;
             }}
-            renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
+            renderSectionHeader={({section: {title}}) => (
+              <Title title={title} />
+            )}
           />
         ) : null}
       </View>

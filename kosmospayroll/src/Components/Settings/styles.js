@@ -83,6 +83,11 @@ export default styles = StyleSheet.create({
 
     justifyContent: 'center',
   },
+  workhourscontainer: {
+    paddingLeft: w * 0.05,
+    flex: 1,
+    justifyContent: 'center',
+  },
   pickeritem: {
     fontSize: Fonts.Sizes.ten,
     paddingLeft: w * 0.05,
