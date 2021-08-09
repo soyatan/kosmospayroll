@@ -33,21 +33,24 @@ const AttendanceItem = ({employee, curDate}) => {
   });
 
   const _changeAttendance = att => {
-    if (employee.attendance) {
-      if (employee.attendance[curDateFormatted]) {
-        const mergedAttendance = {
-          ...employee.attendance[curDateFormatted],
-          ...att,
-        };
-        changeAttendance(
-          employee.userid,
-          employee.key,
-          employee.worktype,
-          moment(curDate).format('YYYY-MM-DD'),
-          mergedAttendance,
-          dispatch,
-        );
-      }
+    const normalpay = employee.rate * att.workhours;
+    const overtimepay = employee.otrate * att.othours || 0;
+
+    if (employee.attendance && employee.attendance[curDateFormatted]) {
+      const mergedAttendance = {
+        ...employee.attendance[curDateFormatted],
+        ...att,
+      };
+      changeAttendance(
+        employee.userid,
+        employee.key,
+        employee.worktype,
+        moment(curDate).format('YYYY-MM-DD'),
+        mergedAttendance,
+        normalpay,
+        overtimepay,
+        dispatch,
+      );
     } else {
       changeAttendance(
         employee.userid,
@@ -55,29 +58,18 @@ const AttendanceItem = ({employee, curDate}) => {
         employee.worktype,
         moment(curDate).format('YYYY-MM-DD'),
         att,
+        normalpay,
+        overtimepay,
         dispatch,
       );
     }
   };
 
-  //const [absence, setabsence] = useState(null);
-
-  /*useEffect(() => {
-    changeAttendance(
-      employee.userid,
-      employee.key,
-      employee.worktype,
-      moment(curDate).format('YYYY-MM-DD'),
-      attendance,
-      dispatch,
-    );
-  }, [attendance]);*/
-  console.log(employee);
   useEffect(() => {
-    setCurDateFormatted(moment(curDate).format('YYYY-MM-DD'));
+    const formattedCurDate = moment(curDate).format('YYYY-MM-DD');
     if (employee.attendance) {
-      if (employee.attendance[curDateFormatted]) {
-        setattendance(employee.attendance[curDateFormatted]);
+      if (employee.attendance[formattedCurDate]) {
+        setattendance(employee.attendance[formattedCurDate]);
       } else {
         setattendance({
           status: null,
@@ -100,12 +92,14 @@ const AttendanceItem = ({employee, curDate}) => {
       _changeAttendance({
         status: 2,
         workday: 'Full',
+
         workhours: user.workhours,
       });
     } else if (status === 1) {
       _changeAttendance({
         status: 1,
         workday: 'Half',
+        othours: 0,
         workhours: 0.5 * user.workhours,
       });
     } else {
@@ -124,7 +118,10 @@ const AttendanceItem = ({employee, curDate}) => {
     <>
       <View style={styles.container}>
         <View style={styles.leftcontainer}>
-          <Text style={styles.blacktext}>{employee.name}</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.blacktext}>{employee.name}</Text>
+            <Text style={styles.smallpinktext}>{employee.designation}</Text>
+          </View>
           <View style={{flexDirection: 'row'}}>
             <AttendanceOption
               title={'Present'}
@@ -204,39 +201,55 @@ const AttendanceItem = ({employee, curDate}) => {
         </Picker>
         {employee.worktype === 'hourly' ? (
           <View style={styles.rightcontainer}>
+            <View style={styles.notecontainer}>
+              <Text style={styles.blacktextnote}>Work hours</Text>
+            </View>
             <TouchableOpacity
               style={[styles.clockcontainer, {borderBottomWidth: 0.3}]}
               onPress={() => pickerRefWork.current.focus()}>
-              <Icon name={'clock'} scale={1} />
-              <Text style={styles.blacktext}>{attendance.workhours}</Text>
+              <Icon name={'clock'} scale={0.8} />
+              <Text style={styles.blacktext}>
+                {attendance.workhours.toFixed(2)}
+              </Text>
             </TouchableOpacity>
-
+            <View style={styles.notecontainer}>
+              <Text style={styles.blacktextnote}>Overtime</Text>
+            </View>
             <TouchableOpacity
               style={styles.clockcontainer}
               onPress={() => pickerRef.current.focus()}>
-              <Icon name={'hourglass'} scale={1} />
-              <Text style={styles.blacktext}>{attendance.othours}</Text>
+              <Icon name={'hourglass'} scale={0.8} />
+              <Text style={styles.blacktext}>
+                {attendance.othours.toFixed(2)}
+              </Text>
             </TouchableOpacity>
           </View>
         ) : employee.worktype === 'daily' ? (
           <View style={styles.rightcontainer}>
-            <View style={[styles.clockcontainer, {borderBottomWidth: 0.3}]}>
-              <Icon name={'clock'} scale={1} />
+            <View style={styles.notecontainer}>
+              <Text style={styles.blacktextnote}>Work day</Text>
+            </View>
+            <View style={[styles.clockcontainer, {borderBottomWidth: 0.6}]}>
+              <Icon name={'clock'} scale={0.8} />
               <Text style={styles.blacktext}>{attendance.workday}</Text>
             </View>
-
+            <View style={styles.notecontainer}>
+              <Text style={styles.blacktextnote}>Overtime</Text>
+            </View>
             <TouchableOpacity
               style={styles.clockcontainer}
               onPress={() => pickerRef.current.focus()}>
-              <Icon name={'hourglass'} scale={1} />
-              <Text style={styles.smallblacktext}>{attendance.othours}</Text>
+              <Icon name={'hourglass'} scale={0.8} />
+              <Text style={styles.blacktext}>
+                {attendance.othours.toFixed(2)}
+              </Text>
             </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.rightcontainer}>
             <View style={[styles.clockcontainer]}>
-              <Icon name={'calendar'} scale={1} />
-              <Text style={styles.blacktext}>Monthly</Text>
+              <Icon name={'calendar'} scale={0.8} />
+              <Text style={styles.blacktext}>{` Monthly`}</Text>
             </View>
           </View>
         )}

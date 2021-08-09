@@ -10,14 +10,28 @@ const EmployeeSummaryContainer = ({employee}) => {
     <>
       <View style={styles.container}>
         <View style={styles.leftcontainer}>
-          <Text style={styles.whitetext}>{employee.name}</Text>
-          <Text style={styles.whitetext}>{employee.designation}</Text>
+          <Text style={styles.blackboldtext}>{employee.name}</Text>
+          <Text style={styles.blacktext}>{employee.designation}</Text>
         </View>
         <View style={styles.rightcontainer}>
-          <Text style={styles.whitetext}>{employee.worktype}</Text>
-          <Text style={styles.whitetext}>
-            {formatCurrency(employee.rate, employee.currency)}
-          </Text>
+          <View style={styles.rightinsidecontainer}>
+            <Text style={styles.blacktext}>Total Earnings </Text>
+            <Text style={styles.blackboldtext}>
+              {formatCurrency(employee.rate, employee.currency)}
+            </Text>
+          </View>
+          <View style={styles.rightinsidecontainer}>
+            <Text style={styles.blacktext}>Total Paid </Text>
+            <Text style={styles.blackboldtext}>
+              {formatCurrency(employee.rate, employee.currency)}
+            </Text>
+          </View>
+          <View style={styles.rightinsidecontainer}>
+            <Text style={styles.blacktext}>Balance </Text>
+            <Text style={styles.blackboldtext}>
+              {formatCurrency(employee.rate, employee.currency)}
+            </Text>
+          </View>
         </View>
       </View>
     </>

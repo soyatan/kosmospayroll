@@ -122,31 +122,20 @@ export const fetchEmployees = async (dispatch, userid) => {
   dispatch(setLoading(false));
 };
 
-export const markAttendance = (
-  userid,
-  employeeid,
-  worktype,
-  date,
-  status,
-  dispatch,
-) => {
-  database()
-    .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
-    .update({status})
-    .then(() => dispatch(changeAbsence(employeeid, date, status, worktype)));
-};
-
 export const changeAttendance = (
   userid,
   employeeid,
   worktype,
   date,
   attendance,
+  normalpay,
+  overtimepay,
   dispatch,
 ) => {
+  const earnings = {normalpay: normalpay, overtimepay: overtimepay};
   database()
     .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
-    .update(attendance)
+    .update({...attendance, ...earnings})
     .then(() =>
       dispatch(changeAttendanceAction(employeeid, date, worktype, attendance)),
     );
@@ -155,6 +144,12 @@ export const addPayment = (userid, employeeid, date, status) => {
   database()
     .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/payments`)
     .update({166856: 911});
+};
+
+export const calculateEarnings = attendance => {
+  Object.entries(attendance).map((item, index) => {
+    console.log(item);
+  });
 };
 
 export const convertDateYMD = utcdate => {

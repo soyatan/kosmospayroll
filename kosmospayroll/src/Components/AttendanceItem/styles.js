@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
     height: h * 0.1,
     paddingHorizontal: w * 0.01,
     marginTop: h * 0.01,
-    paddingVertical: h * 0.005,
+
     borderRadius: w * 0.01,
     flexDirection: 'row',
     backgroundColor: Colors.mainLightGray,
@@ -23,6 +23,14 @@ export default styles = StyleSheet.create({
   pickeritem: {
     fontSize: Fonts.Sizes.ten,
     paddingLeft: w * 0.05,
+  },
+  notecontainer: {
+    justifyContent: 'flex-start',
+
+    alignItems: 'flex-start',
+    paddingLeft: w * 0.02,
+    flex: 0.7,
+    width: '100%',
   },
   clockcontainer: {
     flexDirection: 'row',
@@ -45,6 +53,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: w * 0.01,
     justifyContent: 'space-around',
     //paddingVertical: h * 0.01,
+
     alignItems: 'flex-end',
   },
   dropdowncontainer: {
@@ -62,13 +71,22 @@ export default styles = StyleSheet.create({
   },
   whitetext: {fontSize: Fonts.Sizes.twelve, color: Colors.mainGray},
   blacktext: {
-    fontSize: Fonts.Sizes.fourteen,
+    fontSize: Fonts.Sizes.twelve,
     color: Colors.mainBlack,
     fontWeight: 'bold',
+  },
+  blacktextnote: {
+    fontSize: Fonts.Sizes.eight,
+    color: Colors.mainBlack,
   },
   smallblacktext: {
     fontSize: Fonts.Sizes.fourteen,
     color: Colors.mainBlack,
+    fontWeight: 'bold',
+  },
+  smallpinktext: {
+    fontSize: Fonts.Sizes.ten,
+    color: Colors.mainPink,
     fontWeight: 'bold',
   },
   smalltext: {

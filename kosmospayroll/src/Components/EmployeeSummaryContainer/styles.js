@@ -27,10 +27,13 @@ export default styles = StyleSheet.create({
   },
   rightcontainer: {
     flex: 2,
-    paddingHorizontal: w * 0.03,
+    paddingHorizontal: w * 0.02,
     justifyContent: 'space-around',
-    paddingVertical: h * 0.01,
+
     alignItems: 'flex-end',
+  },
+  rightinsidecontainer: {
+    flexDirection: 'row',
   },
   worktype: {
     backgroundColor: Colors.mainGray,
@@ -40,5 +43,12 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+  },
+  blackboldtext: {
+    fontSize: Fonts.Sizes.fourteen,
+    fontWeight: 'bold',
+  },
+  blacktext: {
+    fontSize: Fonts.Sizes.twelve,
   },
 });

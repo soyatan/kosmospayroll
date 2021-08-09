@@ -32,7 +32,6 @@ export const changeAttendanceAction = (
   };
 };
 export const changeAbsence = (employeeid, date, status, worktype) => {
-  console.log(employeeid, date, status);
   return {
     type: CHANGE_ABSENCE,
     payload: {

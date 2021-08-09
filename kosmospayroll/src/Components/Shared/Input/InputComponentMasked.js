@@ -30,11 +30,6 @@ export default InputComponentMasked = ({
           selectionColor="blue"
           onChangeText={(masked, unmasked, obfuscated) => {
             onChangeText(unmasked); // you can use the unmasked value as well
-
-            // assuming you typed "9" all the way:
-            console.log(masked); // (99) 99999-9999
-            console.log(unmasked); // 99999999999
-            console.log(obfuscated); // (99) 99999-9999 (there's no obfuscation on this mask example)
           }}
           value={state.toString()}
           secureTextEntry={secureTextEntry}
