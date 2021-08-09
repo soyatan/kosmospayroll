@@ -146,10 +146,19 @@ export const addPayment = (userid, employeeid, date, status) => {
     .update({166856: 911});
 };
 
-export const calculateEarnings = attendance => {
-  Object.entries(attendance).map((item, index) => {
-    console.log(item);
+export const calculateEarnings = (attendance, id) => {
+  let earnings = {normalpay: 0, overtimepay: 0};
+  attendance.forEach(element => {
+    element.data.filter(employee => {
+      if (employee.key === id) {
+        Object.entries(employee.attendance).map((item, index) => {
+          earnings.normalpay = earnings.normalpay + item.normalpay;
+          earnings.overtimepay = earnings.overtimepay + item.overtimepay;
+        });
+      }
+    });
   });
+  return earnings;
 };
 
 export const convertDateYMD = utcdate => {

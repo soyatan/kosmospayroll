@@ -11,7 +11,6 @@ const DashboardScreen = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       //fetchEmployees(dispatch, user.userid);
-      console.log('WHOS THERE');
     });
     return unsubscribe;
   }, [navigation]);

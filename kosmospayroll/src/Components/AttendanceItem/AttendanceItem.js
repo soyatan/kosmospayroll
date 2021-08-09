@@ -31,7 +31,6 @@ const AttendanceItem = ({employee, curDate}) => {
     othours: 0,
     workday: 'None',
   });
-
   const _changeAttendance = att => {
     const normalpay = employee.rate * att.workhours;
     const overtimepay = employee.otrate * att.othours || 0;
@@ -92,7 +91,7 @@ const AttendanceItem = ({employee, curDate}) => {
       _changeAttendance({
         status: 2,
         workday: 'Full',
-
+        othours: 0,
         workhours: user.workhours,
       });
     } else if (status === 1) {

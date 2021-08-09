@@ -15,12 +15,13 @@ export default styles = StyleSheet.create({
   seperator: {
     backgroundColor: Colors.mainGray,
     height: h * 0.035,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     paddingHorizontal: w * 0.03,
     marginHorizontal: w * 0.02,
     marginTop: w * 0.02,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderRadius: w * 0.02,
+    flexDirection: 'row',
   },
   rostercontainer: {
     flex: 1,

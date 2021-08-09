@@ -29,8 +29,8 @@ const AttendanceScreen = ({navigation}) => {
             renderItem={({item}) => {
               return <AttendanceItem employee={item} curDate={curDate} />;
             }}
-            renderSectionHeader={({section: {title}}) => (
-              <Title title={title} />
+            renderSectionHeader={({section: {title, data}}) => (
+              <Title title={title} quantity={data.length} />
             )}
           />
         ) : null}

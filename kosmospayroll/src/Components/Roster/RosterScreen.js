@@ -19,9 +19,8 @@ import {Title} from './Title';
 const RosterScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const employees = useSelector(employeesSelector);
-
   const user = useSelector(userSelector);
-  calculateEarnings(employees[0].data[0].attendance);
+  console.log(calculateEarnings(employees, '-MgdvrMig32B0zxo5IUL'));
   return (
     <View style={styles.container}>
       <PendingContainer onPress={() => navigation.navigate('Add')} />
@@ -33,8 +32,8 @@ const RosterScreen = ({navigation}) => {
             renderItem={({item}) => {
               return <EmployeeSummaryContainer employee={item} />;
             }}
-            renderSectionHeader={({section: {title}}) => (
-              <Title title={title} />
+            renderSectionHeader={({section: {title, data}}) => (
+              <Title title={title} quantity={data.length} />
             )}
           />
         ) : null}

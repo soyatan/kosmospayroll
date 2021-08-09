@@ -14,15 +14,15 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     height: h * 0.1,
     borderRadius: w * 0.05,
-    paddingHorizontal: w * 0.03,
+    paddingHorizontal: w * 0.015,
     marginTop: h * 0.01,
     paddingVertical: h * 0.005,
     flexDirection: 'row',
   },
   leftcontainer: {
-    flex: 5,
+    flex: 2,
     justifyContent: 'space-around',
-    paddingHorizontal: w * 0.03,
+    paddingHorizontal: w * 0.02,
     paddingVertical: h * 0.01,
   },
   rightcontainer: {
@@ -34,6 +34,9 @@ export default styles = StyleSheet.create({
   },
   rightinsidecontainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+    width: '100%',
   },
   worktype: {
     backgroundColor: Colors.mainGray,

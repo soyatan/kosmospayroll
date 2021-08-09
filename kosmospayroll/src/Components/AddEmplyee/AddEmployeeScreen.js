@@ -52,19 +52,6 @@ const AddEmployeeScreen = ({navigation}) => {
     rate: false,
     otrate: true,
   });
-  console.log(
-    'n',
-    name,
-    birthdate,
-    email,
-    mobilenumber,
-    designation,
-    'joindate',
-    joindate,
-    workType,
-    rate,
-    otrate,
-  );
 
   const symbol = findCurrencySymbol(user.currency);
 
@@ -182,7 +169,6 @@ const AddEmployeeScreen = ({navigation}) => {
       seterror('Designation must be minimum 3 characters');
     }
   };
-  console.log(isValid);
   const validateAll = () => {
     if (!name || !designation || !workType || !rate) {
       seterror('Please enter all required information');
