@@ -17,8 +17,8 @@ import EmployeePayInfoContainer from './EmployeePayInfoContainer';
 const EmployeeScreen = ({navigation, route}) => {
   const [totalPending, settotalPending] = useState(0);
   const dispatch = useDispatch();
-  const selectedEmployee = useSelector(employeeNameSelector);
 
+  //console.log(selectedEmployee);
   useEffect(() => {
     try {
       const {employee} = route.params;
@@ -26,14 +26,14 @@ const EmployeeScreen = ({navigation, route}) => {
       const pending = formatCurrency(
         calculateTotalEarnings(employee).normalpay +
           calculateTotalEarnings(employee).overtimepay -
-          employee.rate,
-        employee.currency,
+          employee.rate * employee.currency,
       );
+
       settotalPending(pending);
     } catch (error) {
       settotalPending(0);
     }
-  }, [route]);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -43,7 +43,7 @@ const EmployeeScreen = ({navigation, route}) => {
       />
       <View style={styles.rostercontainer}>
         <PaymentOptionsContainer />
-        <EmployeePayInfoContainer employee={selectedEmployee} />
+        <EmployeePayInfoContainer />
       </View>
     </View>
   );
