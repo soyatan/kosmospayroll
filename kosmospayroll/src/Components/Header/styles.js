@@ -31,7 +31,7 @@ export default styles = StyleSheet.create({
   },
   headersmalltext: {
     color: Colors.mainWhite,
-    fontSize: Fonts.Sizes.twelve,
+    fontSize: Fonts.Sizes.fourteen,
   },
   headersmallertext: {
     color: Colors.mainWhite,

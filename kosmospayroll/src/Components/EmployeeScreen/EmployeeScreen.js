@@ -7,13 +7,17 @@ import PendingContainerEmp from './../PendingContainer/PendingContainerEmp';
 import {formatCurrency} from '../../API/Helper';
 import {calculateTotalEarnings} from '../../API/dbfunctions';
 import PaymentOptionsContainer from '../PaymentOptionsContainer/PaymentOptionsContainer';
-import {setEmpChosen} from './../../redux/employeeNameReducer';
-import {useDispatch} from 'react-redux';
+import {
+  employeeNameSelector,
+  setEmpChosen,
+} from './../../redux/employeeNameReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import EmployeePayInfoContainer from './EmployeePayInfoContainer';
 
 const EmployeeScreen = ({navigation, route}) => {
   const [totalPending, settotalPending] = useState(0);
   const dispatch = useDispatch();
-  useEffect(() => {}, [navigation]);
+  const selectedEmployee = useSelector(employeeNameSelector);
 
   useEffect(() => {
     try {
@@ -39,6 +43,7 @@ const EmployeeScreen = ({navigation, route}) => {
       />
       <View style={styles.rostercontainer}>
         <PaymentOptionsContainer />
+        <EmployeePayInfoContainer employee={selectedEmployee} />
       </View>
     </View>
   );

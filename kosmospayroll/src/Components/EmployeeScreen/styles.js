@@ -12,6 +12,15 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.mainWhite,
   },
+  paycontainer: {
+    flex: 1,
+    backgroundColor: Colors.mainLightGray,
+    marginHorizontal: w * 0.04,
+    marginVertical: w * 0.03,
+    borderRadius: w * 0.02,
+    padding: w * 0.02,
+  },
+
   rostercontainer: {
     flex: 1,
     marginTop: h * 0.11,

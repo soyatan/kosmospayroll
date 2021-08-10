@@ -32,6 +32,8 @@ export const Footer = () => {
         return 2;
       case 'Roster':
         return 1;
+      case 'Employee':
+        return 1;
       case 'Add':
         return 1;
     }

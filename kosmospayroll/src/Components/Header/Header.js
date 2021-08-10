@@ -16,13 +16,14 @@ import {employeeNameSelector} from './../../redux/employeeNameReducer';
 export const Header = ({route}) => {
   const [title, settitle] = useState('');
   const currentEmployee = useSelector(employeeNameSelector);
-  console.log(currentEmployee);
   const [isEmp, setisEmp] = useState(false);
   const employeeheader = () => {
     return (
       <>
         <View style={styles.employeeheader}>
-          <TouchableOpacity style={styles.iconcontainer}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.iconcontainer}>
             <Icon name={'left'} scale={1.3} color={'white'} />
           </TouchableOpacity>
           {currentEmployee ? (
