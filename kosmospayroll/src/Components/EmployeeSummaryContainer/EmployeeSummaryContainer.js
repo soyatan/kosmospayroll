@@ -1,14 +1,18 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {converDateUTC} from '../../API/dbfunctions';
+import {calculateTotalEarnings, converDateUTC} from '../../API/dbfunctions';
 import {formatCurrency} from '../../API/Helper';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
-const EmployeeSummaryContainer = ({employee}) => {
+const EmployeeSummaryContainer = ({employee, navigation}) => {
   return (
     <>
-      <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Employee', {employee});
+        }}
+        style={styles.container}>
         <View style={styles.leftcontainer}>
           <Text style={styles.blackboldtext}>{employee.name}</Text>
           <Text style={styles.blacktext}>{employee.designation}</Text>
@@ -17,7 +21,11 @@ const EmployeeSummaryContainer = ({employee}) => {
           <View style={styles.rightinsidecontainer}>
             <Text style={styles.blacktext}>Total Earnings </Text>
             <Text style={styles.blackboldtext}>
-              {formatCurrency(employee.rate, employee.currency)}
+              {formatCurrency(
+                calculateTotalEarnings(employee).normalpay +
+                  calculateTotalEarnings(employee).overtimepay,
+                employee.currency,
+              )}
             </Text>
           </View>
           <View style={styles.rightinsidecontainer}>
@@ -29,11 +37,16 @@ const EmployeeSummaryContainer = ({employee}) => {
           <View style={styles.rightinsidecontainer}>
             <Text style={styles.blacktext}>Balance </Text>
             <Text style={styles.blackboldtext}>
-              {formatCurrency(employee.rate, employee.currency)}
+              {formatCurrency(
+                calculateTotalEarnings(employee).normalpay +
+                  calculateTotalEarnings(employee).overtimepay -
+                  employee.rate,
+                employee.currency,
+              )}
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </>
   );
 };

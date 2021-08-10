@@ -16,6 +16,12 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconcontainer: {
+    height: h * 0.06,
+    width: h * 0.06,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   headertitlebox: {
     alignItems: 'center',
   },
@@ -23,14 +29,33 @@ export default styles = StyleSheet.create({
     fontSize: Fonts.Sizes.twelve,
     color: 'black',
   },
+  headersmalltext: {
+    color: Colors.mainWhite,
+    fontSize: Fonts.Sizes.twelve,
+  },
+  headersmallertext: {
+    color: Colors.mainWhite,
+    fontSize: Fonts.Sizes.ten,
+  },
   headerStyle: {
     backgroundColor: 'red',
     height: h * 0.08,
+  },
+  headertextcontainer: {
+    flex: 1,
+    paddingLeft: w * 0.03,
   },
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,
     fontSize: Fonts.Sizes.twentysix,
     color: Colors.mainWhite,
     marginBottom: w * 0.03,
+  },
+  employeeheader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: w * 0.03,
+    paddingLeft: w * 0.01,
   },
 });

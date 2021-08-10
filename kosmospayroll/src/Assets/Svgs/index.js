@@ -22,6 +22,7 @@ import cross from './cross.svg';
 import settings from './settings.svg';
 import hourglass from './hourglass.svg';
 import clock from './clock.svg';
+import edit from './edit.svg';
 export const SVGS = {
   add_user,
   attendance,
@@ -39,6 +40,7 @@ export const SVGS = {
   padlock,
   clock,
   salary,
+  edit,
   down,
   switcher,
   validate,

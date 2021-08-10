@@ -45,7 +45,7 @@ export const findCurrencySymbol = code => {
 };
 
 export const formatCurrency = (number, currencyCode) => {
-  return fm.from(number, {symbol: findCurrencySymbol(currencyCode)});
+  return fm.from(number, {symbol: `${findCurrencySymbol(currencyCode)} `});
 };
 
 export const CurrencyMask = symbol => {

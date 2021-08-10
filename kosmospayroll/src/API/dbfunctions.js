@@ -151,13 +151,37 @@ export const calculateEarnings = (attendance, id) => {
   attendance.forEach(element => {
     element.data.filter(employee => {
       if (employee.key === id) {
-        Object.entries(employee.attendance).map((item, index) => {
-          earnings.normalpay = earnings.normalpay + item.normalpay;
-          earnings.overtimepay = earnings.overtimepay + item.overtimepay;
+        Object.keys(employee.attendance).map((item, index) => {
+          earnings.normalpay =
+            earnings.normalpay + employee.attendance[item].normalpay;
+          earnings.overtimepay =
+            earnings.overtimepay + employee.attendance[item].overtimepay;
         });
       }
     });
   });
+  return earnings;
+};
+
+const calculateMonths = date => {
+  var a = moment(new Date());
+
+  return a.diff(moment(date), 'months', true);
+};
+
+export const calculateTotalEarnings = att => {
+  let earnings = {normalpay: 0, overtimepay: 0};
+  if (att.worktype === 'monthly') {
+    earnings.normalpay =
+      earnings.normalpay + calculateMonths(att.joindate) * att.rate;
+  } else {
+    Object.keys(att.attendance).map((item, index) => {
+      earnings.normalpay = earnings.normalpay + att.attendance[item].normalpay;
+      earnings.overtimepay =
+        earnings.overtimepay + att.attendance[item].overtimepay;
+    });
+  }
+
   return earnings;
 };
 

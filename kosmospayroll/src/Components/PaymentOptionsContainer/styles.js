@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 import {width as w, height as h} from '../../constants/Metrics';
 import Fonts from '../../constants/Fonts';
-import {Colors} from './../../constants/Colors';
+import {Colors} from '../../constants/Colors';
 
 const {Families, Sizes} = Fonts;
 
@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
     width: w * 0.9,
     borderWidth: 0.3,
     alignSelf: 'center',
-    height: h * 0.05,
+    height: h * 0.075,
     borderRadius: w * 0.05,
     paddingHorizontal: w * 0.03,
     justifyContent: 'space-around',
@@ -20,6 +20,10 @@ export default styles = StyleSheet.create({
     marginTop: h * 0.01,
     paddingVertical: h * 0.005,
     flexDirection: 'row',
+  },
+  iconcontainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   worktype: {
     backgroundColor: Colors.mainGray,
@@ -29,5 +33,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+  },
+  pinktext: {
+    color: Colors.red,
   },
 });

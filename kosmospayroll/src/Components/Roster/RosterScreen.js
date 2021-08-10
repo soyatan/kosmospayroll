@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import PendingContainer from '../PendingContainer/PendingContainer';
 import styles from './styles';
-import WorkTypeFilterContainer from './../WorkTypeFilterContainer/WorkTypeFilterContainer';
 import EmployeeSummaryContainer from './../EmployeeSummaryContainer/EmployeeSummaryContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {employeesSelector} from './../../redux/employeesReducer';
@@ -20,7 +19,8 @@ const RosterScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const employees = useSelector(employeesSelector);
   const user = useSelector(userSelector);
-  console.log(calculateEarnings(employees, '-MgdvrMig32B0zxo5IUL'));
+  //console.log(calculateEarnings(employees, '-MgaQDYjCzcmN2KBydsQ'));
+  //console.log(employees[1].data);
   return (
     <View style={styles.container}>
       <PendingContainer onPress={() => navigation.navigate('Add')} />
@@ -30,7 +30,12 @@ const RosterScreen = ({navigation}) => {
             sections={employees}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => {
-              return <EmployeeSummaryContainer employee={item} />;
+              return (
+                <EmployeeSummaryContainer
+                  employee={item}
+                  navigation={navigation}
+                />
+              );
             }}
             renderSectionHeader={({section: {title, data}}) => (
               <Title title={title} quantity={data.length} />

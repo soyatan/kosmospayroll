@@ -6,7 +6,6 @@ import InputComponentAdd from '../Shared/Input/InputComponentAdd';
 import styles from './styles';
 import InputComponent from './../Shared/Input/InputComponent';
 import CheckBox from '@react-native-community/checkbox';
-import WorkTypeFilterContainer from './../WorkTypeFilterContainer/WorkTypeFilterContainer';
 import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/WorkTypeFilterContainerSmall';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RoundedButton from './../Shared/Button/RoundedButton';

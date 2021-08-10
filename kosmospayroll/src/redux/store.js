@@ -7,11 +7,13 @@ import {persistStore, persistReducer} from 'redux-persist';
 import {userReducer} from './userReducer';
 import {employeesReducer} from './employeesReducer';
 import {loadingReducer} from './loadingReducer';
+import {employeeNameReducer} from './employeeNameReducer';
 
 const combinedReducer = combineReducers({
   userState: userReducer,
   employeesState: employeesReducer,
   loadingState: loadingReducer,
+  employeeNameState: employeeNameReducer,
 });
 
 let persistedReducer = combinedReducer;
