@@ -1,11 +1,16 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {calculateTotalEarnings, converDateUTC} from '../../API/dbfunctions';
+import {
+  calculateMonthlyEarnings,
+  calculateTotalEarnings,
+  converDateUTC,
+} from '../../API/dbfunctions';
 import {formatCurrency} from '../../API/Helper';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee, navigation}) => {
+  calculateMonthlyEarnings(employee);
   return (
     <>
       <TouchableOpacity

@@ -76,3 +76,7 @@ export const PhoneMask = [
   /\d/,
   ' ',
 ];
+
+export const addNumbers = (a, b) => {
+  return a + b;
+};

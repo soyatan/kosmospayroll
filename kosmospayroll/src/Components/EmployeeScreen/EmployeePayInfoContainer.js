@@ -44,6 +44,7 @@ const EmployeePayInfoContainer = () => {
           </Text>
           <Text style={styles.whitetext}>123124</Text>
         </View>
+        <Text style={styles.whitetext}>123124</Text>
         <ChartEvsP />
       </View>
     </>

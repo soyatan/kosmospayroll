@@ -168,23 +168,85 @@ const calculateMonths = date => {
 
   return a.diff(moment(date), 'months', true);
 };
-
-export const calculateTotalEarnings = att => {
+const calculateMonthsDiff = (a, b) => {
+  return a.diff(moment(b), 'months', true);
+};
+export const calculateTotalEarnings = emp => {
   let earnings = {normalpay: 0, overtimepay: 0};
-  if (att.worktype === 'monthly') {
+  if (emp.worktype === 'monthly') {
     earnings.normalpay =
-      earnings.normalpay + calculateMonths(att.joindate) * att.rate;
+      earnings.normalpay + calculateMonths(emp.joindate) * emp.rate;
   } else {
-    Object.keys(att.attendance).map((item, index) => {
-      earnings.normalpay = earnings.normalpay + att.attendance[item].normalpay;
+    Object.keys(emp.attendance).map((item, index) => {
+      earnings.normalpay = earnings.normalpay + emp.attendance[item].normalpay;
       earnings.overtimepay =
-        earnings.overtimepay + att.attendance[item].overtimepay;
+        earnings.overtimepay + emp.attendance[item].overtimepay;
     });
   }
 
   return earnings;
 };
+export const calculateMonthlyEarnings = emp => {
+  //console.log(emp);
+  let earnings = {};
+  if (emp.worktype === 'monthly') {
+    const ymjoindate = moment(emp.joindate).format('YYYY-MM');
+    const ymtoday = moment(new Date()).format('YYYY-MM');
 
+    Object.keys(emp.attendance).map((item, index) => {
+      const ym = moment(item).format('YYYY-MM');
+
+      if (ym === ymjoindate || ym !== ymtoday) {
+        earnings[ym] = {
+          normalpay: calculateMonths(emp.joindate) * emp.rate,
+          overtimepay: 0,
+        };
+      } else if (ym === ymjoindate || ym === ymtoday) {
+        earnings[ym] = {
+          normalpay: emp.rate,
+          overtimepay: 0,
+        };
+      } else {
+        earnings[ym] = {
+          normalpay: emp.rate,
+          overtimepay: 0,
+        };
+      }
+      //sonrası çöp, 3 senaryo yukarıda
+      if (!earnings[ym]) {
+        earnings[ym] = {
+          normalpay: emp.attendance[item].normalpay,
+          overtimepay: emp.attendance[item].overtimepay,
+        };
+      } else {
+        earnings[ym] = {
+          normalpay: earnings[ym].normalpay + emp.attendance[item].normalpay,
+          overtimepay:
+            earnings[ym].overtimepay + emp.attendance[item].overtimepay,
+        };
+      }
+    });
+  } else {
+    Object.keys(emp.attendance).map((item, index) => {
+      const ym = moment(item).format('YYYY-MM');
+
+      if (!earnings[ym]) {
+        earnings[ym] = {
+          normalpay: emp.attendance[item].normalpay,
+          overtimepay: emp.attendance[item].overtimepay,
+        };
+      } else {
+        earnings[ym] = {
+          normalpay: earnings[ym].normalpay + emp.attendance[item].normalpay,
+          overtimepay:
+            earnings[ym].overtimepay + emp.attendance[item].overtimepay,
+        };
+      }
+    });
+  }
+  //console.log(earnings);
+  return earnings;
+};
 export const convertDateYMD = utcdate => {
   return moment(utcdate).format('YYYY-MM-DD');
 };
