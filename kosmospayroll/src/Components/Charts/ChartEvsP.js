@@ -19,10 +19,10 @@ export const ChartEvsP = () => {
     legend: ['L1', 'L2', 'L3'],
 
     data: [
-      [60, 60, 60],
-      [30, 30, 60],
+      [60, 60],
+      [30, 30],
     ],
-    barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
+    barColors: ['#dfe4ea', '#ced6e0'],
   };
   return (
     <StackedBarChart

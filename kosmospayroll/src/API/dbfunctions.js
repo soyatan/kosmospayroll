@@ -168,10 +168,20 @@ const calculateMonths = date => {
 
   return a.diff(moment(date), 'months', true);
 };
-const calculateMonthsDiff = (a, b) => {
-  return a.diff(moment(b), 'months', true);
+const lastday = (y, m) => {
+  return new Date(y, m + 1, 0).getDate();
+};
+
+const calculatefirstmonth = joindate => {
+  const indexofmonth = moment(joindate).month();
+  const indexofyear = moment(joindate).year();
+  const indexofday = moment(joindate).date();
+  const lastdayofmonth = lastday(indexofyear, indexofmonth);
+  return lastdayofmonth - indexofday;
+  //console.log(moment(a).diff(moment(b), 'months', true))
 };
 export const calculateTotalEarnings = emp => {
+  //console.log(emp.joindate);
   let earnings = {normalpay: 0, overtimepay: 0};
   if (emp.worktype === 'monthly') {
     earnings.normalpay =
@@ -195,13 +205,13 @@ export const calculateMonthlyEarnings = emp => {
 
     Object.keys(emp.attendance).map((item, index) => {
       const ym = moment(item).format('YYYY-MM');
-
-      if (ym === ymjoindate || ym !== ymtoday) {
+      console.log(calculatefirstmonth(emp.joindate));
+      if (ym === ymjoindate && ym !== ymtoday) {
         earnings[ym] = {
-          normalpay: calculateMonths(emp.joindate) * emp.rate,
+          normalpay: calculatefirstmonth(emp.joindate) * emp.rate,
           overtimepay: 0,
         };
-      } else if (ym === ymjoindate || ym === ymtoday) {
+      } else if (ym === ymjoindate && ym === ymtoday) {
         earnings[ym] = {
           normalpay: emp.rate,
           overtimepay: 0,
