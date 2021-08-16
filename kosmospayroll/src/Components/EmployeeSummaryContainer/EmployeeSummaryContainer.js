@@ -10,7 +10,7 @@ import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee, navigation}) => {
-  calculateMonthlyEarnings(employee);
+  console.log(employee);
   return (
     <>
       <TouchableOpacity

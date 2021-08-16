@@ -5,7 +5,10 @@ import styles from './styles';
 
 import PendingContainerEmp from './../PendingContainer/PendingContainerEmp';
 import {formatCurrency} from '../../API/Helper';
-import {calculateTotalEarnings} from '../../API/dbfunctions';
+import {
+  calculateMonthlyEarnings,
+  calculateTotalEarnings,
+} from '../../API/dbfunctions';
 import PaymentOptionsContainer from '../PaymentOptionsContainer/PaymentOptionsContainer';
 import {
   employeeNameSelector,
@@ -16,12 +19,13 @@ import EmployeePayInfoContainer from './EmployeePayInfoContainer';
 
 const EmployeeScreen = ({navigation, route}) => {
   const [totalPending, settotalPending] = useState(0);
-  const dispatch = useDispatch();
+  const [monthlyEarnings, setmonthlyEarnings] = useState(null);
 
+  const dispatch = useDispatch();
   //console.log(selectedEmployee);
   useEffect(() => {
+    const {employee} = route.params;
     try {
-      const {employee} = route.params;
       dispatch(setEmpChosen(employee));
       const pending = formatCurrency(
         calculateTotalEarnings(employee).normalpay +
@@ -33,6 +37,7 @@ const EmployeeScreen = ({navigation, route}) => {
     } catch (error) {
       settotalPending(0);
     }
+    setmonthlyEarnings(calculateMonthlyEarnings(employee));
   }, []);
 
   return (
@@ -43,7 +48,7 @@ const EmployeeScreen = ({navigation, route}) => {
       />
       <View style={styles.rostercontainer}>
         <PaymentOptionsContainer />
-        <EmployeePayInfoContainer />
+        <EmployeePayInfoContainer earnings={monthlyEarnings} />
       </View>
     </View>
   );

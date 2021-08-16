@@ -13,6 +13,7 @@ export const createUser = (dispatch, username, email, password) => {
       account.username = username;
       account.currency = null;
       account.company = null;
+      account.workhours = null;
 
       database()
         .ref('users/' + authData.user.uid)
@@ -30,6 +31,7 @@ export const createUser = (dispatch, username, email, password) => {
                   newAccount.email,
                   newAccount.currency,
                   newAccount.company,
+                  newAccount.workhours,
                   null,
                   'firebase',
                 ),
@@ -78,6 +80,7 @@ export const signInUser = (dispatch, email, password) => {
               newAccount.email,
               newAccount.currency,
               newAccount.company,
+              newAccount.workhours,
               null,
               'firebase',
             ),

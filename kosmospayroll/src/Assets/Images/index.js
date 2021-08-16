@@ -22,3 +22,4 @@ export const ImageLink = {
   user: require('./user.png'),
   cancel: require('./cancel.png'),
 };
+r

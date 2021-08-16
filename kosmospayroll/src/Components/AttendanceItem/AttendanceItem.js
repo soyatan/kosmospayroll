@@ -19,7 +19,7 @@ import {userSelector} from '../../redux/userReducer';
 
 const AttendanceItem = ({employee, curDate}) => {
   const user = useSelector(userSelector);
-
+  console.log(user);
   const dispatch = useDispatch();
   const [curDateFormatted, setCurDateFormatted] = useState(
     moment(new Date()).format('YYYY-MM-DD'),
@@ -113,6 +113,7 @@ const AttendanceItem = ({employee, curDate}) => {
 
   const pickerRef = useRef();
   const pickerRefWork = useRef();
+  console.log(attendance);
   return (
     <>
       <View style={styles.container}>

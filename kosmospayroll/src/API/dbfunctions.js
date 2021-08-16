@@ -137,7 +137,16 @@ export const changeAttendance = (
     .ref(`employees/${userid}/${employeeid}/attendance/${date}`)
     .update({...attendance, ...earnings})
     .then(() =>
-      dispatch(changeAttendanceAction(employeeid, date, worktype, attendance)),
+      dispatch(
+        changeAttendanceAction(
+          employeeid,
+          date,
+          worktype,
+          attendance,
+          normalpay,
+          overtimepay,
+        ),
+      ),
     );
 };
 export const addPayment = (userid, employeeid, date, status) => {
@@ -177,16 +186,32 @@ const calculatefirstmonth = joindate => {
   const indexofyear = moment(joindate).year();
   const indexofday = moment(joindate).date();
   const lastdayofmonth = lastday(indexofyear, indexofmonth);
-  return lastdayofmonth - indexofday;
-  //console.log(moment(a).diff(moment(b), 'months', true))
+  const daysearned = lastdayofmonth - indexofday;
+  //console.log(daysearned, lastdayofmonth);
+  return daysearned / lastdayofmonth;
 };
+const calculatejoinandtoday = joindate => {
+  const indexofday = moment(joindate).date();
+  const today = moment(new Date()).date();
+  return today - indexofday;
+};
+const calculatelastmonth = () => {
+  const indexofmonth = moment(new Date()).month();
+  const indexofyear = moment(new Date()).year();
+  const lastdayofmonth = lastday(indexofyear, indexofmonth);
+  const daysearned = moment(new Date()).date();
+
+  return daysearned / lastdayofmonth;
+};
+
 export const calculateTotalEarnings = emp => {
   //console.log(emp.joindate);
   let earnings = {normalpay: 0, overtimepay: 0};
+
   if (emp.worktype === 'monthly') {
     earnings.normalpay =
       earnings.normalpay + calculateMonths(emp.joindate) * emp.rate;
-  } else {
+  } else if (emp.attendance) {
     Object.keys(emp.attendance).map((item, index) => {
       earnings.normalpay = earnings.normalpay + emp.attendance[item].normalpay;
       earnings.overtimepay =
@@ -197,64 +222,71 @@ export const calculateTotalEarnings = emp => {
   return earnings;
 };
 export const calculateMonthlyEarnings = emp => {
-  //console.log(emp);
+  console.log(emp.attendance);
   let earnings = {};
-  if (emp.worktype === 'monthly') {
-    const ymjoindate = moment(emp.joindate).format('YYYY-MM');
-    const ymtoday = moment(new Date()).format('YYYY-MM');
+  if (emp.attendance) {
+    if (emp.worktype === 'monthly') {
+      //console.log(emp.joindate);
+      const ymjoindate = moment(emp.joindate).format('YYYY-MM');
 
-    Object.keys(emp.attendance).map((item, index) => {
-      const ym = moment(item).format('YYYY-MM');
-      console.log(calculatefirstmonth(emp.joindate));
-      if (ym === ymjoindate && ym !== ymtoday) {
-        earnings[ym] = {
-          normalpay: calculatefirstmonth(emp.joindate) * emp.rate,
-          overtimepay: 0,
-        };
-      } else if (ym === ymjoindate && ym === ymtoday) {
-        earnings[ym] = {
-          normalpay: emp.rate,
-          overtimepay: 0,
-        };
-      } else {
-        earnings[ym] = {
-          normalpay: emp.rate,
-          overtimepay: 0,
-        };
-      }
-      //sonrası çöp, 3 senaryo yukarıda
-      if (!earnings[ym]) {
-        earnings[ym] = {
-          normalpay: emp.attendance[item].normalpay,
-          overtimepay: emp.attendance[item].overtimepay,
-        };
-      } else {
-        earnings[ym] = {
-          normalpay: earnings[ym].normalpay + emp.attendance[item].normalpay,
-          overtimepay:
-            earnings[ym].overtimepay + emp.attendance[item].overtimepay,
-        };
-      }
-    });
-  } else {
-    Object.keys(emp.attendance).map((item, index) => {
-      const ym = moment(item).format('YYYY-MM');
+      const ymtoday = moment(new Date()).format('YYYY-MM');
+      const ymjoinindex = moment(emp.joindate).month();
+      const ymtodayindex = moment(new Date()).month();
 
-      if (!earnings[ym]) {
-        earnings[ym] = {
-          normalpay: emp.attendance[item].normalpay,
-          overtimepay: emp.attendance[item].overtimepay,
-        };
-      } else {
-        earnings[ym] = {
-          normalpay: earnings[ym].normalpay + emp.attendance[item].normalpay,
-          overtimepay:
-            earnings[ym].overtimepay + emp.attendance[item].overtimepay,
-        };
+      const monthspassed = moment(ymtoday).diff(
+        moment(ymjoindate),
+        'months',
+        true,
+      );
+
+      for (let i = 0; i <= monthspassed; i++) {
+        const ymfull = moment(ymjoindate).add(i, 'months');
+        const ym = moment(ymfull).format('YYYY-MM');
+
+        if (i === 0 && i !== monthspassed) {
+          earnings[ym] = {
+            normalpay: calculatefirstmonth(emp.joindate) * emp.rate,
+            overtimepay: 0,
+          };
+        } else if (i === 0 && i === monthspassed) {
+          earnings[ym] = {
+            normalpay: calculatejoinandtoday(emp.joindate) * emp.rate,
+            overtimepay: 0,
+          };
+        } else if (i > 0 && i !== monthspassed) {
+          earnings[ym] = {
+            normalpay: emp.rate,
+            overtimepay: 0,
+          };
+        } else if (i > 0 && i === monthspassed) {
+          earnings[ym] = {
+            normalpay: calculatelastmonth() * emp.rate,
+            overtimepay: 0,
+          };
+        }
+
+        console.log(earnings);
       }
-    });
+    } else {
+      Object.keys(emp.attendance).map((item, index) => {
+        const ym = moment(item).format('YYYY-MM');
+
+        if (!earnings[ym]) {
+          earnings[ym] = {
+            normalpay: emp.attendance[item].normalpay,
+            overtimepay: emp.attendance[item].overtimepay,
+          };
+        } else {
+          earnings[ym] = {
+            normalpay: earnings[ym].normalpay + emp.attendance[item].normalpay,
+            overtimepay:
+              earnings[ym].overtimepay + emp.attendance[item].overtimepay,
+          };
+        }
+      });
+    }
+    //console.log(earnings);
   }
-  //console.log(earnings);
   return earnings;
 };
 export const convertDateYMD = utcdate => {

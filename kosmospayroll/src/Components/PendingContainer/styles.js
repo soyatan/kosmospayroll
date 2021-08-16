@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
     backgroundColor: Colors.mainLightGray,
     alignSelf: 'center',
     height: h * 0.1,
-    borderRadius: w * 0.05,
+    borderRadius: w,
     paddingHorizontal: w * 0.03,
     justifyContent: 'space-between',
     alignItems: 'center',
