@@ -264,8 +264,6 @@ export const calculateMonthlyEarnings = emp => {
             overtimepay: 0,
           };
         }
-
-        console.log(earnings);
       }
     } else {
       Object.keys(emp.attendance).map((item, index) => {

@@ -38,7 +38,7 @@ const EmployeeScreen = ({navigation, route}) => {
       settotalPending(0);
     }
     setmonthlyEarnings(calculateMonthlyEarnings(employee));
-  }, []);
+  }, [route]);
 
   return (
     <View style={styles.container}>

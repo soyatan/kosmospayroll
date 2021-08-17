@@ -9,13 +9,14 @@ import moment from 'moment';
 import {useSelector} from 'react-redux';
 import {employeeNameSelector} from './../../redux/employeeNameReducer';
 import {ChartEvsP} from '../Charts/ChartEvsP';
+import {calculateMonthlyEarnings} from '../../API/dbfunctions';
 const EmployeePayInfoContainer = ({earnings}) => {
   const [currentMonth, setcurrentMonth] = useState(new Date());
   const [prevMonth, setprevMonth] = useState(
     new Date(moment(currentMonth).subtract(1, 'months')),
   );
-
-  //console.log(earnings);
+  //calculateMonthlyEarnings()
+  console.log(earnings);
   const employee = useSelector(employeeNameSelector);
   return (
     <>
