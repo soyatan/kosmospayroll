@@ -13,15 +13,13 @@ import {
 import {chartConfigs} from '../../API/chartconfigs';
 const screenWidth = Dimensions.get('window').width;
 
-export const ChartEvsP = () => {
+export const ChartEvsP = ({datam}) => {
+  console.log(datam);
   const data = {
-    labels: ['Test1', 'Test2'],
-    legend: ['L1', 'L2', 'L3'],
+    labels: datam.labels,
+    //legend: ['L1', 'L2'],
 
-    data: [
-      [60, 60],
-      [30, 30],
-    ],
+    data: datam.data,
     barColors: ['#dfe4ea', '#ced6e0'],
   };
   return (
