@@ -294,3 +294,21 @@ export const convertDateYMD = utcdate => {
 export const converDateUTC = date => {
   return moment(date).format('MM-YYYY-DD');
 };
+
+export const calculateBalances = (earnings, currentMonth) => {
+  //const premonth = new Date(moment(currentMonth).subtract(1, 'months'));
+  //const ympre = moment(premonth).format('YYYY-MM');
+  const ymthis = moment(currentMonth).format('YYYY-MM');
+
+  let balances = {current: 0, previous: 0, final: 0};
+  Object.keys(earnings).map(ym => {
+    if (ym === ymthis) {
+      balances.current = earnings[ym].normalpay + earnings[ym].overtimepay;
+    } else {
+      let addbalance = earnings[ym].normalpay + earnings[ym].overtimepay;
+      balances.previous = balances.previous + addbalance;
+    }
+    balances.final = balances.current + balances.previous;
+  });
+  return balances;
+};
