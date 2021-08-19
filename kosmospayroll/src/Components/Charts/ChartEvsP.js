@@ -1,7 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {Dimensions} from 'react-native';
 import styles from './styles';
+
 import {
   LineChart,
   BarChart,
@@ -19,17 +20,25 @@ export const ChartEvsP = ({datam}) => {
     labels: datam.labels,
     //legend: ['L1', 'L2'],
 
-    data: datam.data,
-    barColors: ['#dfe4ea', '#ced6e0'],
+    data: datam.data || [],
+    barColors: ['#9523bb', '#548b88'],
   };
+  if (datam) {
+    return (
+      <StackedBarChart
+        bezier
+        hideLegend={true}
+        style={styles.chartstyle}
+        data={data}
+        width={screenWidth * 0.9}
+        height={styles.chart.height}
+        chartConfig={chartConfigs[4]}
+      />
+    );
+  }
   return (
-    <StackedBarChart
-      hideLegend={true}
-      style={styles.chartstyle}
-      data={data}
-      width={screenWidth * 0.9}
-      height={styles.chart.height}
-      chartConfig={chartConfigs[4]}
-    />
+    <View style={{}}>
+      <ActivityIndicator size="small" color="white" />
+    </View>
   );
 };
