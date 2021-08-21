@@ -75,6 +75,7 @@ export const Header = ({route}) => {
       case 'Roster':
         return 'Roster';
       case 'Employee':
+      case 'Payment':
         return setisEmp(true);
       case 'Add':
         return 'Add Employee';

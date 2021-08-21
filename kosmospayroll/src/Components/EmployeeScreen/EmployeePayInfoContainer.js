@@ -24,6 +24,7 @@ const EmployeePayInfoContainer = ({earnings}) => {
 
   const employee = useSelector(employeeNameSelector);
   //console.log(balances);
+
   useEffect(() => {
     if (earnings) {
       setbalances(calculateBalances(earnings, currentMonth));

@@ -23,8 +23,8 @@ const EmployeeScreen = ({navigation, route}) => {
 
   const dispatch = useDispatch();
   //console.log(selectedEmployee);
+  const {employee} = route.params;
   useEffect(() => {
-    const {employee} = route.params;
     try {
       dispatch(setEmpChosen(employee));
       const pending = formatCurrency(
@@ -43,7 +43,7 @@ const EmployeeScreen = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <PendingContainerEmp
-        onPress={() => console.log('hy')}
+        onPress={() => navigation.navigate('Payment', {employee})}
         totalPending={totalPending}
       />
       <View style={styles.rostercontainer}>

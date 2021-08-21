@@ -21,19 +21,18 @@ export const Footer = () => {
 
     switch (routeIndex) {
       case 'Payroll':
-        return 0;
       case 'Dashboard':
         return 0;
+
       case 'Settings':
         return 4;
       case 'Payslips':
+      case 'Payment':
         return 3;
       case 'Attendance':
         return 2;
       case 'Roster':
-        return 1;
       case 'Employee':
-        return 1;
       case 'Add':
         return 1;
     }
