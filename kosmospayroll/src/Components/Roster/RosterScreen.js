@@ -23,7 +23,7 @@ const RosterScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const employees = useSelector(employeesSelector);
   const user = useSelector(userSelector);
-  console.log(employees[2].data[0].attendance);
+  console.log(employees[2].data[0].payments);
   //console.log(calculateEarnings(employees, '-MgaQDYjCzcmN2KBydsQ'));
   //console.log(employees[1].data);
   //console.log(employees[2]);

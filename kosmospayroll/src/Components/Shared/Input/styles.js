@@ -36,8 +36,22 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  borderlessinputsmall: {
+    //height: '100%',
+    opacity: 0.5,
+    //margin: w * 0.02,
+    //paddingLeft: 10,
+
+    //borderBottomWidth: 0.3,
+    alignItems: 'center',
+    //flexDirection: 'row',
+    height: h * 0.06,
+    justifyContent: 'center',
+
+    alignItems: 'stretch',
+  },
   textinput: {
-    marginLeft: w * 0.02,
+    //marginLeft: w * 0.02,
     marginRight: w * 0.01,
     flex: 1,
   },

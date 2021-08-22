@@ -1,17 +1,35 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {Icon} from '../../Assets/Svgs/icon';
+import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
+import {findCurrencySymbol} from '../../API/Helper';
+import {useSelector} from 'react-redux';
+import {userSelector} from '../../redux/userReducer';
+import PaymentItem from '../PaymentItem/PaymentItem';
+import NewPayment from '../PaymentItem/NewPayment';
+import {addPayment} from './../../API/dbfunctions';
 const PaymentScreen = ({navigation, route}) => {
   const [paydate, setpaydate] = useState(new Date());
   const [showPay, setShowPay] = useState(false);
-  console.log(route.params);
+  const [paynote, setpaynote] = useState('');
+  const [pay, setpay] = useState(0);
+  const {employee} = route.params;
+  const user = useSelector(userSelector);
+  const symbol = findCurrencySymbol(user.currency);
   const onChangeBD = (event, selectedDate) => {
-    const currentDate = selectedDate || birthdate;
+    const currentDate = selectedDate || paydate;
     setShowPay(Platform.OS === 'ios');
     setpaydate(currentDate);
   };
+  console.log(paydate);
+  console.log(employee);
+  const addPaymentToDB = () => {
+    addPayment(user.userid, employee.key, Date.now(), pay, paynote);
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -33,40 +51,31 @@ const PaymentScreen = ({navigation, route}) => {
           <Text>Payments to date </Text>
           <Text>2 total</Text>
         </View>
-        <View style={styles.addpaymentcontainer}>
-          <Text>New Payment </Text>
-          <View style={styles.addpaymentrow}>
-            <View
-              style={{
-                alignSelf: 'flex-start',
-                justifyContent: 'center',
-                alignItems: 'stretch',
-                marginLeft: 15,
-                alignContent: 'stretch',
-                width: '100%',
-                height: '100%',
-              }}>
-              <Text
-                style={{
-                  flex: 1,
-                  textAlignVertical: 'center',
-                }}
-                onPress={() => setShowPay(true)}>
-                {paydate.toLocaleDateString('en-gb')}
-              </Text>
-            </View>
-            {showPay && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={paydate}
-                mode={'date'}
-                is24Hour={true}
-                display={'spinner'}
-                onChange={onChangeBD}
-              />
-            )}
-          </View>
+        <View style={styles.paymentscontainer}>
+          <PaymentItem />
+          <NewPayment
+            pay={pay}
+            paydate={paydate}
+            setpaydate={setpaydate}
+            setpay={setpay}
+            setShowPay={setShowPay}
+            symbol={symbol}
+            paynote={paynote}
+            setpaynote={setpaynote}
+            onPress={() => addPaymentToDB()}
+          />
         </View>
+
+        {showPay && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={paydate}
+            mode={'date'}
+            is24Hour={true}
+            display={'spinner'}
+            onChange={onChangeBD}
+          />
+        )}
       </View>
     </>
   );

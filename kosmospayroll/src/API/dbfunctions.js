@@ -149,10 +149,10 @@ export const changeAttendance = (
       ),
     );
 };
-export const addPayment = (userid, employeeid, date, status) => {
+export const addPayment = (userid, employeeid, date, amount, note) => {
   database()
-    .ref(`employees/${userid}/-MgKTatO8ndjWru8FJm9/payments`)
-    .update({166856: 911});
+    .ref(`employees/${userid}/${employeeid}/payments`)
+    .push({date, amount, note});
 };
 
 export const calculateEarnings = (attendance, id) => {

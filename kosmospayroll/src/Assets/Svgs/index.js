@@ -23,6 +23,7 @@ import settings from './settings.svg';
 import hourglass from './hourglass.svg';
 import clock from './clock.svg';
 import edit from './edit.svg';
+import add from './add.svg';
 export const SVGS = {
   add_user,
   attendance,
@@ -34,6 +35,7 @@ export const SVGS = {
   envelope,
   google,
   right,
+  add,
   left,
   management,
   overtime,

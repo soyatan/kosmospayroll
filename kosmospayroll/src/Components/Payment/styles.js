@@ -21,26 +21,39 @@ export default styles = StyleSheet.create({
     height: h * 0.06,
     flexDirection: 'row',
   },
+  paymentscontainer: {flex: 1, marginBottom: w * 0.03},
+  inputcontainer: {
+    backgroundColor: 'red',
+    justifyContent: 'flex-end',
+  },
+  dateinput: {
+    flex: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'yellow',
+  },
+  iconinput: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   balanceitem: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  addpaymentrow: {backgroundColor: 'red', height: h * 0.08},
+  addpaymentrow: {
+    height: h * 0.08,
+    flexDirection: 'row',
+  },
   paymentlist: {
-    backgroundColor: 'yellow',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: w * 0.03,
     marginHorizontal: w * 0.02,
   },
-  addpaymentcontainer: {
-    backgroundColor: 'yellow',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    paddingHorizontal: w * 0.03,
-    marginHorizontal: w * 0.02,
-  },
+
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,
     fontSize: Fonts.Sizes.thirty,
