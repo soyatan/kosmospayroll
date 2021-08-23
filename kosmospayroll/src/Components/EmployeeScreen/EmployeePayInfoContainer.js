@@ -4,7 +4,7 @@ import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 import {Icon} from '../../Assets/Svgs/icon';
-import {getMonthName} from '../../API/Helper';
+import {formatCurrency, getMonthName} from '../../API/Helper';
 import moment from 'moment';
 import {useSelector} from 'react-redux';
 import {employeeNameSelector} from './../../redux/employeeNameReducer';
@@ -13,7 +13,8 @@ import {
   calculateBalances,
   calculateMonthlyEarnings,
 } from '../../API/dbfunctions';
-const EmployeePayInfoContainer = ({earnings}) => {
+
+const EmployeePayInfoContainer = ({earnings, currency}) => {
   const [balances, setbalances] = useState(null);
   const [currentMonth, setcurrentMonth] = useState(new Date());
   const [prevMonth, setprevMonth] = useState(
@@ -33,12 +34,34 @@ const EmployeePayInfoContainer = ({earnings}) => {
         data: [],
         legend: ['normalpay', 'overtime pay'],
       };
+      let np = 0;
+      let otp = 0;
+      if (Object.keys(earnings).length > 4) {
+        monthlyearnings.labels.push('Earlier');
+        monthlyearnings.data.push([0, 0]);
+      }
+      Object.keys(earnings).map((month, index) => {
+        if (index < 4) {
+          monthlyearnings.labels.push(month);
+          let earns = [earnings[month].normalpay, earnings[month].overtimepay];
 
-      Object.keys(earnings).map(month => {
-        monthlyearnings.labels.push(month);
-        let earns = [earnings[month].normalpay, earnings[month].overtimepay];
-
-        monthlyearnings.data.push(earns);
+          monthlyearnings.data.push(earns);
+        } else {
+          let ind = monthlyearnings.labels.indexOf('Earlier');
+          monthlyearnings.data = monthlyearnings.data.map((item, index) => {
+            if (index === ind) {
+              item.map((childitem, chindex) => {
+                if (index === 0) {
+                  return childitem[0] + earnings[month].normalpay;
+                } else {
+                  return childitem[1] + earnings[month].overtimepay;
+                }
+              });
+            } else {
+              return item;
+            }
+          });
+        }
       });
       setmonthlyearns(monthlyearnings);
     }
@@ -52,7 +75,9 @@ const EmployeePayInfoContainer = ({earnings}) => {
             {`${getMonthName(prevMonth.getMonth())} Final Balance `}
           </Text>
           {balances ? (
-            <Text style={styles.blacktext}>{balances.previous}</Text>
+            <Text style={styles.blacktext}>
+              {formatCurrency(balances.previous, currency)}
+            </Text>
           ) : null}
         </View>
         <View style={styles.datarowcontainer}>
@@ -60,7 +85,9 @@ const EmployeePayInfoContainer = ({earnings}) => {
             currentMonth.getMonth(),
           )} Earnings `}</Text>
           {balances ? (
-            <Text style={styles.blacktext}>{balances.current}</Text>
+            <Text style={styles.blacktext}>
+              {formatCurrency(balances.current, currency)}
+            </Text>
           ) : null}
         </View>
         <View style={styles.datarowcontainer}>
@@ -68,7 +95,9 @@ const EmployeePayInfoContainer = ({earnings}) => {
             currentMonth.getMonth(),
           )} Payments `}</Text>
           {balances ? (
-            <Text style={styles.blacktext}>{balances.final}</Text>
+            <Text style={styles.blacktext}>
+              {formatCurrency(balances.final, currency)}
+            </Text>
           ) : null}
         </View>
         <View style={styles.iconcontainer}>
@@ -76,7 +105,9 @@ const EmployeePayInfoContainer = ({earnings}) => {
             {`Net Balance by ${moment(currentMonth).format('DD-MMM-YYYY')}`}
           </Text>
           {balances ? (
-            <Text style={styles.whitetext}>{balances.final}</Text>
+            <Text style={styles.whitetext}>
+              {formatCurrency(balances.final, currency)}
+            </Text>
           ) : null}
         </View>
         <Text style={styles.whitetext}>123124</Text>

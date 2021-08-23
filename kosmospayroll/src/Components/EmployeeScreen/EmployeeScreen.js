@@ -51,7 +51,10 @@ const EmployeeScreen = ({navigation, route}) => {
       />
       <View style={styles.rostercontainer}>
         <PaymentOptionsContainer />
-        <EmployeePayInfoContainer earnings={monthlyEarnings} />
+        <EmployeePayInfoContainer
+          earnings={monthlyEarnings}
+          currency={employee.currency}
+        />
       </View>
     </View>
   );
