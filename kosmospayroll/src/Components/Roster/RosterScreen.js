@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {employeesSelector} from './../../redux/employeesReducer';
 import {
   calculateEarnings,
+  calculateGlobalBalance,
   calculateMonthlyEarnings,
   fetchEmployees,
 } from '../../API/dbfunctions';
@@ -20,17 +21,25 @@ import {userSelector} from '../../redux/userReducer';
 import {Title} from './Title';
 
 const RosterScreen = ({navigation}) => {
+  const [isLoading, setisLoading] = useState(true);
+  const [globalBalance, setglobalBalance] = useState(0);
   const dispatch = useDispatch();
   const employees = useSelector(employeesSelector);
   const user = useSelector(userSelector);
-  console.log(employees[2].data[0].payments);
-  //console.log(calculateEarnings(employees, '-MgaQDYjCzcmN2KBydsQ'));
-  //console.log(employees[1].data);
-  //console.log(employees[2]);
-  //console.log(calculateMonthlyEarnings(employees[2].data[0]));
+
+  useEffect(() => {
+    if (employees) {
+      setglobalBalance(calculateGlobalBalance(employees));
+    }
+  }, [employees]);
+
   return (
     <View style={styles.container}>
-      <PendingContainer onPress={() => navigation.navigate('Add')} />
+      <PendingContainer
+        onPress={() => navigation.navigate('Add')}
+        isLoading={isLoading}
+        globalBalance={globalBalance}
+      />
       <View style={styles.rostercontainer}>
         {employees ? (
           <SectionList

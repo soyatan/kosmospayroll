@@ -8,6 +8,7 @@ import {formatCurrency} from '../../API/Helper';
 import {
   calculateMonthlyEarnings,
   calculateTotalEarnings,
+  calculateTotalPayments,
 } from '../../API/dbfunctions';
 import PaymentOptionsContainer from '../PaymentOptionsContainer/PaymentOptionsContainer';
 import {
@@ -24,13 +25,15 @@ const EmployeeScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
   //console.log(selectedEmployee);
   const {employee} = route.params;
+
   useEffect(() => {
     try {
       dispatch(setEmpChosen(employee));
       const pending = formatCurrency(
         calculateTotalEarnings(employee).normalpay +
           calculateTotalEarnings(employee).overtimepay -
-          employee.rate * employee.currency,
+          calculateTotalPayments(employee),
+        employee.currency,
       );
 
       settotalPending(pending);

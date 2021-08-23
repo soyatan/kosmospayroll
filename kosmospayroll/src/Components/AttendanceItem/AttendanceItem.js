@@ -113,7 +113,7 @@ const AttendanceItem = ({employee, curDate}) => {
 
   const pickerRef = useRef();
   const pickerRefWork = useRef();
-  console.log(attendance);
+
   return (
     <>
       <View style={styles.container}>

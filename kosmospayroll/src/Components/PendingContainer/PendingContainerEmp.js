@@ -5,6 +5,7 @@ import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const PendingContainerEmp = ({onPress, totalPending}) => {
   const [isLoading, setisLoading] = useState(true);
+
   useEffect(() => {
     if (totalPending) {
       setisLoading(false);

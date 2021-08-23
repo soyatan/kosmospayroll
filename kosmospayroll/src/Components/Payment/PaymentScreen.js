@@ -24,8 +24,7 @@ const PaymentScreen = ({navigation, route}) => {
     setShowPay(Platform.OS === 'ios');
     setpaydate(currentDate);
   };
-  console.log(paydate);
-  console.log(employee);
+
   const addPaymentToDB = () => {
     addPayment(user.userid, employee.key, Date.now(), pay, paynote);
   };

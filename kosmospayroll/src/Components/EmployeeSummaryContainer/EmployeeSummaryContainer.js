@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {
   calculateMonthlyEarnings,
   calculateTotalEarnings,
+  calculateTotalPayments,
   converDateUTC,
 } from '../../API/dbfunctions';
 import {formatCurrency} from '../../API/Helper';
@@ -35,7 +36,10 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
           <View style={styles.rightinsidecontainer}>
             <Text style={styles.blacktext}>Total Paid </Text>
             <Text style={styles.blackboldtext}>
-              {formatCurrency(employee.rate, employee.currency)}
+              {formatCurrency(
+                calculateTotalPayments(employee),
+                employee.currency,
+              )}
             </Text>
           </View>
           <View style={styles.rightinsidecontainer}>
@@ -44,7 +48,7 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
               {formatCurrency(
                 calculateTotalEarnings(employee).normalpay +
                   calculateTotalEarnings(employee).overtimepay -
-                  employee.rate,
+                  calculateTotalPayments(employee),
                 employee.currency,
               )}
             </Text>

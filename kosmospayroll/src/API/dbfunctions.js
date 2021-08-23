@@ -10,6 +10,7 @@ import {
 import {setLoading} from '../redux/loadingReducer';
 import moment from 'moment';
 import {changeOtHours} from './../redux/employeesReducer';
+import {formatCurrency} from './Helper';
 export const addEmployee = (
   name,
   birthdate,
@@ -205,7 +206,6 @@ const calculatelastmonth = () => {
 };
 
 export const calculateTotalEarnings = emp => {
-  //console.log(emp.joindate);
   let earnings = {normalpay: 0, overtimepay: 0};
 
   if (emp.worktype === 'monthly') {
@@ -221,8 +221,41 @@ export const calculateTotalEarnings = emp => {
 
   return earnings;
 };
+
+export const calculateTotalPayments = emp => {
+  let payments = 0;
+
+  if (!emp.payments || emp.payments.length < 1) {
+    return payments;
+  } else {
+    Object.values(emp.payments).map(payment => {
+      payments += payment.amount;
+    });
+  }
+  return payments;
+};
+
+export const calculateGlobalBalance = employees => {
+  let totalbalance = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let balance =
+          calculateTotalEarnings(emp).normalpay +
+          calculateTotalEarnings(emp).overtimepay -
+          calculateTotalPayments(emp);
+
+        totalbalance = totalbalance + balance;
+        currency = emp.currency;
+      });
+    }
+  });
+
+  return formatCurrency(totalbalance, currency);
+};
+
 export const calculateMonthlyEarnings = emp => {
-  console.log(emp.attendance);
   let earnings = {};
   if (emp.attendance) {
     if (emp.worktype === 'monthly') {

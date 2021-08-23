@@ -3,14 +3,14 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
-const PendingContainer = ({onPress}) => {
+const PendingContainer = ({onPress, globalBalance, isLoading}) => {
   return (
     <>
       <View style={styles.headeradditioncontainer}></View>
       <View style={styles.container}>
         <View style={styles.pendingleftcontainer}>
           <Text>TOTAL PENDING</Text>
-          <Text>$1235.84</Text>
+          <Text>{globalBalance}</Text>
         </View>
         <View style={styles.pendingrightcontainer}>
           <ButtonWithText

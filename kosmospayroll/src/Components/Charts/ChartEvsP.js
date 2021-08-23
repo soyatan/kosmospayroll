@@ -15,7 +15,6 @@ import {chartConfigs} from '../../API/chartconfigs';
 const screenWidth = Dimensions.get('window').width;
 
 export const ChartEvsP = ({datam}) => {
-  console.log(datam);
   const data = {
     labels: datam.labels,
     //legend: ['L1', 'L2'],
