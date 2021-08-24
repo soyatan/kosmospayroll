@@ -40,10 +40,14 @@ export const chartConfigs = [
     backgroundGradientFromOpacity: 0.4,
     backgroundGradientToOpacity: 0.1,
     decimalPlaces: 0,
+
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
-      borderRadius: 123,
+      borderRadius: 12,
       color: '#1b3fa0',
+    },
+    propsForLabels: {
+      fontSize: 9,
     },
   },
   {

@@ -12,9 +12,10 @@ import {
   StackedBarChart,
 } from 'react-native-chart-kit';
 import {chartConfigs} from '../../API/chartconfigs';
+import {formatCurrency} from '../../API/Helper';
 const screenWidth = Dimensions.get('window').width;
 
-export const ChartEvsP = ({datam}) => {
+export const ChartEvsP = ({datam, currency}) => {
   const data = {
     labels: datam.labels,
     //legend: ['L1', 'L2'],
@@ -32,6 +33,7 @@ export const ChartEvsP = ({datam}) => {
         width={screenWidth * 0.9}
         height={styles.chart.height}
         chartConfig={chartConfigs[4]}
+        formatYLabel={value => `${value}123`}
       />
     );
   }

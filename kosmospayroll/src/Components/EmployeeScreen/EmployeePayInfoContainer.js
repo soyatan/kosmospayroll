@@ -48,25 +48,21 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
           monthlyearnings.data.push(earns);
         } else {
           let ind = monthlyearnings.labels.indexOf('Earlier');
-          monthlyearnings.data = monthlyearnings.data.map((item, index) => {
-            if (index === ind) {
-              item.map((childitem, chindex) => {
-                if (index === 0) {
-                  return childitem[0] + earnings[month].normalpay;
-                } else {
-                  return childitem[1] + earnings[month].overtimepay;
-                }
-              });
-            } else {
-              return item;
-            }
-          });
+          monthlyearnings.data[ind] = monthlyearnings.data[ind].map(
+            (amount, amountindex) => {
+              if (amountindex === 0) {
+                return amount + earnings[month].normalpay;
+              } else {
+                return amount + earnings[month].overtimepay;
+              }
+            },
+          );
         }
       });
       setmonthlyearns(monthlyearnings);
     }
   }, [earnings]);
-
+  console.log(monthlyearns);
   return (
     <>
       <View style={styles.paycontainer}>
@@ -111,7 +107,7 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
           ) : null}
         </View>
         <Text style={styles.whitetext}>123124</Text>
-        <ChartEvsP datam={monthlyearns} />
+        <ChartEvsP datam={monthlyearns} currency={currency} />
       </View>
     </>
   );

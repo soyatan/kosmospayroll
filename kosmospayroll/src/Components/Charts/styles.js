@@ -9,7 +9,6 @@ const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   chartstyle: {
-    flex: 1,
     alignItems: 'center',
     borderRadius: 10,
     justifyContent: 'center',
