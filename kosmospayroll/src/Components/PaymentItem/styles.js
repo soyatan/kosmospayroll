@@ -81,8 +81,8 @@ export default styles = StyleSheet.create({
     height: '100%',
   },
   blackboldtext: {
-    fontSize: Fonts.Sizes.twelve,
-    fontWeight: 'bold',
+    fontSize: Fonts.Sizes.ten,
+    fontWeight: '700',
   },
   blacktext: {
     fontSize: Fonts.Sizes.twelve,

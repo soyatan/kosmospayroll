@@ -62,7 +62,7 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
       setmonthlyearns(monthlyearnings);
     }
   }, [earnings]);
-  console.log(monthlyearns);
+
   return (
     <>
       <View style={styles.paycontainer}>

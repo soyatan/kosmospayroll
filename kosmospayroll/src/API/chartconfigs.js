@@ -36,9 +36,9 @@ export const chartConfigs = [
   {
     backgroundColor: `${Colors.mainLightGray}`,
     backgroundGradientFrom: `${Colors.mainBlack}`,
-    backgroundGradientTo: `${Colors.mainLightGray}`,
-    backgroundGradientFromOpacity: 0.4,
-    backgroundGradientToOpacity: 0.1,
+    backgroundGradientTo: `${Colors.mainBlack}`,
+    backgroundGradientFromOpacity: 0.7,
+    backgroundGradientToOpacity: 0.4,
     decimalPlaces: 0,
 
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

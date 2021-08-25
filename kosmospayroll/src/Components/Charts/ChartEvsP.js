@@ -21,7 +21,7 @@ export const ChartEvsP = ({datam, currency}) => {
     //legend: ['L1', 'L2'],
 
     data: datam.data || [],
-    barColors: ['#9523bb', '#548b88'],
+    barColors: ['#F890AB', '#E9E9E9'],
   };
   if (datam) {
     return (
@@ -33,7 +33,7 @@ export const ChartEvsP = ({datam, currency}) => {
         width={screenWidth * 0.9}
         height={styles.chart.height}
         chartConfig={chartConfigs[4]}
-        formatYLabel={value => `${value}123`}
+        formatYLabel={value => Math.round(value)}
       />
     );
   }

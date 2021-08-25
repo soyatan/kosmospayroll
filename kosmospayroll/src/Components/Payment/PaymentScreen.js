@@ -5,12 +5,16 @@ import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Icon} from '../../Assets/Svgs/icon';
 import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
-import {findCurrencySymbol} from '../../API/Helper';
+import {findCurrencySymbol, formatCurrency} from '../../API/Helper';
 import {useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import PaymentItem from '../PaymentItem/PaymentItem';
 import NewPayment from '../PaymentItem/NewPayment';
-import {addPayment} from './../../API/dbfunctions';
+import {
+  addPayment,
+  calculateTotalEarnings,
+  calculateTotalPayments,
+} from './../../API/dbfunctions';
 const PaymentScreen = ({navigation, route}) => {
   const [paydate, setpaydate] = useState(new Date());
   const [showPay, setShowPay] = useState(false);
@@ -19,6 +23,7 @@ const PaymentScreen = ({navigation, route}) => {
   const {employee} = route.params;
   const user = useSelector(userSelector);
   const symbol = findCurrencySymbol(user.currency);
+
   const onChangeBD = (event, selectedDate) => {
     const currentDate = selectedDate || paydate;
     setShowPay(Platform.OS === 'ios');
@@ -28,6 +33,7 @@ const PaymentScreen = ({navigation, route}) => {
   const addPaymentToDB = () => {
     addPayment(user.userid, employee.key, Date.now(), pay, paynote);
   };
+  console.log(employee.payments);
 
   return (
     <>
@@ -35,23 +41,56 @@ const PaymentScreen = ({navigation, route}) => {
         <View style={styles.balancerow}>
           <View style={styles.balanceitem}>
             <Text>Earnings</Text>
-            <Text>12324.23</Text>
+            <Text>
+              {formatCurrency(
+                calculateTotalEarnings(employee).normalpay +
+                  calculateTotalEarnings(employee).overtimepay,
+                employee.currency,
+              )}
+            </Text>
           </View>
           <View style={styles.balanceitem}>
             <Text>Payments</Text>
-            <Text>12324.23</Text>
+            <Text>
+              {formatCurrency(
+                calculateTotalPayments(employee),
+                employee.currency,
+              )}
+            </Text>
           </View>
           <View style={styles.balanceitem}>
             <Text>Balance</Text>
-            <Text>12324.23</Text>
+            <Text>
+              {formatCurrency(
+                calculateTotalEarnings(employee).normalpay +
+                  calculateTotalEarnings(employee).overtimepay -
+                  calculateTotalPayments(employee),
+                employee.currency,
+              )}
+            </Text>
           </View>
         </View>
         <View style={styles.paymentlist}>
           <Text>Payments to date </Text>
-          <Text>2 total</Text>
+          {employee.payments ? (
+            <Text>{`${Object.keys(employee.payments).length} Total`}</Text>
+          ) : (
+            <Text>0 Total</Text>
+          )}
         </View>
         <View style={styles.paymentscontainer}>
-          <PaymentItem />
+          {employee.payments
+            ? Object.keys(employee.payments).map(paymentid => {
+                return (
+                  <PaymentItem
+                    key={paymentid}
+                    item={employee.payments[paymentid]}
+                    currency={user.currency}
+                  />
+                );
+              })
+            : null}
+
           <NewPayment
             pay={pay}
             paydate={paydate}
