@@ -9,6 +9,7 @@ import {
   calculateMonthlyEarnings,
   calculateTotalEarnings,
   calculateTotalPayments,
+  fetchEmployees,
 } from '../../API/dbfunctions';
 import PaymentOptionsContainer from '../PaymentOptionsContainer/PaymentOptionsContainer';
 import {
@@ -17,43 +18,62 @@ import {
 } from './../../redux/employeeNameReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import EmployeePayInfoContainer from './EmployeePayInfoContainer';
+import {calculateSplitPayments} from './../../API/dbfunctions';
+import {employeesSelector} from './../../redux/employeesReducer';
+import {userSelector} from '../../redux/userReducer';
 
 const EmployeeScreen = ({navigation, route}) => {
   const [totalPending, settotalPending] = useState(0);
   const [monthlyEarnings, setmonthlyEarnings] = useState(null);
 
   const dispatch = useDispatch();
-  //console.log(selectedEmployee);
+
   const {employee} = route.params;
+  const empchosen = useSelector(employeeNameSelector);
+  const user = useSelector(userSelector);
+  //console.log(empchosen);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log(route.params);
+      fetchEmployees(dispatch, user.userid);
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    dispatch(setEmpChosen(route.params.employee));
+  }, [route]);
 
   useEffect(() => {
     try {
-      dispatch(setEmpChosen(employee));
       const pending = formatCurrency(
-        calculateTotalEarnings(employee).normalpay +
-          calculateTotalEarnings(employee).overtimepay -
-          calculateTotalPayments(employee),
-        employee.currency,
+        calculateTotalEarnings(empchosen).normalpay +
+          calculateTotalEarnings(empchosen).overtimepay -
+          calculateTotalPayments(empchosen),
+        empchosen.currency,
       );
 
       settotalPending(pending);
     } catch (error) {
       settotalPending(0);
     }
-    setmonthlyEarnings(calculateMonthlyEarnings(employee));
-  }, [route]);
+    setmonthlyEarnings(calculateMonthlyEarnings(empchosen));
+  }, [empchosen]);
 
   return (
     <View style={styles.container}>
       <PendingContainerEmp
-        onPress={() => navigation.navigate('Payment', {employee})}
+        onPress={() => navigation.navigate('Payment')}
         totalPending={totalPending}
       />
       <View style={styles.rostercontainer}>
         <PaymentOptionsContainer />
         <EmployeePayInfoContainer
           earnings={monthlyEarnings}
+          emp={employee}
           currency={employee.currency}
+          payments={calculateTotalPayments(employee)}
         />
       </View>
     </View>

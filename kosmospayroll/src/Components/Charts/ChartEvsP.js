@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Text} from 'react-native';
 import {Dimensions} from 'react-native';
 import styles from './styles';
 
@@ -25,16 +25,21 @@ export const ChartEvsP = ({datam, currency}) => {
   };
   if (datam) {
     return (
-      <StackedBarChart
-        bezier
-        hideLegend={true}
-        style={styles.chartstyle}
-        data={data}
-        width={screenWidth * 0.9}
-        height={styles.chart.height}
-        chartConfig={chartConfigs[4]}
-        formatYLabel={value => Math.round(value)}
-      />
+      <>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{marginBottom: 10}}>EARNINGS</Text>
+          <StackedBarChart
+            bezier
+            hideLegend={true}
+            style={styles.chartstyle}
+            data={data}
+            width={screenWidth * 0.9}
+            height={styles.chart.height}
+            chartConfig={chartConfigs[4]}
+            formatYLabel={value => Math.round(value)}
+          />
+        </View>
+      </>
     );
   }
   return (

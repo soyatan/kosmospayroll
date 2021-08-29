@@ -21,6 +21,7 @@ export default styles = StyleSheet.create({
     padding: w * 0.02,
     borderWidth: 0.5,
     shadowColor: 'yellow',
+    justifyContent: 'space-between',
   },
   datarowcontainer: {
     backgroundColor: Colors.mainLightGray,

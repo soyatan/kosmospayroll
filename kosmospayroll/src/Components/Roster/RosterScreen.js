@@ -28,6 +28,14 @@ const RosterScreen = ({navigation}) => {
   const user = useSelector(userSelector);
 
   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('hoy');
+      fetchEmployees(dispatch, user.userid);
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
     if (employees) {
       setglobalBalance(calculateGlobalBalance(employees));
     }

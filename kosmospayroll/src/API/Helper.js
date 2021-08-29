@@ -36,7 +36,7 @@ export const generateFullDate = date => {
 };
 
 export const fm = new FormatMoney({
-  decimals: 2,
+  decimals: 0,
 });
 
 export const findCurrencySymbol = code => {

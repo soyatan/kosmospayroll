@@ -150,10 +150,21 @@ export const changeAttendance = (
       ),
     );
 };
-export const addPayment = (userid, employeeid, date, amount, note) => {
+export const addPayment = (
+  userid,
+  employeeid,
+  date,
+  amount,
+  note,
+  dispatch,
+  navigation,
+) => {
   database()
     .ref(`employees/${userid}/${employeeid}/payments`)
-    .push({date, amount, note});
+    .push({date, amount, note})
+    .then(() => {
+      navigation.navigate('Roster');
+    });
 };
 
 export const calculateEarnings = (attendance, id) => {
@@ -316,7 +327,6 @@ export const calculateMonthlyEarnings = emp => {
         }
       });
     }
-    //console.log(earnings);
   }
   return earnings;
 };
@@ -328,7 +338,7 @@ export const converDateUTC = date => {
   return moment(date).format('MM-YYYY-DD');
 };
 
-export const calculateBalances = (earnings, currentMonth) => {
+export const calculateSplitEarnings = (earnings, currentMonth) => {
   //const premonth = new Date(moment(currentMonth).subtract(1, 'months'));
   //const ympre = moment(premonth).format('YYYY-MM');
   const ymthis = moment(currentMonth).format('YYYY-MM');
@@ -344,4 +354,25 @@ export const calculateBalances = (earnings, currentMonth) => {
     balances.final = balances.current + balances.previous;
   });
   return balances;
+};
+export const calculateSplitPayments = (employee, currentMonth) => {
+  const ymthis = moment(currentMonth).format('YYYY-MM');
+  let payments = {current: 0, previous: 0};
+  try {
+    if (employee.payments) {
+      Object.values(employee.payments).map(id => {
+        let ym = moment(id.date).format('YYYY-MM');
+
+        if (ym === ymthis) {
+          payments.current = payments.current + id.amount;
+        } else {
+          payments.previous = payments.previous + id.amount;
+        }
+      });
+    }
+  } catch (error) {
+    console.log('some error occured');
+  }
+
+  return payments;
 };

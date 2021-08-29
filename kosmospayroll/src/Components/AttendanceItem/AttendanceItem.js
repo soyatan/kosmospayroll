@@ -186,6 +186,7 @@ const AttendanceItem = ({employee, curDate}) => {
             _changeAttendance({
               status: 2,
               workhours: itemValue,
+              othours: user.othours || 0,
             })
           }>
           {hours.map((item, index) => {

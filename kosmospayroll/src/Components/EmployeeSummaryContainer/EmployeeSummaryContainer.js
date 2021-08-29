@@ -15,7 +15,10 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
     <>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Employee', {employee});
+          navigation.navigate('Employee', {
+            employee: employee,
+            id: employee.key,
+          });
         }}
         style={styles.container}>
         <View style={styles.leftcontainer}>

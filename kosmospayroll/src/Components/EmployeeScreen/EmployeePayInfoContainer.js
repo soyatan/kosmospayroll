@@ -10,11 +10,13 @@ import {useSelector} from 'react-redux';
 import {employeeNameSelector} from './../../redux/employeeNameReducer';
 import {ChartEvsP} from '../Charts/ChartEvsP';
 import {
-  calculateBalances,
+  calculateEarnings,
+  calculateSplitEarnings,
   calculateMonthlyEarnings,
+  calculateSplitPayments,
 } from '../../API/dbfunctions';
 
-const EmployeePayInfoContainer = ({earnings, currency}) => {
+const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
   const [balances, setbalances] = useState(null);
   const [currentMonth, setcurrentMonth] = useState(new Date());
   const [prevMonth, setprevMonth] = useState(
@@ -24,11 +26,11 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
   //calculateMonthlyEarnings()
 
   const employee = useSelector(employeeNameSelector);
-  //console.log(balances);
+  const paymentInfo = calculateSplitPayments(employee, currentMonth);
 
   useEffect(() => {
     if (earnings) {
-      setbalances(calculateBalances(earnings, currentMonth));
+      setbalances(calculateSplitEarnings(earnings, currentMonth));
       let monthlyearnings = {
         labels: [],
         data: [],
@@ -70,9 +72,12 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
           <Text style={styles.blacktext}>
             {`${getMonthName(prevMonth.getMonth())} Final Balance `}
           </Text>
-          {balances ? (
+          {balances && paymentInfo ? (
             <Text style={styles.blacktext}>
-              {formatCurrency(balances.previous, currency)}
+              {formatCurrency(
+                paymentInfo.previous - balances.previous,
+                currency,
+              )}
             </Text>
           ) : null}
         </View>
@@ -90,11 +95,13 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
           <Text style={styles.blacktext}>{`${getMonthName(
             currentMonth.getMonth(),
           )} Payments `}</Text>
-          {balances ? (
+          {payments ? (
             <Text style={styles.blacktext}>
-              {formatCurrency(balances.final, currency)}
+              {formatCurrency(paymentInfo.current, currency)}
             </Text>
-          ) : null}
+          ) : (
+            <Text style={styles.blacktext}>{formatCurrency(0, currency)}</Text>
+          )}
         </View>
         <View style={styles.iconcontainer}>
           <Text style={styles.whitetext}>
@@ -102,7 +109,7 @@ const EmployeePayInfoContainer = ({earnings, currency}) => {
           </Text>
           {balances ? (
             <Text style={styles.whitetext}>
-              {formatCurrency(balances.final, currency)}
+              {formatCurrency(balances.final - payments, currency)}
             </Text>
           ) : null}
         </View>

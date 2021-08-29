@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Icon} from '../../Assets/Svgs/icon';
 import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
 import {findCurrencySymbol, formatCurrency} from '../../API/Helper';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import PaymentItem from '../PaymentItem/PaymentItem';
 import NewPayment from '../PaymentItem/NewPayment';
@@ -15,14 +21,18 @@ import {
   calculateTotalEarnings,
   calculateTotalPayments,
 } from './../../API/dbfunctions';
+import moment from 'moment';
+import {employeesSelector} from './../../redux/employeesReducer';
+import {employeeNameSelector} from '../../redux/employeeNameReducer';
 const PaymentScreen = ({navigation, route}) => {
   const [paydate, setpaydate] = useState(new Date());
   const [showPay, setShowPay] = useState(false);
   const [paynote, setpaynote] = useState('');
   const [pay, setpay] = useState(0);
-  const {employee} = route.params;
+  const dispatch = useDispatch();
   const user = useSelector(userSelector);
   const symbol = findCurrencySymbol(user.currency);
+  const employee = useSelector(employeeNameSelector);
 
   const onChangeBD = (event, selectedDate) => {
     const currentDate = selectedDate || paydate;
@@ -31,9 +41,16 @@ const PaymentScreen = ({navigation, route}) => {
   };
 
   const addPaymentToDB = () => {
-    addPayment(user.userid, employee.key, Date.now(), pay, paynote);
+    addPayment(
+      user.userid,
+      employee.key,
+      moment.utc(paydate).valueOf(),
+      pay,
+      paynote,
+      dispatch,
+      navigation,
+    );
   };
-  console.log(employee.payments);
 
   return (
     <>
@@ -78,7 +95,7 @@ const PaymentScreen = ({navigation, route}) => {
             <Text>0 Total</Text>
           )}
         </View>
-        <View style={styles.paymentscontainer}>
+        <ScrollView style={styles.paymentscontainer}>
           {employee.payments
             ? Object.keys(employee.payments).map(paymentid => {
                 return (
@@ -102,7 +119,7 @@ const PaymentScreen = ({navigation, route}) => {
             setpaynote={setpaynote}
             onPress={() => addPaymentToDB()}
           />
-        </View>
+        </ScrollView>
 
         {showPay && (
           <DateTimePicker
