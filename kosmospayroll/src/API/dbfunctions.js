@@ -376,3 +376,20 @@ export const calculateSplitPayments = (employee, currentMonth) => {
 
   return payments;
 };
+
+export const createPaymentsList = employees => {
+  let paymentsList = [];
+  employees.map(section => {
+    section.data.map(employee => {
+      if (employee.payments) {
+        Object.values(employee.payments).map(payment => {
+          paymentsList.push({...payment, id: employee.key});
+        });
+      }
+    });
+  });
+  paymentsList.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
+  return paymentsList;
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {
   calculateMonthlyEarnings,
+  calculateSplitEarnings,
   calculateTotalEarnings,
   calculateTotalPayments,
   converDateUTC,
@@ -11,13 +12,14 @@ import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee, navigation}) => {
+  const earnings = calculateSplitEarnings(calculateMonthlyEarnings(employee));
+
   return (
     <>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('Employee', {
-            employee: employee,
-            id: employee.key,
+            employee,
           });
         }}
         style={styles.container}>
@@ -29,11 +31,7 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
           <View style={styles.rightinsidecontainer}>
             <Text style={styles.blacktext}>Total Earnings </Text>
             <Text style={styles.blackboldtext}>
-              {formatCurrency(
-                calculateTotalEarnings(employee).normalpay +
-                  calculateTotalEarnings(employee).overtimepay,
-                employee.currency,
-              )}
+              {formatCurrency(earnings.final, employee.currency)}
             </Text>
           </View>
           <View style={styles.rightinsidecontainer}>

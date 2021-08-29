@@ -1,12 +1,25 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
+import {createPaymentsList} from '../../API/dbfunctions';
+import {employeesSelector} from '../../redux/employeesReducer';
 import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
+import PayslipItem from './../PayslipItem/PayslipItem';
 
 const PayslipsScreen = ({navigation}) => {
+  const employees = useSelector(employeesSelector);
+  const paymentslist = createPaymentsList(employees);
+
   return (
     <View style={styles.container}>
-      <DateContainer />
+      <FlatList
+        data={paymentslist}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => {
+          return <PayslipItem item={item} />;
+        }}
+      />
     </View>
   );
 };

@@ -35,7 +35,6 @@ const EmployeeScreen = ({navigation, route}) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log(route.params);
       fetchEmployees(dispatch, user.userid);
     });
     return unsubscribe;
@@ -46,19 +45,21 @@ const EmployeeScreen = ({navigation, route}) => {
   }, [route]);
 
   useEffect(() => {
-    try {
-      const pending = formatCurrency(
-        calculateTotalEarnings(empchosen).normalpay +
-          calculateTotalEarnings(empchosen).overtimepay -
-          calculateTotalPayments(empchosen),
-        empchosen.currency,
-      );
+    if (empchosen) {
+      try {
+        const pending = formatCurrency(
+          calculateTotalEarnings(empchosen).normalpay +
+            calculateTotalEarnings(empchosen).overtimepay -
+            calculateTotalPayments(empchosen),
+          empchosen.currency,
+        );
 
-      settotalPending(pending);
-    } catch (error) {
-      settotalPending(0);
+        settotalPending(pending);
+      } catch (error) {
+        settotalPending(0);
+      }
+      setmonthlyEarnings(calculateMonthlyEarnings(empchosen));
     }
-    setmonthlyEarnings(calculateMonthlyEarnings(empchosen));
   }, [empchosen]);
 
   return (
@@ -71,9 +72,8 @@ const EmployeeScreen = ({navigation, route}) => {
         <PaymentOptionsContainer />
         <EmployeePayInfoContainer
           earnings={monthlyEarnings}
-          emp={employee}
           currency={employee.currency}
-          payments={calculateTotalPayments(employee)}
+          payments={calculateTotalPayments(employee) || 0}
         />
       </View>
     </View>

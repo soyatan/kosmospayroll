@@ -75,7 +75,7 @@ const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
           {balances && paymentInfo ? (
             <Text style={styles.blacktext}>
               {formatCurrency(
-                paymentInfo.previous - balances.previous,
+                -paymentInfo.previous + balances.previous,
                 currency,
               )}
             </Text>

@@ -29,7 +29,6 @@ const RosterScreen = ({navigation}) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('hoy');
       fetchEmployees(dispatch, user.userid);
     });
     return unsubscribe;
