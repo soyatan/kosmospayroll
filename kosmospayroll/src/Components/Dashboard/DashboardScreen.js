@@ -36,7 +36,9 @@ const DashboardScreen = ({navigation}) => {
       {employees ? (
         <View style={styles.welcometextcontainer}>
           <Text>aa</Text>
-          <Text></Text>
+          {/*TotalChart */}
+          {/*WeeklyChart */}
+          {/*DailyEarningsChart */}
         </View>
       ) : null}
     </View>

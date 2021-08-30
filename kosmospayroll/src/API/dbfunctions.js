@@ -383,7 +383,7 @@ export const createPaymentsList = employees => {
     section.data.map(employee => {
       if (employee.payments) {
         Object.values(employee.payments).map(payment => {
-          paymentsList.push({...payment, id: employee.key});
+          paymentsList.push({...payment, name: employee.name});
         });
       }
     });
