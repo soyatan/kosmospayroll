@@ -8,13 +8,11 @@ import {Colors} from '../../constants/Colors';
 const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
-  chartstyle: {
-    alignItems: 'center',
-    borderRadius: 10,
-    justifyContent: 'center',
+  container: {
+    width: w * 0.015,
+    height: h * 0.03,
+    borderRadius: w * 0.03,
+    borderWidth: 1,
+    marginHorizontal: w * 0.03,
   },
-  chart: {
-    height: h * 0.3,
-  },
-  piechart: {},
 });

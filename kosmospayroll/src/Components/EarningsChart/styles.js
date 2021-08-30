@@ -8,13 +8,18 @@ import {Colors} from '../../constants/Colors';
 const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
-  chartstyle: {
+  container: {
+    backgroundColor: Colors.mainLightGray,
+    flexDirection: 'row',
+    width: w * 0.95,
+    height: h * 0.1,
+    borderRadius: w * 0.03,
+    marginTop: w * 0.05,
+  },
+  dashinfocontainer: {
+    width: w * 0.35,
+    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 10,
-    justifyContent: 'center',
   },
-  chart: {
-    height: h * 0.3,
-  },
-  piechart: {},
 });

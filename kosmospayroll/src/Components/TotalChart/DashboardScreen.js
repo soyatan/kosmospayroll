@@ -6,8 +6,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import {loadingSelector, setLoading} from '../../redux/loadingReducer';
 import {employeesSelector} from '../../redux/employeesReducer';
-import DashboardSummary from './../DashboardSummary/DashboardSummary';
-import EarningsChart from '../EarningsChart/EarningsChart';
 
 const DashboardScreen = ({navigation}) => {
   useEffect(() => {
@@ -37,9 +35,7 @@ const DashboardScreen = ({navigation}) => {
       </View>
       {employees ? (
         <View style={styles.welcometextcontainer}>
-          <Text>EMPLOYEES</Text>
-          <DashboardSummary />
-          <EarningsChart />
+          <Text>aa</Text>
           {/*TotalChart */}
           {/*WeeklyChart */}
           {/*DailyEarningsChart */}
