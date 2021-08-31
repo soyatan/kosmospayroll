@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   chart: {
-    height: h * 0.3,
+    height: h * 0.17,
   },
   piechart: {},
 });

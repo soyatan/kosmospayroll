@@ -8,32 +8,21 @@ import {loadingSelector, setLoading} from '../../redux/loadingReducer';
 import {employeesSelector} from '../../redux/employeesReducer';
 import DashRectangle from '../DashRectangle/DashRectangle';
 import {EmployeeChart} from '../Charts/EmployeeChart';
+import {WeeklyChartSL} from '../Charts/WeeklyChartSL';
 
 const WeeklyChart = () => {
+  const data = {
+    labels: ['Test1', 'Test2'],
+    legend: ['L1', 'L2', 'L3'],
+    data: [
+      [60, 60, 60],
+      [30, 30, 60],
+    ],
+    barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
+  };
   return (
     <View style={styles.container}>
-      <View style={{flex: 1}}>
-        <View style={styles.dashinfocontainer}>
-          <DashRectangle />
-          <Text>26 Total Employees</Text>
-        </View>
-        <View style={styles.dashinfocontainer}>
-          <DashRectangle />
-          <Text>26 Total Employees</Text>
-        </View>
-        <View style={styles.dashinfocontainer}>
-          <DashRectangle />
-          <Text>26 Total Employees</Text>
-        </View>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <EmployeeChart />
-      </View>
+      <WeeklyChartSL datam={data} />
     </View>
   );
 };

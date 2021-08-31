@@ -20,7 +20,8 @@ export default styles = StyleSheet.create({
   },
   blacktext: {
     fontFamily: Fonts.Families.medium,
-    fontSize: Fonts.Sizes.fourteen,
+    fontSize: Fonts.Sizes.twelve,
+    fontWeight: 'bold',
   },
   headeradditioncontainer: {
     backgroundColor: Colors.mainGray,
