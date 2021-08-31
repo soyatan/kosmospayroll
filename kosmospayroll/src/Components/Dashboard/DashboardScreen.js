@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import {fetchEmployees} from '../../API/dbfunctions';
 import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -27,16 +33,7 @@ const DashboardScreen = ({navigation}) => {
     fetchEmployees(dispatch, user.userid);
   }, []);
   return (
-    <View style={styles.container}>
-      <View style={styles.headeradditioncontainer}>
-        {isloading ? (
-          <>
-            <View style={{}}>
-              <ActivityIndicator size="small" color="white" />
-            </View>
-          </>
-        ) : null}
-      </View>
+    <ScrollView style={styles.container}>
       {employees ? (
         <View style={styles.welcometextcontainer}>
           <Text>EMPLOYEES</Text>
@@ -47,9 +44,11 @@ const DashboardScreen = ({navigation}) => {
           <WeeklyChart />
           <Text>WEEKLY</Text>
           <MonthlyChart />
+          <Text>WEEKLY</Text>
+          <MonthlyChart />
         </View>
       ) : null}
-    </View>
+    </ScrollView>
   );
 };
 

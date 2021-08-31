@@ -63,7 +63,7 @@ export const Header = ({route}) => {
 
     switch (routeName) {
       case 'Payroll':
-        return 'Payroll';
+        return 'Dashboard';
       case 'Dashboard':
         return 'Dashboard';
       case 'Settings':
