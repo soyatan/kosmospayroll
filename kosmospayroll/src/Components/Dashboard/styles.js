@@ -29,6 +29,6 @@ export default styles = StyleSheet.create({
   },
   welcometextcontainer: {
     alignItems: 'center',
-    marginTop: h * 0.05,
+    marginTop: h * 0.01,
   },
 });

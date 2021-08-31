@@ -9,35 +9,38 @@ import styles from './styles';
 const EarningsChart = () => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{flex: 1}}>
         <View style={styles.dashinfocontainer}>
           <DashRectangle />
-          <Text>26 Total Employees</Text>
+          <View>
+            <Text>$41.500</Text>
+            <Text>TOTAL EARNINGS</Text>
+          </View>
+        </View>
+
+        <View style={styles.dashinfocontainer}>
+          <DashRectangle />
+          <View>
+            <Text>$41.500</Text>
+            <Text>TOTAL PAYMENTS</Text>
+          </View>
         </View>
         <View style={styles.dashinfocontainer}>
           <DashRectangle />
-          <Text>26 Total Employees</Text>
-        </View>
-        <View style={styles.dashinfocontainer}>
-          <DashRectangle />
-          <Text>26 Total Employees</Text>
+          <View>
+            <Text>$41.500</Text>
+            <Text>TOTAL BALANCE</Text>
+          </View>
         </View>
       </View>
       <View
         style={{
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'yellow',
+
+          flex: 1,
         }}>
         <BalanceChart />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Text>MERHABA</Text>
       </View>
     </View>
   );

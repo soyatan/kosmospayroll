@@ -8,6 +8,8 @@ import {loadingSelector, setLoading} from '../../redux/loadingReducer';
 import {employeesSelector} from '../../redux/employeesReducer';
 import DashboardSummary from './../DashboardSummary/DashboardSummary';
 import EarningsChart from '../EarningsChart/EarningsChart';
+import WeeklyChart from '../WeeklyChart/WeeklyChart';
+import MonthlyChart from '../MonthlyChart/MonthlyChart';
 
 const DashboardScreen = ({navigation}) => {
   useEffect(() => {
@@ -39,10 +41,12 @@ const DashboardScreen = ({navigation}) => {
         <View style={styles.welcometextcontainer}>
           <Text>EMPLOYEES</Text>
           <DashboardSummary />
+          <Text>BALANCE</Text>
           <EarningsChart />
-          {/*TotalChart */}
-          {/*WeeklyChart */}
-          {/*DailyEarningsChart */}
+          <Text>WEEKLY</Text>
+          <WeeklyChart />
+          <Text>WEEKLY</Text>
+          <MonthlyChart />
         </View>
       ) : null}
     </View>

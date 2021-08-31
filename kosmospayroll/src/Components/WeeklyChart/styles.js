@@ -9,26 +9,18 @@ const {Families, Sizes} = Fonts;
 
 export default styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.mainWhite,
-  },
-  bigwhitetext: {
-    fontFamily: Fonts.Families.bold,
-    fontSize: Fonts.Sizes.thirty,
-    color: Colors.mainWhite,
+    backgroundColor: Colors.mainLightGray,
+    flexDirection: 'row',
+    width: w * 0.95,
+    height: h * 0.17,
+    borderRadius: w * 0.03,
+    marginTop: w * 0.01,
     marginBottom: w * 0.03,
   },
-  blacktext: {
-    fontFamily: Fonts.Families.medium,
-    fontSize: Fonts.Sizes.fourteen,
-  },
-  headeradditioncontainer: {
-    backgroundColor: Colors.mainGray,
-    height: h * 0.04,
+  dashinfocontainer: {
+    width: w * 0.35,
+    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-  },
-  welcometextcontainer: {
-    alignItems: 'center',
-    marginTop: h * 0.05,
   },
 });

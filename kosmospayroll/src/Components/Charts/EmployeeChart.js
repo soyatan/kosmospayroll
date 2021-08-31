@@ -35,6 +35,9 @@ export const EmployeeChart = ({datak, currency}) => {
         width={210}
         chartConfig={chartConfigs[1]}
         accessor="population"
+        style={{
+          alignItems: 'center',
+        }}
       />
     </>
   );

@@ -11,14 +11,14 @@ const screenWidth = Dimensions.get('window').width;
 export const BalanceChart = ({datak, currency}) => {
   const pieChartData = [
     {
-      name: 'Seoul',
+      name: 'Earnings',
       population: 26,
       color: 'rgba(131, 167, 234, 1)',
       legendFontColor: '#7F7F7F',
       legendFontSize: 10,
     },
     {
-      name: 'Toronto',
+      name: 'Payments',
       population: 14,
       color: '#F00',
       legendFontColor: '#7F7F7F',
@@ -29,11 +29,15 @@ export const BalanceChart = ({datak, currency}) => {
   return (
     <>
       <PieChart
-        hasLegend={false}
+        hasLegend={true}
+        absolute={true}
         data={pieChartData}
-        height={80}
-        width={130}
-        style={{}}
+        height={125}
+        width={210}
+        style={{
+          alignItems: 'center',
+          flex: 1,
+        }}
         chartConfig={chartConfigs[1]}
         accessor="population"
       />

@@ -14,7 +14,8 @@ export default styles = StyleSheet.create({
     width: w * 0.95,
     height: h * 0.1,
     borderRadius: w * 0.03,
-    marginTop: w * 0.05,
+    marginTop: w * 0.01,
+    marginBottom: w * 0.03,
   },
   dashinfocontainer: {
     width: w * 0.35,
