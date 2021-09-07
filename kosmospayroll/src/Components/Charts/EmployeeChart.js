@@ -8,7 +8,7 @@ import {chartConfigs} from '../../API/chartconfigs';
 import {formatCurrency} from '../../API/Helper';
 const screenWidth = Dimensions.get('window').width;
 
-export const EmployeeChart = ({datak, currency}) => {
+export const EmployeeChart = ({datam, currency}) => {
   const pieChartData = [
     {
       name: 'Seoul',
@@ -30,11 +30,11 @@ export const EmployeeChart = ({datak, currency}) => {
     <>
       <PieChart
         hasLegend={true}
-        data={pieChartData}
+        data={datam}
         height={80}
         width={210}
         chartConfig={chartConfigs[1]}
-        accessor="population"
+        accessor="number"
         style={{
           alignItems: 'center',
         }}

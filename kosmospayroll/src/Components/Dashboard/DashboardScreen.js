@@ -24,6 +24,7 @@ const DashboardScreen = ({navigation}) => {
     });
     return unsubscribe;
   }, [navigation]);
+
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
   const isloading = useSelector(loadingSelector);
@@ -37,9 +38,9 @@ const DashboardScreen = ({navigation}) => {
       {employees ? (
         <View style={styles.welcometextcontainer}>
           <Text style={styles.blacktext}>EMPLOYEES</Text>
-          <DashboardSummary />
+          <DashboardSummary employees={employees} />
           <Text style={styles.blacktext}>OVERALL BALANCE</Text>
-          <EarningsChart />
+          <EarningsChart employees={employees} />
           <Text style={styles.blacktext}>WEEKLY</Text>
           <WeeklyChart />
           <Text style={styles.blacktext}>MONTHLY TRENDS</Text>

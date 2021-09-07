@@ -3,8 +3,8 @@ import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {fetchEmployees} from '../../API/dbfunctions';
 import styles from './styles';
 
-const DashRectangle = () => {
-  return <View style={[styles.container, {backgroundColor: 'red'}]}></View>;
+const DashRectangle = ({color}) => {
+  return <View style={[styles.container, {backgroundColor: color}]}></View>;
 };
 
 export default DashRectangle;

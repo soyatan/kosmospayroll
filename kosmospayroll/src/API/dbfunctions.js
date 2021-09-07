@@ -265,6 +265,41 @@ export const calculateGlobalBalance = employees => {
 
   return formatCurrency(totalbalance, currency);
 };
+export const calculateGlobalEarnings = employees => {
+  let totalearnings = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let earnings =
+          calculateTotalEarnings(emp).normalpay +
+          calculateTotalEarnings(emp).overtimepay;
+
+        totalearnings = totalearnings + earnings;
+        currency = emp.currency;
+      });
+    }
+  });
+
+  return formatCurrency(totalearnings, currency);
+};
+
+export const calculateGlobalPayments = employees => {
+  let totalpayments = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let payments = calculateTotalPayments(emp);
+
+        totalpayments = totalpayments + payments;
+        currency = emp.currency;
+      });
+    }
+  });
+
+  return formatCurrency(totalpayments, currency);
+};
 
 export const calculateMonthlyEarnings = emp => {
   let earnings = {};
@@ -392,4 +427,18 @@ export const createPaymentsList = employees => {
     return new Date(b.date) - new Date(a.date);
   });
   return paymentsList;
+};
+
+export const countActiveEmployees = employees => {
+  let headcount = {active: 0, passive: 0};
+  employees.map(section => {
+    section.data.map(employee => {
+      if (employee.isactive === true) {
+        headcount.active++;
+      } else {
+        headcount.passive++;
+      }
+    });
+  });
+  return headcount;
 };
