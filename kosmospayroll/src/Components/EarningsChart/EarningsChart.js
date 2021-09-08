@@ -2,7 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {
   calculateEarnings,
+  calculateGlobalBalanceFormatted,
   calculateGlobalEarnings,
+  calculateGlobalEarningsFormatted,
+  calculateGlobalPaymentsFormatted,
   calculateTotalEarnings,
   fetchEmployees,
 } from '../../API/dbfunctions';
@@ -16,11 +19,31 @@ import {
 } from './../../API/dbfunctions';
 
 const EarningsChart = ({employees}) => {
+  const [datas, setdatas] = useState(null);
+
   useEffect(() => {
-    if (employees) {
-      console.log(calculateGlobalBalance(employees));
-      console.log(calculateGlobalPayments(employees));
-      console.log(calculateGlobalEarnings(employees));
+    const calculateDatas = emps => {
+      let data = [
+        {
+          name: 'Earnings',
+          amount: calculateGlobalEarnings(emps),
+          color: '#63bd95',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 10,
+        },
+        {
+          name: 'Payments',
+          amount: calculateGlobalPayments(emps),
+          color: '#bd6363',
+          legendFontColor: '#7F7F7F',
+          legendFontSize: 10,
+        },
+      ];
+      return data;
+    };
+
+    if (employees && employees.length > 0) {
+      setdatas(calculateDatas(employees));
     }
   }, [employees]);
 
@@ -28,25 +51,37 @@ const EarningsChart = ({employees}) => {
     <View style={styles.container}>
       <View style={{flex: 1}}>
         <View style={styles.dashinfocontainer}>
-          <DashRectangle />
+          <DashRectangle color={'#63bd95'} />
           <View>
-            <Text>$41.500</Text>
-            <Text>TOTAL EARNINGS</Text>
+            <Text style={[styles.moneytext, {color: '#63bd95'}]}>
+              {datas ? calculateGlobalEarningsFormatted(employees) : null}
+            </Text>
+            <Text style={[styles.titletext, {color: '#63bd95'}]}>
+              TOTAL EARNINGS
+            </Text>
           </View>
         </View>
 
         <View style={styles.dashinfocontainer}>
-          <DashRectangle />
+          <DashRectangle color={'#bd6363'} />
           <View>
-            <Text>$41.500</Text>
-            <Text>TOTAL PAYMENTS</Text>
+            <Text style={[styles.moneytext, {color: '#bd6363'}]}>
+              {datas ? calculateGlobalPaymentsFormatted(employees) : null}
+            </Text>
+            <Text style={[styles.titletext, {color: '#bd6363'}]}>
+              TOTAL PAYMENTS
+            </Text>
           </View>
         </View>
         <View style={styles.dashinfocontainer}>
-          <DashRectangle />
+          <DashRectangle color={'#636dbd'} />
           <View>
-            <Text>$41.500</Text>
-            <Text>TOTAL BALANCE</Text>
+            <Text style={[styles.moneytext, {color: '#636dbd'}]}>
+              {datas ? calculateGlobalBalanceFormatted(employees) : null}
+            </Text>
+            <Text style={[styles.titletext, {color: '#636dbd'}]}>
+              TOTAL BALANCE
+            </Text>
           </View>
         </View>
       </View>
@@ -55,9 +90,9 @@ const EarningsChart = ({employees}) => {
           alignItems: 'center',
           justifyContent: 'center',
 
-          flex: 1,
+          flex: 0.4,
         }}>
-        <BalanceChart />
+        {datas ? <BalanceChart data={datas} /> : null}
       </View>
     </View>
   );

@@ -6,43 +6,38 @@ import styles from './styles';
 import {PieChart} from 'react-native-chart-kit';
 import {chartConfigs} from '../../API/chartconfigs';
 import {formatCurrency} from '../../API/Helper';
+import {useEffect, useState} from 'react';
 const screenWidth = Dimensions.get('window').width;
 
-export const BalanceChart = ({datak, currency}) => {
-  const pieChartData = [
-    {
-      name: 'Earnings',
-      population: 26,
-      color: 'rgba(131, 167, 234, 1)',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 10,
-    },
-    {
-      name: 'Payments',
-      population: 14,
-      color: '#F00',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 10,
-    },
-  ];
+export const BalanceChart = ({data, currency}) => {
+  const [pieData, setpieData] = useState([]);
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setpieData(data);
+    }
+  }, [data]);
 
-  return (
-    <>
-      <PieChart
-        hasLegend={true}
-        absolute={true}
-        data={pieChartData}
-        height={125}
-        width={210}
-        style={{
-          alignItems: 'center',
-          flex: 1,
-        }}
-        chartConfig={chartConfigs[1]}
-        accessor="population"
-      />
-    </>
-  );
+  if (pieData) {
+    return (
+      <>
+        <PieChart
+          hasLegend={false}
+          absolute={false}
+          data={pieData}
+          height={125}
+          width={250}
+          style={{
+            alignItems: 'center',
+            flex: 1,
+          }}
+          chartConfig={chartConfigs[1]}
+          accessor="amount"
+        />
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 /*return (

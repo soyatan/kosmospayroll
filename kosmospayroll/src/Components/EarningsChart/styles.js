@@ -23,4 +23,12 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  titletext: {
+    fontSize: Fonts.Sizes.ten,
+    fontWeight: 'bold',
+  },
+  moneytext: {
+    fontSize: Fonts.Sizes.ten,
+    fontWeight: '700',
+  },
 });

@@ -262,7 +262,25 @@ export const calculateGlobalBalance = employees => {
       });
     }
   });
+  return totalbalance;
+};
 
+export const calculateGlobalBalanceFormatted = employees => {
+  let totalbalance = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let balance =
+          calculateTotalEarnings(emp).normalpay +
+          calculateTotalEarnings(emp).overtimepay -
+          calculateTotalPayments(emp);
+
+        totalbalance = totalbalance + balance;
+        currency = emp.currency;
+      });
+    }
+  });
   return formatCurrency(totalbalance, currency);
 };
 export const calculateGlobalEarnings = employees => {
@@ -281,10 +299,45 @@ export const calculateGlobalEarnings = employees => {
     }
   });
 
-  return formatCurrency(totalearnings, currency);
+  return totalearnings;
 };
 
+export const calculateGlobalEarningsFormatted = employees => {
+  let totalearnings = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let earnings =
+          calculateTotalEarnings(emp).normalpay +
+          calculateTotalEarnings(emp).overtimepay;
+
+        totalearnings = totalearnings + earnings;
+        currency = emp.currency;
+      });
+    }
+  });
+
+  return formatCurrency(totalearnings, currency);
+};
 export const calculateGlobalPayments = employees => {
+  let totalpayments = 0;
+  let currency = 'TRY';
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      section.data.forEach(emp => {
+        let payments = calculateTotalPayments(emp);
+
+        totalpayments = totalpayments + payments;
+        currency = emp.currency;
+      });
+    }
+  });
+
+  return totalpayments;
+};
+
+export const calculateGlobalPaymentsFormatted = employees => {
   let totalpayments = 0;
   let currency = 'TRY';
   employees.forEach(section => {
@@ -300,7 +353,6 @@ export const calculateGlobalPayments = employees => {
 
   return formatCurrency(totalpayments, currency);
 };
-
 export const calculateMonthlyEarnings = emp => {
   let earnings = {};
   if (emp.attendance) {
