@@ -1,16 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import {fetchEmployees} from '../../API/dbfunctions';
+import {fetchEmployees, getGlobalDailyAttendance} from '../../API/dbfunctions';
 import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {userSelector} from '../../redux/userReducer';
-import {loadingSelector, setLoading} from '../../redux/loadingReducer';
-import {employeesSelector} from '../../redux/employeesReducer';
-import DashRectangle from '../DashRectangle/DashRectangle';
-import {EmployeeChart} from '../Charts/EmployeeChart';
+
 import {WeeklyChartSL} from '../Charts/WeeklyChartSL';
 
-const WeeklyChart = () => {
+const WeeklyChart = ({employees}) => {
+  getGlobalDailyAttendance(employees);
   const data = {
     labels: ['Test1', 'Test2'],
     legend: ['L1', 'L2', 'L3'],

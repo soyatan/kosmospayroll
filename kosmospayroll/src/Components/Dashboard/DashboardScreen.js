@@ -42,9 +42,9 @@ const DashboardScreen = ({navigation}) => {
           <Text style={styles.blacktext}>OVERALL BALANCE</Text>
           <EarningsChart employees={employees} />
           <Text style={styles.blacktext}>WEEKLY</Text>
-          <WeeklyChart />
+          <WeeklyChart employees={employees} />
           <Text style={styles.blacktext}>MONTHLY TRENDS</Text>
-          <MonthlyChart />
+          <MonthlyChart employees={employees} />
         </View>
       ) : null}
     </ScrollView>

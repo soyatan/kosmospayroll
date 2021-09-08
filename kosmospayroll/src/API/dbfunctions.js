@@ -494,3 +494,53 @@ export const countActiveEmployees = employees => {
   });
   return headcount;
 };
+
+export const createWeek = () => {
+  let days = [];
+  let today = moment(new Date());
+  for (let i = 0; i < 7; i++) {
+    if (i === 0) {
+      days.push(today.format('YYYY-MM-DD'));
+    } else {
+      days.push(today.subtract(1, 'days').format('YYYY-MM-DD'));
+    }
+  }
+
+  return days;
+};
+
+export const getGlobalDailyAttendance = employees => {
+  const days = createWeek();
+  let weeklyData = {};
+  days.map(day => {
+    weeklyData[day] = {present: 0, half: 0, absent: 0};
+  });
+  //console.log(day);
+  employees.forEach(section => {
+    if (section.data.length > 0) {
+      days.map(day => {
+        section.data.forEach(emp => {
+          if (emp.attendance) {
+            Object.keys(emp.attendance).map(date => {
+              if (date === day) {
+                if (emp.attendance[date].status === 2) {
+                  weeklyData[day].present++;
+                } else if (emp.attendance[date].status === 1) {
+                  weeklyData[day].half++;
+                } else {
+                  weeklyData[day].absent++;
+                }
+              }
+            });
+            if (!Object.keys(emp.attendance).includes(day)) {
+              weeklyData[day].absent++;
+            }
+          } else {
+            weeklyData[day].absent++;
+          }
+        });
+      });
+    }
+  });
+  return weeklyData;
+};

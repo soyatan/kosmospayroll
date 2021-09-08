@@ -6,7 +6,7 @@ import DashRectangle from '../DashRectangle/DashRectangle';
 import {EmployeeChart} from '../Charts/EmployeeChart';
 import {MonthlyChartSL} from './../Charts/MonthlyChartSL';
 
-const MonthlyChart = () => {
+const MonthlyChart = ({employees}) => {
   const data = {
     labels: ['Test1', 'Test2'],
     legend: ['L1', 'L2', 'L3'],
