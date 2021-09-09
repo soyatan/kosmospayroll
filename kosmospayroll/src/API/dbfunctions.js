@@ -508,6 +508,27 @@ export const createWeek = () => {
 
   return days;
 };
+export const createMonths = () => {
+  let months = [];
+  let today = moment(new Date());
+  for (let i = 0; i < 5; i++) {
+    if (i === 0) {
+      months.push(today.format('YYYY-MM'));
+    } else {
+      months.push(today.subtract(1, 'months').format('YYYY-MM'));
+    }
+  }
+  return months;
+};
+
+export const createGlobalMonthlyBalances = employees => {
+  const months = createMonths();
+  let monthlyData = {};
+  months.map(months => {
+    monthlyData[months] = {earnings: 0, payments: 0};
+  });
+  console.log(months);
+};
 
 export const getGlobalDailyAttendance = employees => {
   const days = createWeek();
