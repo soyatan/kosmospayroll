@@ -16,9 +16,12 @@ const PayslipsScreen = ({navigation}) => {
     <View style={styles.container}>
       <FlatList
         data={paymentslist}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => {
-          return <PayslipItem item={item} currency={user.currency} />;
+        renderItem={({item, index}) => {
+          return (
+            <PayslipItem item={item} index={index} currency={user.currency} />
+          );
         }}
       />
     </View>

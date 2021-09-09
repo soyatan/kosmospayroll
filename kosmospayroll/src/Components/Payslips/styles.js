@@ -11,6 +11,10 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.mainWhite,
+    borderLeftWidth: w * 0.02,
+    borderRightWidth: w * 0.02,
+
+    borderColor: Colors.mainGray,
   },
   bigwhitetext: {
     fontFamily: Fonts.Families.bold,

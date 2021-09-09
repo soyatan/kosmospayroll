@@ -8,7 +8,7 @@ import {MonthlyChartSL} from './../Charts/MonthlyChartSL';
 import {createGlobalMonthlyBalances} from '../../API/dbfunctions';
 
 const MonthlyChart = ({employees}) => {
-  createGlobalMonthlyBalances(employees);
+  //createGlobalMonthlyBalances(employees);
   const data = {
     labels: ['Test1', 'Test2'],
     legend: ['L1', 'L2', 'L3'],

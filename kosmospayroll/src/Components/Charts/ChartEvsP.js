@@ -18,8 +18,6 @@ const screenWidth = Dimensions.get('window').width;
 export const ChartEvsP = ({datam, currency}) => {
   const data = {
     labels: datam.labels,
-    //legend: ['L1', 'L2'],
-
     data: datam.data || [],
     barColors: ['#F890AB', '#E9E9E9'],
   };
@@ -27,7 +25,7 @@ export const ChartEvsP = ({datam, currency}) => {
     return (
       <>
         <View style={{alignItems: 'center'}}>
-          <Text style={{marginBottom: 10}}>EARNINGS</Text>
+          <Text style={styles.chartheadertext}>Monthly Earnings</Text>
           <StackedBarChart
             bezier
             hideLegend={true}
@@ -36,7 +34,7 @@ export const ChartEvsP = ({datam, currency}) => {
             width={screenWidth * 0.9}
             height={styles.chart.height}
             chartConfig={chartConfigs[4]}
-            formatYLabel={value => Math.round(value)}
+            formatYLabel={value => formatCurrency(Math.round(value), currency)}
           />
         </View>
       </>

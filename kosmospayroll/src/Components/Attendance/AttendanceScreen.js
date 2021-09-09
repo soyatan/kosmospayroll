@@ -24,6 +24,7 @@ const AttendanceScreen = ({navigation}) => {
         {employees.length > 1 ? (
           <SectionList
             //data={employees}
+            showsVerticalScrollIndicator={false}
             sections={employees}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => {

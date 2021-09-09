@@ -7,7 +7,38 @@ import {useDispatch, useSelector} from 'react-redux';
 import {WeeklyChartSL} from '../Charts/WeeklyChartSL';
 
 const WeeklyChart = ({employees}) => {
-  getGlobalDailyAttendance(employees);
+  const [chartData, setchartData] = useState({
+    labels: [],
+    legend: [],
+    data: [],
+    barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
+  });
+  useEffect(() => {
+    const createChartData = obj => {
+      let labels = [];
+      let legend = ['Absent', 'Half', 'Present'];
+      let data = [];
+      let barColors = ['#dfe4ea', '#ced6e0', '#c60e0e'];
+      Object.keys(obj).map(date => {
+        labels.push(date);
+        data.push([obj[date].present, obj[date].half, obj[date].absent]);
+      });
+      return {labels, legend, data, barColors};
+    };
+    if (employees) {
+      const weeklyData = getGlobalDailyAttendance(employees);
+      const dataObject = createChartData(weeklyData);
+      console.log(dataObject);
+      const updatedChartData = {
+        labels: dataObject.labels,
+        legend: dataObject.legend,
+        data: dataObject.data,
+        barColors: dataObject.barColors,
+      };
+      setchartData(updatedChartData);
+    }
+  }, [employees]);
+
   const data = {
     labels: ['Test1', 'Test2'],
     legend: ['L1', 'L2', 'L3'],
@@ -19,7 +50,7 @@ const WeeklyChart = ({employees}) => {
   };
   return (
     <View style={styles.container}>
-      <WeeklyChartSL datam={data} />
+      <WeeklyChartSL datam={chartData} />
     </View>
   );
 };

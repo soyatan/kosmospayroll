@@ -35,19 +35,21 @@ export const chartConfigs = [
   },
   {
     backgroundColor: `${Colors.mainLightGray}`,
-    backgroundGradientFrom: `${Colors.mainBlack}`,
-    backgroundGradientTo: `${Colors.mainBlack}`,
+    backgroundGradientFrom: `${Colors.mainLightGray}`,
+    backgroundGradientTo: `${Colors.mainPurple}`,
     backgroundGradientFromOpacity: 0.7,
-    backgroundGradientToOpacity: 0.4,
+    backgroundGradientToOpacity: 0.2,
     decimalPlaces: 0,
+    labelColor: () => Colors.mainGray,
 
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    color: () => '#1b3fa250',
     style: {
-      borderRadius: 12,
+      borderRadius: 5,
       color: '#1b3fa0',
     },
     propsForLabels: {
-      fontSize: 9,
+      fontSize: 10,
+      fontWeight: 'bold',
     },
   },
   {

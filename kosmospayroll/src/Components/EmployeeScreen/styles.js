@@ -12,6 +12,10 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.mainWhite,
   },
+  chartcontainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
   paycontainer: {
     flex: 1,
     backgroundColor: Colors.mainWhite,
@@ -21,7 +25,7 @@ export default styles = StyleSheet.create({
     padding: w * 0.02,
     borderWidth: 0.5,
     shadowColor: 'yellow',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   datarowcontainer: {
     backgroundColor: Colors.mainLightGray,

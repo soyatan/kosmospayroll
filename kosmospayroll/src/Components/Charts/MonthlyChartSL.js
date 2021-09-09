@@ -32,7 +32,7 @@ export const MonthlyChartSL = ({datam, currency}) => {
           style={styles.chartstyle}
           data={data}
           width={screenWidth * 0.95}
-          height={styles.chart.height}
+          height={styles.dashchart.height}
           chartConfig={chartConfigs[4]}
           formatYLabel={value => Math.round(value)}
         />

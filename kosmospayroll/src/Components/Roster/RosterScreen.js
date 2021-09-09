@@ -14,6 +14,7 @@ import {employeesSelector} from './../../redux/employeesReducer';
 import {
   calculateEarnings,
   calculateGlobalBalance,
+  calculateGlobalBalanceFormatted,
   calculateMonthlyEarnings,
   fetchEmployees,
 } from '../../API/dbfunctions';
@@ -36,7 +37,7 @@ const RosterScreen = ({navigation}) => {
 
   useEffect(() => {
     if (employees) {
-      setglobalBalance(calculateGlobalBalance(employees));
+      setglobalBalance(calculateGlobalBalanceFormatted(employees));
     }
   }, [employees]);
 
@@ -50,6 +51,7 @@ const RosterScreen = ({navigation}) => {
       <View style={styles.rostercontainer}>
         {employees ? (
           <SectionList
+            showsVerticalScrollIndicator={false}
             sections={employees}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => {

@@ -14,7 +14,15 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   chart: {
-    height: h * 0.17,
+    height: h * 0.27,
+  },
+  dashchart: {
+    height: h * 0.165,
   },
   piechart: {},
+  chartheadertext: {
+    fontSize: Fonts.Sizes.twelve,
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
 });

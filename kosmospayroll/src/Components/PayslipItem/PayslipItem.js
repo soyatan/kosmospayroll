@@ -4,9 +4,17 @@ import moment from 'moment';
 import styles from './styles';
 import {formatCurrency} from '../../API/Helper';
 
-const PayslipItem = ({item, currency}) => {
+const PayslipItem = ({item, index, currency}) => {
+  const isEven = number => {
+    if (number % 2 === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={isEven(index) ? styles.container : styles.containeralt}>
       <View style={styles.date}>
         <Text>{moment(item.date).format('YYYY-MM-DD')}</Text>
       </View>

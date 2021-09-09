@@ -36,8 +36,7 @@ const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
         data: [],
         legend: ['normalpay', 'overtime pay'],
       };
-      let np = 0;
-      let otp = 0;
+
       if (Object.keys(earnings).length > 4) {
         monthlyearnings.labels.push('Earlier');
         monthlyearnings.data.push([0, 0]);
@@ -113,8 +112,9 @@ const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
             </Text>
           ) : null}
         </View>
-        <Text style={styles.whitetext}>123124</Text>
-        <ChartEvsP datam={monthlyearns} currency={currency} />
+        <View style={styles.chartcontainer}>
+          <ChartEvsP datam={monthlyearns} currency={currency} />
+        </View>
       </View>
     </>
   );

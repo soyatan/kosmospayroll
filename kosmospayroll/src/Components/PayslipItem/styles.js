@@ -10,12 +10,20 @@ const {Families, Sizes} = Fonts;
 export default styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-
-    marginVertical: h * 0.005,
-    marginHorizontal: w * 0.05,
-    borderRadius: w * 0.1,
+    borderWidth: 0.5,
+    marginHorizontal: w * 0.02,
     paddingHorizontal: w * 0.01,
-    paddingVertical: w * 0.002,
+    paddingVertical: w * 0.008,
+    borderColor: Colors.mainLightGray,
+  },
+  containeralt: {
+    flexDirection: 'row',
+    backgroundColor: Colors.mainPink,
+    borderWidth: 0.5,
+    borderColor: Colors.mainLightGray,
+    marginHorizontal: w * 0.02,
+    paddingHorizontal: w * 0.01,
+    paddingVertical: w * 0.008,
   },
   date: {
     flex: 1,
