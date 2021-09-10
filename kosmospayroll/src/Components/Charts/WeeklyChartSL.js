@@ -17,20 +17,9 @@ const screenWidth = Dimensions.get('window').width;
 
 export const WeeklyChartSL = ({datam, currency}) => {
   if (datam) {
-    console.log(datam);
-    const data = {
-      labels: datam.labels,
-      legend: ['L1', 'L2'],
-
-      data: datam.data || [],
-      barColors: ['#F890AB', '#E9E9E9', '#c60e0e'],
-    };
-
     return (
       <>
         <StackedBarChart
-          bezier
-          segments={7}
           hideLegend={true}
           style={styles.chartstyleweekly}
           data={datam}
@@ -43,10 +32,11 @@ export const WeeklyChartSL = ({datam, currency}) => {
         />
       </>
     );
+  } else {
+    return (
+      <View style={{alignItems: 'center'}}>
+        <ActivityIndicator size="small" color="white" />
+      </View>
+    );
   }
-  return (
-    <View style={{alignItems: 'center'}}>
-      <ActivityIndicator size="small" color="white" />
-    </View>
-  );
 };

@@ -41,7 +41,11 @@ const DashboardScreen = ({navigation}) => {
           <DashboardSummary employees={employees} />
           <Text style={styles.blacktext}>OVERALL BALANCE</Text>
           <EarningsChart employees={employees} />
-          <Text style={styles.blacktext}>WEEKLY OVERVIEW</Text>
+          <Text style={styles.blacktext}>
+            WEEKLY OVERVIEW (<Text style={{color: '#8cc79c'}}>PRESENT</Text>/
+            <Text style={{color: '#be8cc7'}}> HALF</Text>/
+            <Text style={{color: '#71717F'}}> ABSENT</Text>)
+          </Text>
           <WeeklyChart employees={employees} />
           <Text style={styles.blacktext}>MONTHLY TRENDS</Text>
           <MonthlyChart employees={employees} />

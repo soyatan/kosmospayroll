@@ -28,12 +28,13 @@ export const chartConfigs = [
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
   },
   {
-    backgroundColor: `${Colors.mainLightGray}`,
-    backgroundGradientFrom: `${Colors.mainLightGray}`,
-    backgroundGradientTo: `${Colors.mainPurple}`,
-    backgroundGradientFromOpacity: 0.7,
-    backgroundGradientToOpacity: 0.2,
+    backgroundColor: `${Colors.mainWhite}`,
+    backgroundGradientFrom: `${Colors.mainPurple}`,
+    backgroundGradientTo: `${Colors.lightGreen}`,
+    backgroundGradientFromOpacity: 0.1,
+    backgroundGradientToOpacity: 0.3,
     decimalPlaces: 0,
+    barPercentage: 0.75,
     labelColor: () => Colors.mainGray,
 
     color: () => '#1b3fa250',
@@ -43,7 +44,7 @@ export const chartConfigs = [
       color: '#1b3fa0',
     },
     propsForLabels: {
-      fontSize: 8,
+      fontSize: 10,
       fontWeight: 'bold',
     },
   },
@@ -59,6 +60,27 @@ export const chartConfigs = [
     color: () => '#1b3fa250',
     style: {
       borderRadius: 5,
+      color: '#1b3fa0',
+    },
+    propsForLabels: {
+      fontSize: 10,
+      fontWeight: 'bold',
+    },
+  },
+  {
+    backgroundColor: `${Colors.mainWhite}`,
+    backgroundGradientFrom: `${Colors.mainPurple}`,
+    backgroundGradientTo: `${Colors.lightGreen}`,
+    backgroundGradientFromOpacity: 0.1,
+    backgroundGradientToOpacity: 0.3,
+    decimalPlaces: 0,
+    barPercentage: 0.75,
+    labelColor: () => Colors.mainGray,
+
+    color: () => '#1b3fa250',
+    style: {
+      borderRadius: 5,
+
       color: '#1b3fa0',
     },
     propsForLabels: {

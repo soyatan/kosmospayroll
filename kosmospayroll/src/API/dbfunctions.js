@@ -523,11 +523,16 @@ export const createMonths = () => {
 
 export const createGlobalMonthlyBalances = employees => {
   const months = createMonths();
-  let monthlyData = {};
+  let monthlyData = ()=>{};
+  monthlyData[months] = {earnings: 0, payments: 0};
   months.map(months => {
-    monthlyData[months] = {earnings: 0, payments: 0};
-  });
-  console.log(months);
+    employees.map(employee => {
+      console.log(employee.data);
+      const employeeMonthly= calculateMonthlyEarnings(employee.data[0]);
+      
+    });
+    
+  return monthlyData;
 };
 
 export const getGlobalDailyAttendance = employees => {
@@ -564,4 +569,8 @@ export const getGlobalDailyAttendance = employees => {
     }
   });
   return weeklyData;
+};
+
+export const getDayName = yyyMMdd => {
+  return moment(yyyMMdd, 'YYYY-MM-DD').format('ddd');
 };

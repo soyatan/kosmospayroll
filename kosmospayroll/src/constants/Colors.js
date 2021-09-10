@@ -10,6 +10,7 @@ export const Colors = {
   red: '#F10000',
   orange: '#DB9E11',
   blue: '#4285F4',
+  lightGreen: '#dfeae2',
 };
 
 export const Grads = {

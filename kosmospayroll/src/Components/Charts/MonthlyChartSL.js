@@ -16,13 +16,6 @@ import {formatCurrency} from '../../API/Helper';
 const screenWidth = Dimensions.get('window').width;
 
 export const MonthlyChartSL = ({datam, currency}) => {
-  const data = {
-    labels: datam.labels,
-    legend: ['L1', 'L2'],
-
-    data: datam.data || [],
-    barColors: ['#F890AB', '#E9E9E9'],
-  };
   if (datam) {
     return (
       <>
@@ -30,18 +23,19 @@ export const MonthlyChartSL = ({datam, currency}) => {
           bezier
           hideLegend={true}
           style={styles.chartstyle}
-          data={data}
+          data={datam}
           width={screenWidth * 0.95}
           height={styles.dashchart.height}
-          chartConfig={chartConfigs[4]}
+          chartConfig={chartConfigs[5]}
           formatYLabel={value => Math.round(value)}
         />
       </>
     );
+  } else {
+    return (
+      <View style={{}}>
+        <ActivityIndicator size="small" color="white" />
+      </View>
+    );
   }
-  return (
-    <View style={{}}>
-      <ActivityIndicator size="small" color="white" />
-    </View>
-  );
 };

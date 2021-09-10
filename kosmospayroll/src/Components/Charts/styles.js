@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     justifyContent: 'center',
-    height: h * 0.18,
+    flex: 1,
   },
   chart: {
     height: h * 0.27,
