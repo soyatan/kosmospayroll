@@ -35,13 +35,13 @@ const DashboardScreen = ({navigation}) => {
   }, []);
   return (
     <ScrollView style={styles.container}>
-      {employees ? (
+      {employees && employees.length > 0 ? (
         <View style={styles.welcometextcontainer}>
           <Text style={styles.blacktext}>EMPLOYEES</Text>
           <DashboardSummary employees={employees} />
           <Text style={styles.blacktext}>OVERALL BALANCE</Text>
           <EarningsChart employees={employees} />
-          <Text style={styles.blacktext}>WEEKLY ATTENDANCE</Text>
+          <Text style={styles.blacktext}>WEEKLY OVERVIEW</Text>
           <WeeklyChart employees={employees} />
           <Text style={styles.blacktext}>MONTHLY TRENDS</Text>
           <MonthlyChart employees={employees} />

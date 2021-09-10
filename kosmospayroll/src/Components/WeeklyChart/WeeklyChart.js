@@ -7,12 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {WeeklyChartSL} from '../Charts/WeeklyChartSL';
 
 const WeeklyChart = ({employees}) => {
-  const [chartData, setchartData] = useState({
-    labels: [],
-    legend: [],
-    data: [],
-    barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
-  });
+  const [chartData, setchartData] = useState(null);
+
   useEffect(() => {
     const createChartData = obj => {
       let labels = [];
@@ -28,7 +24,7 @@ const WeeklyChart = ({employees}) => {
     if (employees) {
       const weeklyData = getGlobalDailyAttendance(employees);
       const dataObject = createChartData(weeklyData);
-      console.log(dataObject);
+
       const updatedChartData = {
         labels: dataObject.labels,
         legend: dataObject.legend,
@@ -50,7 +46,7 @@ const WeeklyChart = ({employees}) => {
   };
   return (
     <View style={styles.container}>
-      <WeeklyChartSL datam={chartData} />
+      {chartData ? <WeeklyChartSL datam={chartData} /> : null}
     </View>
   );
 };

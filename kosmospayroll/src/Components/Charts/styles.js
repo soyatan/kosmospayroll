@@ -13,11 +13,17 @@ export default styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
   },
+  chartstyleweekly: {
+    alignItems: 'center',
+    borderRadius: 10,
+    justifyContent: 'center',
+    height: h * 0.18,
+  },
   chart: {
     height: h * 0.27,
   },
   dashchart: {
-    height: h * 0.165,
+    height: h * 0.18,
   },
   piechart: {},
   chartheadertext: {
