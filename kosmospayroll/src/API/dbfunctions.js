@@ -248,7 +248,7 @@ export const calculateTotalPayments = emp => {
 
 export const calculateGlobalBalance = employees => {
   let totalbalance = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -267,7 +267,7 @@ export const calculateGlobalBalance = employees => {
 
 export const calculateGlobalBalanceFormatted = employees => {
   let totalbalance = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -285,7 +285,7 @@ export const calculateGlobalBalanceFormatted = employees => {
 };
 export const calculateGlobalEarnings = employees => {
   let totalearnings = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -304,7 +304,7 @@ export const calculateGlobalEarnings = employees => {
 
 export const calculateGlobalEarningsFormatted = employees => {
   let totalearnings = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -322,7 +322,7 @@ export const calculateGlobalEarningsFormatted = employees => {
 };
 export const calculateGlobalPayments = employees => {
   let totalpayments = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -339,7 +339,7 @@ export const calculateGlobalPayments = employees => {
 
 export const calculateGlobalPaymentsFormatted = employees => {
   let totalpayments = 0;
-  let currency = 'TRY';
+  let currency = 'USD';
   employees.forEach(section => {
     if (section.data.length > 0) {
       section.data.forEach(emp => {
@@ -464,6 +464,25 @@ export const calculateSplitPayments = (employee, currentMonth) => {
   return payments;
 };
 
+export const calculateMonthlyPayment = (employee, currentMonth) => {
+  let payments = 0;
+  try {
+    if (employee.payments) {
+      Object.values(employee.payments).map(id => {
+        let ym = moment(id.date).format('YYYY-MM');
+
+        if (ym === currentMonth) {
+          payments += id.amount;
+        }
+      });
+    }
+  } catch (error) {
+    console.log('some error occured');
+  }
+
+  return payments;
+};
+
 export const createPaymentsList = employees => {
   let paymentsList = [];
   employees.map(section => {
@@ -523,16 +542,37 @@ export const createMonths = () => {
 
 export const createGlobalMonthlyBalances = employees => {
   const months = createMonths();
-  let monthlyData = ()=>{};
-  monthlyData[months] = {earnings: 0, payments: 0};
-  months.map(months => {
-    employees.map(employee => {
-      console.log(employee.data);
-      const employeeMonthly= calculateMonthlyEarnings(employee.data[0]);
-      
+  const monthlyData = () => {
+    let dataMonths = {};
+    months.map(month => {
+      dataMonths[month] = {earnings: 0, payments: 0};
     });
-    
-  return monthlyData;
+    return dataMonths;
+  };
+  let monthbalancedata = monthlyData();
+  // {"2021-05": {"earnings": 0, "payments": 0}, "2021-06": {"earnings": 0, "payments": 0}, "2021-07": {"earnings": 0, "payments": 0}, "2021-08": {"earnings": 0, "payments": 0}, "2021-09": {"earnings": 0, "payments": 0}}
+  //console.log(monthbalancedata);
+  months.map(month => {
+    employees.map(section => {
+      section.data.map(emp => {
+        let earnings = calculateMonthlyEarnings(emp);
+        // {"2021-09": {"normalpay": 794.3000000000001, "overtimepay": 36.63}}
+
+        // let earning = normalpay + overtimepay;
+        let payment = calculateMonthlyPayment(emp, month);
+
+        if (earnings[month]) {
+          let earns = earnings[month].normalpay + earnings[month].overtimepay;
+          monthbalancedata[month].earnings += earns;
+        } else {
+          let earns = 0;
+          monthbalancedata[month].earnings += earns;
+        }
+        monthbalancedata[month].payments += payment;
+      });
+    });
+  });
+  return monthbalancedata;
 };
 
 export const getGlobalDailyAttendance = employees => {

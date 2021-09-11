@@ -51,8 +51,13 @@ const AddEmployeeScreen = ({navigation}) => {
     rate: false,
     otrate: true,
   });
+  const [symbol, setsymbol] = useState('USD');
 
-  const symbol = findCurrencySymbol(user.currency);
+  useEffect(() => {
+    if (user) {
+      setsymbol(findCurrencySymbol(user.currency));
+    }
+  }, []);
 
   useEffect(() => {
     if (workType) {

@@ -37,6 +37,7 @@ export default styles = StyleSheet.create({
   blacktext: {
     fontFamily: Fonts.Families.medium,
     fontSize: Fonts.Sizes.fourteen,
+    fontWeight: 'bold',
   },
   bigpinktext: {
     fontFamily: Fonts.Families.medium,
@@ -52,6 +53,16 @@ export default styles = StyleSheet.create({
     paddingHorizontal: w * 0.02,
     backgroundColor: Colors.mainLightGray,
     borderRadius: w * 0.02,
+    borderColor: Colors.mainLightGray,
+    borderWidth: 1,
+    shadowColor: Colors.mainPurple,
+
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   buttoncontainer: {
     height: h * 0.08,

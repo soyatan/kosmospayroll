@@ -15,6 +15,14 @@ export default styles = StyleSheet.create({
     height: h * 0.1,
     paddingHorizontal: w * 0.01,
     marginTop: h * 0.01,
+    shadowColor: Colors.mainPurple,
+    borderColor: Colors.mainGray,
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
 
     borderRadius: w * 0.01,
     flexDirection: 'row',

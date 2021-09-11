@@ -17,6 +17,7 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
   return (
     <>
       <TouchableOpacity
+        elevation={5}
         onPress={() => {
           navigation.navigate('Employee', {
             employee,

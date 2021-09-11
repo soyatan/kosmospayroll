@@ -22,6 +22,13 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: w * 0.02,
     flexDirection: 'row',
+    shadowColor: Colors.mainPurple,
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   rostercontainer: {
     flex: 1,

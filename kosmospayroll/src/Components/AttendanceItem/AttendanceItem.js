@@ -116,7 +116,7 @@ const AttendanceItem = ({employee, curDate}) => {
 
   return (
     <>
-      <View style={styles.container}>
+      <View elevation={5} style={styles.container}>
         <View style={styles.leftcontainer}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.blacktext}>{employee.name}</Text>

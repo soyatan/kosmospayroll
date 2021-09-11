@@ -15,20 +15,32 @@ import {chartConfigs} from '../../API/chartconfigs';
 import {formatCurrency} from '../../API/Helper';
 const screenWidth = Dimensions.get('window').width;
 
-export const MonthlyChartSL = ({datam, currency}) => {
+export const MonthlyChartSL = ({datam, datapay, currency}) => {
   if (datam) {
     return (
       <>
-        <StackedBarChart
-          bezier
-          hideLegend={true}
-          style={styles.chartstyle}
-          data={datam}
-          width={screenWidth * 0.95}
-          height={styles.dashchart.height}
-          chartConfig={chartConfigs[5]}
-          formatYLabel={value => Math.round(value)}
-        />
+        <View style={styles.multibarchart}>
+          <BarChart
+            bezier
+            hideLegend={true}
+            style={styles.stackchartfirst}
+            data={datam}
+            width={screenWidth * 0.95}
+            height={styles.stackcharts.height}
+            chartConfig={chartConfigs[0]}
+          />
+          <BarChart
+            bezier
+            hideLegend={true}
+            withVerticalLabels={false}
+            withHorizontalLabels={false}
+            style={styles.stackchart}
+            data={datapay}
+            width={screenWidth * 0.95}
+            height={styles.stackcharts.height}
+            chartConfig={chartConfigs[1]}
+          />
+        </View>
       </>
     );
   } else {

@@ -13,17 +13,29 @@ export default styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
   },
+  stackchartfirst: {
+    alignItems: 'center',
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  stackchart: {
+    position: 'absolute',
+    left: w * 0.05,
+  },
+  multibarchart: {height: h * 0.22},
   chartstyleweekly: {
     alignItems: 'center',
     borderRadius: 10,
     justifyContent: 'center',
-    flex: 1,
   },
   chart: {
     height: h * 0.27,
   },
   dashchart: {
     height: h * 0.18,
+  },
+  stackcharts: {
+    height: h * 0.17,
   },
   piechart: {},
   chartheadertext: {

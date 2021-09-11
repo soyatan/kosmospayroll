@@ -1,24 +1,51 @@
 import {Colors} from './../constants/Colors';
 export const chartConfigs = [
   {
-    backgroundColor: '#000000',
-    backgroundGradientFrom: '#1E2923',
-    backgroundGradientTo: '#08130D',
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    backgroundColor: `${Colors.mainWhite}`,
+    backgroundGradientFrom: `${Colors.mainPurple}`,
+    backgroundGradientTo: `${Colors.lightGreen}`,
+    backgroundGradientFromOpacity: 0.1,
+    backgroundGradientToOpacity: 0.3,
+    decimalPlaces: 0,
+    barPercentage: 0.5,
+    fillShadowGradient: '#60093a',
+    fillShadowGradientOpacity: 1,
+    labelColor: () => Colors.mainGray,
+
+    color: () => '#1b3fa250',
     style: {
-      borderRadius: 16,
+      borderRadius: 5,
+
+      color: '#1b3fa0',
+    },
+    propsForLabels: {
+      fontSize: 11,
+      fontWeight: 'bold',
     },
   },
   {
-    backgroundColor: '#022173',
-    backgroundGradientFrom: '#022173',
-    backgroundGradientTo: '#1b3fa0',
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    backgroundColor: `${Colors.mainWhite}`,
+    backgroundGradientFrom: `${Colors.mainPurple}`,
+    backgroundGradientTo: `${Colors.lightGreen}`,
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientToOpacity: 0,
+    decimalPlaces: 0,
+    barPercentage: 0.5,
+    labelColor: () => Colors.mainGray,
+    fillShadowGradient: '#1a8115',
+    fillShadowGradientOpacity: 0.5,
+    color: () => '#1a8115',
     style: {
-      borderRadius: 16,
+      borderRadius: 5,
+
+      color: '#1b3fa0',
+    },
+    propsForLabels: {
+      fontSize: 5,
+      fontWeight: 'bold',
     },
     propsForBackgroundLines: {
-      strokeDasharray: '', // solid background lines with no dashes
+      strokeWidth: 0,
     },
   },
   {

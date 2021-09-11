@@ -31,7 +31,7 @@ const PaymentScreen = ({navigation, route}) => {
   const [pay, setpay] = useState(0);
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
-  const symbol = findCurrencySymbol(user.currency);
+  const [symbol, setsymbol] = useState('USD');
   const employee = useSelector(employeeNameSelector);
 
   const onChangeBD = (event, selectedDate) => {
@@ -40,6 +40,11 @@ const PaymentScreen = ({navigation, route}) => {
     setpaydate(currentDate);
   };
 
+  useEffect(() => {
+    if (user) {
+      setsymbol(findCurrencySymbol(user.currency));
+    }
+  }, []);
   const addPaymentToDB = () => {
     addPayment(
       user.userid,

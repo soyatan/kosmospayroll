@@ -22,7 +22,7 @@ import {userSelector} from '../../redux/userReducer';
 import {Title} from './Title';
 
 const RosterScreen = ({navigation}) => {
-  const [isLoading, setisLoading] = useState(true);
+  const [isMinus, setisMinus] = useState(false);
   const [globalBalance, setglobalBalance] = useState(0);
   const dispatch = useDispatch();
   const employees = useSelector(employeesSelector);
@@ -38,6 +38,11 @@ const RosterScreen = ({navigation}) => {
   useEffect(() => {
     if (employees) {
       setglobalBalance(calculateGlobalBalanceFormatted(employees));
+      if (calculateGlobalBalance(employees) > 0) {
+        setisMinus(false);
+      } else {
+        setisMinus(true);
+      }
     }
   }, [employees]);
 
@@ -45,7 +50,7 @@ const RosterScreen = ({navigation}) => {
     <View style={styles.container}>
       <PendingContainer
         onPress={() => navigation.navigate('Add')}
-        isLoading={isLoading}
+        isMinus={isMinus}
         globalBalance={globalBalance}
       />
       <View style={styles.rostercontainer}>

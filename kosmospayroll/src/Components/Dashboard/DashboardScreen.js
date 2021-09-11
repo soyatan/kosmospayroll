@@ -47,7 +47,10 @@ const DashboardScreen = ({navigation}) => {
             <Text style={{color: '#71717F'}}> ABSENT</Text>)
           </Text>
           <WeeklyChart employees={employees} />
-          <Text style={styles.blacktext}>MONTHLY TRENDS</Text>
+          <Text style={styles.blacktext}>
+            MONTHLY TRENDS (<Text style={{color: '#8cc79c'}}>EARNINGS</Text>/
+            <Text style={{color: '#be8cc7'}}> PAYMENTS</Text>)
+          </Text>
           <MonthlyChart employees={employees} />
         </View>
       ) : null}

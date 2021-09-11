@@ -17,10 +17,18 @@ export default styles = StyleSheet.create({
     paddingHorizontal: w * 0.03,
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderWidth: 0.3,
+    borderWidth: 1,
+    borderColor: Colors.mainGray,
     flexDirection: 'row',
     position: 'absolute',
     alignContent: 'stretch',
+    shadowColor: Colors.mainPurple,
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   pendingleftcontainer: {
     flex: 2,
@@ -42,5 +50,20 @@ export default styles = StyleSheet.create({
     width: '100%',
     height: h * 0.04,
     position: 'absolute',
+  },
+  headertext: {
+    color: Colors.mainGray,
+    fontWeight: 'bold',
+    fontSize: Fonts.Sizes.fourteen,
+  },
+  greenmoneytext: {
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.green,
+    fontWeight: 'bold',
+  },
+  redmoneytext: {
+    fontSize: Fonts.Sizes.fourteen,
+    color: Colors.red,
+    fontWeight: 'bold',
   },
 });

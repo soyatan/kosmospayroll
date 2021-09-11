@@ -26,7 +26,7 @@ export const WeeklyChartSL = ({datam, currency}) => {
           width={screenWidth * 0.95}
           height={styles.dashchart.height}
           chartConfig={chartConfigs[3]}
-          formatYLabel={value => Math.round(value)}
+          formatYLabel={value => Math.round(value) || 0}
           verticalLabelsHeightPercentage={0.65}
           withHorizontalLabels={true}
         />
