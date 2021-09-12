@@ -82,7 +82,7 @@ export const chartConfigs = [
     backgroundGradientFromOpacity: 0.7,
     backgroundGradientToOpacity: 0.2,
     decimalPlaces: 0,
-    labelColor: () => Colors.mainGray,
+    labelColor: () => Colors.mainPurple,
 
     color: () => '#1b3fa250',
     style: {
@@ -93,6 +93,8 @@ export const chartConfigs = [
       fontSize: 10,
       fontWeight: 'bold',
     },
+    fillShadowGradient: '#d3539a',
+    fillShadowGradientOpacity: 0.6,
   },
   {
     backgroundColor: `${Colors.mainWhite}`,

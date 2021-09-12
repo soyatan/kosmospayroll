@@ -29,7 +29,10 @@ const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
   const paymentInfo = calculateSplitPayments(employee, currentMonth);
 
   useEffect(() => {
-    if (earnings) {
+    const isEmpty = obj => {
+      return Object.keys(obj).length === 0;
+    };
+    if (earnings && !isEmpty(earnings)) {
       setbalances(calculateSplitEarnings(earnings, currentMonth));
       let monthlyearnings = {
         labels: [],

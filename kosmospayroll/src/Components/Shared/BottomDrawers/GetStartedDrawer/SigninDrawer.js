@@ -15,6 +15,7 @@ import {Icon} from '../../../../Assets/Svgs/icon';
 import {useDispatch, useSelector} from 'react-redux';
 import {setError, userSelector} from '../../../../redux/userReducer';
 import {createUser, signInUser} from '../../../../API/auth';
+import {configureGoogleSign, signIn} from '../../../../API/google';
 
 const SigninDrawer = ({
   isModalShown,
@@ -22,6 +23,9 @@ const SigninDrawer = ({
   isSignup,
   setisSignup,
 }) => {
+  useEffect(() => {
+    configureGoogleSign();
+  }, []);
   const [userName, setuserName] = useState('');
   const [password, setpassword] = useState('');
   const [confirmpw, setconfirmpw] = useState('');
@@ -129,6 +133,10 @@ const SigninDrawer = ({
     } else {
       signInUser(dispatch, email, password);
     }
+  };
+
+  const signWithGoogle = () => {
+    signIn(dispatch);
   };
 
   const registerUser = () => {
@@ -301,6 +309,7 @@ const SigninDrawer = ({
               bg_color={'blue'}
               text_color={'mainWhite'}
               iconname={'google'}
+              onPress={() => signWithGoogle()}
             />
             <TouchableOpacity
               style={styles.siginoption}

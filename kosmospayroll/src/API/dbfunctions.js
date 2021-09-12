@@ -361,8 +361,6 @@ export const calculateMonthlyEarnings = emp => {
       const ymjoindate = moment(emp.joindate).format('YYYY-MM');
 
       const ymtoday = moment(new Date()).format('YYYY-MM');
-      const ymjoinindex = moment(emp.joindate).month();
-      const ymtodayindex = moment(new Date()).month();
 
       const monthspassed = moment(ymtoday).diff(
         moment(ymjoindate),
