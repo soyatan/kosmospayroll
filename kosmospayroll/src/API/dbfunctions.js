@@ -133,6 +133,16 @@ export const changeAttendance = (
   overtimepay,
   dispatch,
 ) => {
+  console.log(
+    userid,
+    employeeid,
+    worktype,
+    date,
+    attendance,
+    normalpay,
+    overtimepay,
+    dispatch,
+  );
   const earnings = {normalpay: normalpay, overtimepay: overtimepay};
   database()
     .ref(`employees/${userid}/${employeeid}/attendance/${date}`)

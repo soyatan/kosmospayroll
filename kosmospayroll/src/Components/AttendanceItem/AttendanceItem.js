@@ -113,7 +113,7 @@ const AttendanceItem = ({employee, curDate}) => {
 
   const pickerRef = useRef();
   const pickerRefWork = useRef();
-
+  //console.log(attendance);
   return (
     <>
       <View elevation={5} style={styles.container}>
@@ -186,7 +186,7 @@ const AttendanceItem = ({employee, curDate}) => {
             _changeAttendance({
               status: 2,
               workhours: itemValue,
-              othours: user.othours || 0,
+              othours: attendance.othours || 0,
             })
           }>
           {hours.map((item, index) => {
