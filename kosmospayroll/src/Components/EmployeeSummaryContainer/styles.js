@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     height: h * 0.1,
     borderRadius: w * 0.05,
-    borderColor: Colors.mainPurple,
+    borderColor: Colors.mainLightGray,
     paddingHorizontal: w * 0.015,
     marginTop: h * 0.01,
     paddingVertical: h * 0.005,
@@ -57,10 +57,14 @@ export default styles = StyleSheet.create({
     height: '100%',
   },
   blackboldtext: {
-    fontSize: Fonts.Sizes.fourteen,
+    fontSize: Fonts.Sizes.twelve,
     fontWeight: 'bold',
   },
   blacktext: {
     fontSize: Fonts.Sizes.twelve,
+  },
+  pinktext: {
+    fontSize: Fonts.Sizes.ten,
+    color: Colors.mainPink,
   },
 });

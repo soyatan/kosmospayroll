@@ -230,13 +230,13 @@ const AddEmployeeScreen = ({navigation}) => {
 
   return (
     <>
-      <View style={styles.headeradditioncontainer}>
-        {error ? (
+      {error ? (
+        <View style={styles.headeradditioncontainer}>
           <View style={{marginVertical: 5}}>
             <Text style={styles.errormessage}>* {error}</Text>
           </View>
-        ) : null}
-      </View>
+        </View>
+      ) : null}
 
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <View style={styles.addinfocontainer}>
@@ -260,7 +260,7 @@ const AddEmployeeScreen = ({navigation}) => {
                   alignSelf: 'flex-start',
                   justifyContent: 'center',
                   alignItems: 'stretch',
-                  marginLeft: 15,
+                  //marginLeft: 15,
                   alignContent: 'stretch',
                   width: '100%',
                   height: '100%',
@@ -334,7 +334,7 @@ const AddEmployeeScreen = ({navigation}) => {
               Joining Date <Text style={styles.shadytext}> (opt..)</Text>
             </Text>
             <View style={styles.inputcontainer}>
-              <View style={{alignSelf: 'flex-start', marginLeft: 15}}>
+              <View style={{alignSelf: 'flex-start'}}>
                 <Text onPress={() => setShowJoin(true)}>
                   {joindate.toLocaleDateString('en-gb')}
                 </Text>

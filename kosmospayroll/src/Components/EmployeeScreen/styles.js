@@ -18,14 +18,23 @@ export default styles = StyleSheet.create({
   },
   paycontainer: {
     flex: 1,
-    backgroundColor: Colors.mainWhite,
+    backgroundColor: '#F8F8EE',
+
     marginHorizontal: w * 0.04,
     marginVertical: w * 0.03,
     borderRadius: w * 0.02,
     padding: w * 0.02,
     borderWidth: 0.5,
-    shadowColor: 'yellow',
+    borderColor: Colors.mainLightGray,
     justifyContent: 'flex-start',
+    shadowColor: Colors.mainPurple,
+
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   datarowcontainer: {
     backgroundColor: Colors.mainLightGray,

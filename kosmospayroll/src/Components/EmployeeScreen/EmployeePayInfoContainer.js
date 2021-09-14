@@ -69,7 +69,7 @@ const EmployeePayInfoContainer = ({earnings, currency, payments}) => {
 
   return (
     <>
-      <View style={styles.paycontainer}>
+      <View elevation={5} style={styles.paycontainer}>
         <View style={styles.datarowcontainer}>
           <Text style={styles.blacktext}>
             {`${getMonthName(prevMonth.getMonth())} Final Balance `}

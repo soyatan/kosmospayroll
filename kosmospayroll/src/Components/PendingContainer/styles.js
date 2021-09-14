@@ -18,7 +18,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: Colors.mainGray,
+    borderColor: Colors.mainLightGray,
     flexDirection: 'row',
     position: 'absolute',
     alignContent: 'stretch',

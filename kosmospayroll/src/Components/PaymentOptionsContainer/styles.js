@@ -10,8 +10,10 @@ const {Families, Sizes} = Fonts;
 export default styles = StyleSheet.create({
   container: {
     width: w * 0.9,
-    borderWidth: 0.3,
+    borderWidth: 1,
     alignSelf: 'center',
+    borderColor: Colors.mainLightGray,
+    backgroundColor: '#f8f8ee',
     height: h * 0.075,
     borderRadius: w * 0.05,
     paddingHorizontal: w * 0.03,
@@ -20,6 +22,14 @@ export default styles = StyleSheet.create({
     marginTop: h * 0.01,
     paddingVertical: h * 0.005,
     flexDirection: 'row',
+    shadowColor: Colors.mainPurple,
+
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
   },
   iconcontainer: {
     flex: 1,
@@ -36,5 +46,8 @@ export default styles = StyleSheet.create({
   },
   pinktext: {
     color: Colors.red,
+    fontSize: Fonts.Sizes.ten,
+    fontStyle: 'italic',
+    fontWeight: '600',
   },
 });

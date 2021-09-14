@@ -23,6 +23,7 @@ export default styles = StyleSheet.create({
     borderRadius: w * 0.02,
     flexDirection: 'row',
     shadowColor: Colors.mainPurple,
+    borderColor: Colors.mainLightGray,
     shadowOpacity: 0.5,
     shadowRadius: 12,
     shadowOffset: {

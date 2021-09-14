@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: w * 0.01,
     marginTop: h * 0.01,
     shadowColor: Colors.mainPurple,
-    borderColor: Colors.mainGray,
+    borderColor: Colors.mainLightGray,
     shadowOpacity: 0.5,
     shadowRadius: 12,
     shadowOffset: {

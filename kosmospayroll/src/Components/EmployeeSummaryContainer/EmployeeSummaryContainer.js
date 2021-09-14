@@ -26,18 +26,18 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
         style={styles.container}>
         <View style={styles.leftcontainer}>
           <Text style={styles.blackboldtext}>{employee.name}</Text>
-          <Text style={styles.blacktext}>{employee.designation}</Text>
+          <Text style={styles.pinktext}>{employee.designation}</Text>
         </View>
         <View style={styles.rightcontainer}>
           <View style={styles.rightinsidecontainer}>
-            <Text style={styles.blacktext}>Total Earnings </Text>
-            <Text style={styles.blackboldtext}>
+            <Text style={styles.blackboldtext}>Total Earnings </Text>
+            <Text style={styles.blacktext}>
               {formatCurrency(earnings.final, employee.currency)}
             </Text>
           </View>
           <View style={styles.rightinsidecontainer}>
-            <Text style={styles.blacktext}>Total Paid </Text>
-            <Text style={styles.blackboldtext}>
+            <Text style={styles.blackboldtext}>Total Paid </Text>
+            <Text style={styles.blacktext}>
               {formatCurrency(
                 calculateTotalPayments(employee),
                 employee.currency,
@@ -45,8 +45,8 @@ const EmployeeSummaryContainer = ({employee, navigation}) => {
             </Text>
           </View>
           <View style={styles.rightinsidecontainer}>
-            <Text style={styles.blacktext}>Balance </Text>
-            <Text style={styles.blackboldtext}>
+            <Text style={styles.blackboldtext}>Balance </Text>
+            <Text style={styles.blacktext}>
               {formatCurrency(
                 calculateTotalEarnings(employee).normalpay +
                   calculateTotalEarnings(employee).overtimepay -
