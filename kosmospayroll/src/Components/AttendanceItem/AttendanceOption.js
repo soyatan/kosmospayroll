@@ -1,7 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
-import ButtonWithText from '../Shared/Button/ButtonWithText';
+import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 const AttendanceOption = ({title, color, onPress, textcolor}) => {
   return (

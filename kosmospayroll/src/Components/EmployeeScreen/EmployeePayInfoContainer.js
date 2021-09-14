@@ -1,18 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
-import ButtonWithText from '../Shared/Button/ButtonWithText';
+
 import styles from './styles';
-import {Icon} from '../../Assets/Svgs/icon';
 import {formatCurrency, getMonthName} from '../../API/Helper';
 import moment from 'moment';
 import {useSelector} from 'react-redux';
 import {employeeNameSelector} from './../../redux/employeeNameReducer';
 import {ChartEvsP} from '../Charts/ChartEvsP';
 import {
-  calculateEarnings,
   calculateSplitEarnings,
-  calculateMonthlyEarnings,
   calculateSplitPayments,
 } from '../../API/dbfunctions';
 

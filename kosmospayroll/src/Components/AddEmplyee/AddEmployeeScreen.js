@@ -1,26 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Button, TouchableOpacity, ScrollView} from 'react-native';
-import AttendanceItem from '../AttendanceItem/AttendanceItem';
-import DateContainer from '../DateContainer/DateContainer';
 import InputComponentAdd from '../Shared/Input/InputComponentAdd';
 import styles from './styles';
-import InputComponent from './../Shared/Input/InputComponent';
 import CheckBox from '@react-native-community/checkbox';
 import WorkTypeFilterContainerSmall from './../WorkTypeFilterContainerSmall/WorkTypeFilterContainerSmall';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RoundedButton from './../Shared/Button/RoundedButton';
-import {
-  checkAge,
-  findCurrencySymbol,
-  fm,
-  formatCurrency,
-  PhoneMask,
-} from './../../API/Helper';
+import {checkAge, findCurrencySymbol, PhoneMask} from './../../API/Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
 import {addEmployee, convertDateYMD} from '../../API/dbfunctions';
 import {loadingSelector} from '../../redux/loadingReducer';
-import MaskInput, {Masks, createNumberMask} from 'react-native-mask-input';
 import InputComponentMasked from '../Shared/Input/InputComponentMasked';
 import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
 const AddEmployeeScreen = ({navigation}) => {

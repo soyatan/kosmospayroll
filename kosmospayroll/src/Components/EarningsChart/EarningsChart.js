@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {
-  calculateEarnings,
   calculateGlobalBalanceFormatted,
   calculateGlobalEarnings,
   calculateGlobalEarningsFormatted,
   calculateGlobalPaymentsFormatted,
-  calculateTotalEarnings,
-  fetchEmployees,
 } from '../../API/dbfunctions';
 import {BalanceChart} from '../Charts/BalanceChart';
 import {EmployeeChart} from '../Charts/EmployeeChart';

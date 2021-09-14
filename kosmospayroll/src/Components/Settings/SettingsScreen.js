@@ -7,11 +7,9 @@ import {Picker} from '@react-native-picker/picker';
 import {currencies} from '../../API/currencies';
 import RoundedButton from './../Shared/Button/RoundedButton';
 import {addCurrency} from '../../API/dbfunctions';
-import InputComponent from './../Shared/Input/InputComponent';
-import InputComponentAdd from './../Shared/Input/InputComponentAdd';
+
 import SimpleInput from '../Shared/Input/SimpleInput';
 import {hours, shifthours} from '../../API/hours';
-import {Icon} from './../../Assets/Svgs/icon';
 
 const SettingsScreen = ({navigation}) => {
   const user = useSelector(userSelector);

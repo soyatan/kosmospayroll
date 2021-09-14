@@ -1,19 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Text, TouchableOpacity, BackHandler} from 'react-native';
-import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
-import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 import AttendanceOption from './AttendanceOption';
 import {Icon} from '../../Assets/Svgs/icon';
-import {
-  changeAttendance,
-  markAttendance,
-  saveOtHours,
-} from './../../API/dbfunctions';
+import {changeAttendance} from './../../API/dbfunctions';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import {Picker} from '@react-native-picker/picker';
-import {currencies} from '../../API/currencies';
 import {hours} from './../../API/hours';
 import {userSelector} from '../../redux/userReducer';
 

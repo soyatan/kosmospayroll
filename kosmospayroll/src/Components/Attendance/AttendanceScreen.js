@@ -1,17 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  SectionList,
-} from 'react-native';
+import {View, SectionList} from 'react-native';
 import {useSelector} from 'react-redux';
 import AttendanceItem from '../AttendanceItem/AttendanceItem';
 import DateContainer from '../DateContainer/DateContainer';
 import styles from './styles';
 import {employeesSelector} from './../../redux/employeesReducer';
-import {convertDateYMD} from '../../API/dbfunctions';
 import {Title} from '../Roster/Title';
 const AttendanceScreen = ({navigation}) => {
   const [curDate, setcurDate] = useState(new Date());

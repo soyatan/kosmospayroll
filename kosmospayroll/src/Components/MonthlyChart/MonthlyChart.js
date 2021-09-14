@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from 'react';
 
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View} from 'react-native';
 import styles from './styles';
-import DashRectangle from '../DashRectangle/DashRectangle';
-import {EmployeeChart} from '../Charts/EmployeeChart';
+
 import {MonthlyChartSL} from './../Charts/MonthlyChartSL';
-import {
-  createGlobalMonthlyBalances,
-  getDayName,
-  getGlobalDailyAttendance,
-} from '../../API/dbfunctions';
+import {createGlobalMonthlyBalances} from '../../API/dbfunctions';
 
 const MonthlyChart = ({employees}) => {
   const [chartData, setchartData] = useState(null);

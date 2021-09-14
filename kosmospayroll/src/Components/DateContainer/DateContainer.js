@@ -4,13 +4,6 @@ import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
 import styles from './styles';
 import moment from 'moment';
 const DateContainer = ({curDate, setcurDate}) => {
-  useEffect(() => {
-    if (curDate) {
-      //setcurDate(moment(curDate, 'YYYY-MM-DD').format('DD-MMMM-YYYY'));
-      //const dayafter = moment(curDate).add(3, 'd');
-    }
-  }, [curDate]);
-
   return (
     <View style={styles.headeradditioncontainer}>
       <View style={styles.container}>

@@ -1,12 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import {TouchableIcon} from './../../Assets/Svgs/touchableIcon';
-import {
-  useNavigation,
-  useNavigationState,
-  useRoute,
-} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';

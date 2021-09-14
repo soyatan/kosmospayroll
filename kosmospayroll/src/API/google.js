@@ -25,7 +25,6 @@ export async function signIn(dispatch) {
       .ref('users/' + userInfo.user.id)
       .once('value', snapshot => {
         if (snapshot.exists()) {
-          console.log('user exists in database');
           let newAccount = snapshot.val();
           dispatch(
             setUserAndError(

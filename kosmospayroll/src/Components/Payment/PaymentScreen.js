@@ -1,16 +1,8 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from 'react-native';
-import DateContainer from '../DateContainer/DateContainer';
+import {View, Text, ScrollView} from 'react-native';
+
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Icon} from '../../Assets/Svgs/icon';
-import InputComponentCurrency from './../Shared/Input/InputComponentCuurrency';
 import {findCurrencySymbol, formatCurrency} from '../../API/Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSelector} from '../../redux/userReducer';
@@ -22,7 +14,7 @@ import {
   calculateTotalPayments,
 } from './../../API/dbfunctions';
 import moment from 'moment';
-import {employeesSelector} from './../../redux/employeesReducer';
+
 import {employeeNameSelector} from '../../redux/employeeNameReducer';
 const PaymentScreen = ({navigation, route}) => {
   const [paydate, setpaydate] = useState(new Date());

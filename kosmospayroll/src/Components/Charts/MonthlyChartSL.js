@@ -3,16 +3,9 @@ import {View, ActivityIndicator, Text} from 'react-native';
 import {Dimensions} from 'react-native';
 import styles from './styles';
 
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
-} from 'react-native-chart-kit';
+import {BarChart} from 'react-native-chart-kit';
 import {chartConfigs} from '../../API/chartconfigs';
-import {formatCurrency} from '../../API/Helper';
+
 const screenWidth = Dimensions.get('window').width;
 
 export const MonthlyChartSL = ({datam, datapay, currency}) => {

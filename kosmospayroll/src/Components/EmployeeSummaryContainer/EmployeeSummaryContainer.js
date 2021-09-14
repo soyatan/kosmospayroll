@@ -5,11 +5,8 @@ import {
   calculateSplitEarnings,
   calculateTotalEarnings,
   calculateTotalPayments,
-  converDateUTC,
 } from '../../API/dbfunctions';
 import {formatCurrency} from '../../API/Helper';
-import {TouchableIcon} from '../../Assets/Svgs/touchableIcon';
-import ButtonWithText from '../Shared/Button/ButtonWithText';
 import styles from './styles';
 const EmployeeSummaryContainer = ({employee, navigation}) => {
   const earnings = calculateSplitEarnings(calculateMonthlyEarnings(employee));
