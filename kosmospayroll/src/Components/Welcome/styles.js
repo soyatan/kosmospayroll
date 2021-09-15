@@ -10,5 +10,9 @@ const {Families, Sizes} = Fonts;
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+  },
+  imagecontainer: {
+    marginTop: h * 0.2,
   },
 });

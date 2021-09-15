@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import GetStartedDrawer from '../Shared/BottomDrawers/GetStartedDrawer/GetStartedDrawer';
 import styles from './styles';
 const WelcomeScreen = ({navigation}) => {
@@ -7,7 +7,9 @@ const WelcomeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/*'Logo and text'*/}
+      <View style={styles.imagecontainer}>
+        <Image source={require('../../Assets/Images/logo.png')} />
+      </View>
       <GetStartedDrawer
         isModalShown={isModalShown}
         setisModalShown={setisModalShown}
